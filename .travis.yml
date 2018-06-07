@@ -16,7 +16,7 @@ script:
   - ng build --prod
 
 after_success:
-  - firebase deploy --token $FIREBASE_TOKEN
+  - firebase deploy --token 1/dgkjGz5lCwRDZEgYjadz2lnllto045sS_YFTBuX_XDc
 
 notifications:
   email:
