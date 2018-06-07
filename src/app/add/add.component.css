@@ -1,0 +1,23 @@
+div.container {
+  width: 40vw;
+  height: auto;
+  padding: 30px 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+agm-map {
+  height: 300px;
+}
+
+.container > * {
+  width: 100%;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.container form {
+  width: 100%;
+}

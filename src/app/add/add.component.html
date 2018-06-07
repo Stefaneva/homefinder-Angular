@@ -1,0 +1,42 @@
+<mat-dialog-content>
+<div class="container">
+  <h2>Adauga Anunt <i class="fa fa-arrow-circle-up"></i></h2>
+  <form [formGroup]="addNewAdForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+    <mat-form-field>
+      <input type="text" placeholder="Titlu anunt..." matInput formControlName="title" autocomplete="off">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Tip anunt..." matInput formControlName="adType">
+        <mat-option value="Inchiriere">Inchiriere</mat-option>
+        <mat-option value="Vanzare">Vanzare</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-radio-group matInput formControlName="adItemType">
+      <mat-radio-button value="Casa">Casa</mat-radio-button>
+      <mat-radio-button value="Apartament">Apartament</mat-radio-button>
+    </mat-radio-group>
+    <mat-form-field>
+      <textarea type="text" placeholder="Descriere..." matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=10 formControlName="description" autocomplete="off"></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <input type="number" placeholder="Pret..." matInput formControlName="price" autocomplete="off">
+    </mat-form-field>
+    <mat-form-field>
+      <input type="number" placeholder="Suprafata..." matInput formControlName="surface" autocomplete="off">
+    </mat-form-field>
+    <mat-form-field>
+      <input type="number" placeholder="Camere..." matInput formControlName="rooms" autocomplete="off">
+    </mat-form-field>
+    <div class="form-group">
+      <input placeholder="Localizare..." autocorrect="on" autocapitalize="on" spellcheck="on" type="text" class="form-control" #search formControlName="searchControl">
+    </div>
+    <agm-map [latitude]="lat" [longitude]="lng" [scrollwheel]="true" [fullscreenControl]="true" (mapClick)="onChoseLocation($event)" [zoom]="zoom">
+      <agm-marker [latitude]="lat" [longitude]="lng" *ngIf="locationChosen"></agm-marker>
+    </agm-map>
+    <label> Imagini... (PNG/JPG/DICOM/DCM):</label>
+    <br>
+    <input type="file" id="file" multiple (change)="getFileDetails($event)" accept="image/*">
+    <button [disabled]="!addNewAdForm.valid || !locationChosen || myFiles.length <= 0" class="btn btn-success form-control custom__button" type="submit">Adauga Anunt</button>
+  </form>
+</div>
+</mat-dialog-content>

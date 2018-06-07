@@ -1,0 +1,26 @@
+input[type='number'] {
+  -moz-appearance:textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+span{
+  color: red;
+}
+
+.custom__button{
+  width: 265px;
+}
+
+.enrollForm{
+  width: 60vw;
+  padding: 30px 25px;
+  margin: 0 auto;
+}

@@ -1,0 +1,47 @@
+<div class="row enrollForm">
+  <div class="col-md-4 col-sm-4 col-xs-12"></div>
+  <div class="col-md-4 col-sm-4 col-xs-12">
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <h1><i class="fa fa-user"></i> Creare cont: </h1>
+      <div class="form-group">
+        <label for="username">Nume utilizator: </label>
+        <input type="text" id="username" name="username" formControlName="username" class="form-control">
+        <span *ngIf="!signupForm.get('username').valid && signupForm.get('username').touched"
+              class="help-block">Introduceti un nume de utilizator!</span>
+      </div>
+      <div class="form-group">
+        <label for="email">E-mail: </label>
+        <input type="email" id="email" name="email" formControlName="email" class="form-control">
+        <span *ngIf="!signupForm.get('email').valid && signupForm.get('email').touched"
+              class="help-block">Introduceti o adresa de e-mail valida!</span>
+      </div>
+      <div class="form-group">
+        <label for="password">Parola: </label>
+        <input type="password" id="password" name="password" formControlName="password" class="form-control" (keyup)="keyPress($event)">
+        <span *ngIf="!signupForm.get('password').valid && signupForm.get('password').touched"
+              class="help-block">Introduceti o parola!</span>
+      </div>
+      <div class="form-group">
+        <label for="confirm_assword">Confirmare Parola: </label>
+        <input type="password" id="confirm_assword" name="confirm_password"
+               formControlName="confirm_password" class="form-control">
+        <span *ngIf="!signupForm.get('confirm_password').valid && signupForm.get('confirm_password').touched"
+              class="help-block">Parola introdusa nu coincide!</span>
+      </div>
+      <div class="form-group">
+        <label for="phone">Telefon: </label>
+        <input type="tel"  id="phone" name="phone" formControlName="phone" class="form-control">
+        <span *ngIf="!signupForm.get('phone').valid && signupForm.get('phone').touched"
+              class="help-block">Introduceti un numar de telefon valid!</span>
+      </div>
+      <div class="form-group">
+        <label for="type">Tip utilizator: </label>
+        <select id="type" name="type" class="form-control" formControlName="user_type">
+          <option *ngFor="let t of user_types" [ngValue]="t">{{ t }}</option>
+        </select>
+      </div>
+      <button [disabled]="!signupForm.valid" class="btn btn-success form-control custom__button" type="submit">Sign Up</button>
+    </form>
+    <div class="col-md-4 col-sm-4 col-xs-12"></div>
+  </div>
+</div>

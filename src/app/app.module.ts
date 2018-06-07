@@ -1,18 +1,78 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {UserService} from './user.service';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {AppComponent} from './app.component';
+import {UserListComponent} from './user-list/user-list.component';
+import {RouterModule, Routes} from '@angular/router';
+import {HomeComponent} from './home/home.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {SignupComponent} from './auth/signup/signup.component';
+import {SigninComponent} from './auth/signin/signin.component';
+import {HeaderComponent} from './header/header.component';
+import {AuthService} from './auth/auth.service';
+import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
+import {NgxIntlTelInputModule} from 'ngx-intl-tel-input';
+import {LoggingInterceptor} from './interceptors/logging.interceptor';
+import {AuthInterceptor} from './interceptors/auth.interceptor';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatDialogModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatRadioModule,
+  MatSelectModule
+} from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {AddComponent} from './add/add.component';
+import {AgmCoreModule} from '@agm/core';
 
-
-import { AppComponent } from './app.component';
-
+const appRoutes: Routes = [
+  { path: 'home', component: HomeComponent},
+  { path: 'signup' , component: SignupComponent},
+  { path: 'signin' , component: SigninComponent},
+  { path: 'add', component: AddComponent}
+];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    UserListComponent,
+    HomeComponent,
+    SignupComponent,
+    SigninComponent,
+    HeaderComponent,
+    AddComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    MatFormFieldModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatInputModule,
+    MatCardModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatRadioModule,
+    MatSelectModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule.forRoot(appRoutes),
+    BsDropdownModule.forRoot(),
+    NgxIntlTelInputModule,
+    AgmCoreModule.forRoot(  {
+      apiKey: 'AIzaSyCP6Jh0CirrZAf-IDtdktCuhKPtIgh94_0',
+      libraries: ['places']
+    })
   ],
-  providers: [],
+  providers: [
+    UserService,
+    AuthService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true}
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

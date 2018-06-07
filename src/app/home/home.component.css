@@ -1,0 +1,18 @@
+.card__class {
+  /*max-width: 600px;*/
+  width: 400px;
+}
+
+.custom__container {
+  display: flex;
+  justify-content: space-around;
+  flex-flow: row wrap;
+  align-items: flex-start !important;
+}
+
+.viewAddButton {
+  /*display: block;*/
+  /*margin-left: 88px;*/
+  display: flex;
+  justify-content: center;
+}
