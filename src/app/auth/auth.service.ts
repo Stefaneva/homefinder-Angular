@@ -4,9 +4,9 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 @Injectable()
 export class AuthService {
 
-  private _BASE_URL = 'https://home--finder.herokuapp.com';
-
   data: Object;
+
+  private _BASE_URL = 'https://home--finder.herokuapp.com';
 
   constructor(private http: HttpClient) { }
 
