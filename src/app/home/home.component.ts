@@ -12,6 +12,7 @@ export class HomeComponent implements OnInit {
 
   private readonly imageType: string = 'data:image/PNG;base64,';
   public image: any = [];
+  page: number;
   // public ads: AddDto[] = [];
 
   constructor(private authService: AuthService,
