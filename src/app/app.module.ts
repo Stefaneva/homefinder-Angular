@@ -28,6 +28,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AddComponent} from './add/add.component';
 import {AgmCoreModule} from '@agm/core';
 import {NgxPaginationModule} from 'ngx-pagination';
+import {Ng4LoadingSpinnerModule} from 'ng4-loading-spinner';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent},
@@ -61,6 +62,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    Ng4LoadingSpinnerModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     BsDropdownModule.forRoot(),
     NgxIntlTelInputModule,

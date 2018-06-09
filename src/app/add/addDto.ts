@@ -1,4 +1,5 @@
 export class AddDto {
+  id: number;
   title: string;
   adType: string;
   description: string;
