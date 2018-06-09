@@ -102,7 +102,8 @@ export class AddComponent implements OnInit {
     this.addDto.lat = this.lat;
     this.addDto.lng = this.lng;
     this.addDto.userEmail = this.userService.currentUser.email;
-    this.userService.ads.push(this.addDto);
+    // this.userService.ads.push(this.addDto);
+    this.userService.ads.splice(0, 0 , this.addDto);
     frmData.append('title', this.addNewAdForm.value.title);
     frmData.append('description', this.addNewAdForm.value.description);
     frmData.append('adItemType', this.addNewAdForm.value.adItemType);

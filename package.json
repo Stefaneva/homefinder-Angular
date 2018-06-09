@@ -32,6 +32,7 @@
     "ng4-intl-phone": "^1.2.1",
     "ngx-bootstrap": "^2.0.4",
     "ngx-intl-tel-input": "^1.0.6",
+    "ngx-pagination": "^3.1.1",
     "popper.js": "^1.14.3",
     "rxjs": "^5.5.11",
     "zone.js": "^0.8.19"

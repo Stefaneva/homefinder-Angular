@@ -1,6 +1,6 @@
 <h1>Anunturi: </h1>
 <div class="custom__container">
-  <div *ngFor="let ad of userService.ads; let i = index">
+  <div *ngFor="let ad of userService.ads | paginate: {itemsPerPage: 5, currentPage: page}; let i = index">
     <mat-card class="card__class">
       <mat-card-header>
         <mat-card-title>{{ ad.title}}</mat-card-title>
@@ -12,4 +12,10 @@
       </mat-card-actions>
     </mat-card><br>
   </div>
+</div>
+<div class="myPaginationContainer">
+  <pagination-controls class="myPagination" (pageChange)="page = $event"
+                       previousLabel="Inapoi"
+                       nextLabel="Inainte" maxSize="5">
+  </pagination-controls>
 </div>

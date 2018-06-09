@@ -11,8 +11,11 @@
 }
 
 .viewAddButton {
-  /*display: block;*/
-  /*margin-left: 88px;*/
+  display: flex;
+  justify-content: center;
+}
+
+.myPaginationContainer {
   display: flex;
   justify-content: center;
 }

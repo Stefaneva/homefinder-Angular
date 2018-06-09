@@ -27,6 +27,7 @@ import {
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AddComponent} from './add/add.component';
 import {AgmCoreModule} from '@agm/core';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent},
@@ -53,6 +54,7 @@ const appRoutes: Routes = [
     MatInputModule,
     MatCardModule,
     MatButtonModule,
+    NgxPaginationModule,
     MatFormFieldModule,
     MatRadioModule,
     MatSelectModule,
