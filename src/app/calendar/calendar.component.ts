@@ -40,6 +40,8 @@ const colors: any = {
 export class CalendarComponent implements OnInit {
   @ViewChild('modalContent') modalContent: TemplateRef<any>;
 
+  modalRef;
+
   view = 'month';
   viewDate: Date = new Date();
   modalData: {
@@ -65,6 +67,12 @@ export class CalendarComponent implements OnInit {
   refresh: Subject<any> = new Subject();
 
   events: CalendarEvent[] = [
+    {
+      start: new Date('06/12/2018'),
+      end: new Date('06/14/2018'),
+      title: 'A 4 day event',
+      color: colors.blue,
+    },
     {
       start: subDays(startOfDay(new Date()), 1),
       end: addDays(new Date(), 1),
@@ -129,7 +137,7 @@ export class CalendarComponent implements OnInit {
 
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = { event, action };
-    this.modal.open(this.modalContent, { size: 'lg' });
+    this.modalRef = this.modal.open(this.modalContent, { size: 'lg' });
   }
 
   addEvent(): void {
@@ -150,4 +158,7 @@ export class CalendarComponent implements OnInit {
   ngOnInit() {
   }
 
+  closeModal() {
+    this.modalRef.close(true);
+  }
 }
