@@ -29,19 +29,22 @@ import {AddComponent} from './add/add.component';
 import {AgmCoreModule} from '@agm/core';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {Ng4LoadingSpinnerModule} from 'ng4-loading-spinner';
-import { AddDetailsComponent } from './add-details/add-details.component';
+import {AddDetailsComponent} from './add-details/add-details.component';
 import {UICarouselModule} from 'ui-carousel';
 import {CarouselModule} from 'ngx-bootstrap';
-import {OwlModule} from 'ngx-owl-carousel';
 import {FilterPipe} from './home/FilterPipe';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModalModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {CalendarModule} from 'angular-calendar';
+import { CalendarComponent } from './calendar/calendar.component';
+import {DemoUtilsModule} from './demo-utils/module';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent},
   { path: 'signup' , component: SignupComponent},
   { path: 'signin' , component: SigninComponent},
   { path: 'add', component: AddComponent},
-  { path: 'AdDetails', component: AddDetailsComponent}
+  { path: 'AdDetails', component: AddDetailsComponent},
+  {path: 'calendar', component: CalendarComponent}
 ];
 
 @NgModule({
@@ -54,7 +57,8 @@ const appRoutes: Routes = [
     SigninComponent,
     HeaderComponent,
     AddComponent,
-    AddDetailsComponent
+    CalendarComponent,
+    AddDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,7 +77,9 @@ const appRoutes: Routes = [
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    OwlModule,
+    DemoUtilsModule,
+    NgbModalModule.forRoot(),
+    CalendarModule.forRoot(),
     NgbModule.forRoot(),
     Ng4LoadingSpinnerModule.forRoot(),
     RouterModule.forRoot(appRoutes),
