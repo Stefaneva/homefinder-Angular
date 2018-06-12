@@ -10,16 +10,19 @@
 
 .my__carousel {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  margin-left: 50px;
 }
 
+
 .carousel__item {
-  width: 600px;
-  height: 600px;
+  width: 700px;
+  height: 500px;
 }
 
 agm-map {
-  width: 600px;
+  width: 800px;
+  height: 600px;
 }
 
 .map__class {
@@ -30,4 +33,22 @@ agm-map {
 .map__label {
   display: flex;
   justify-content: center;
+}
+
+.text__label {
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 300px;
+}
+
+.description__container {
+  margin-left: 200px;
+  margin-right: 200px;
+}
+
+.price {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 300px;
+  color: red;
 }

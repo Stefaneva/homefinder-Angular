@@ -9,8 +9,7 @@
     <mat-radio-button value="Casa">Casa</mat-radio-button>
     <mat-radio-button value="Apartament">Apartament</mat-radio-button>
   </mat-radio-group>
-
-<h1>Anunturi: </h1>
+<h1 class="ads__title">Anunturi: </h1>
 <div class="custom__container">
   <div *ngFor="let ad of userService.ads | filter : term : 'title' : adItemType : 'adItemType' | paginate: {itemsPerPage: 5, currentPage: userService.page}; let i = index">
     <mat-card class="card__class">

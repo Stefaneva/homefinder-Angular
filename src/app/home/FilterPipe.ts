@@ -14,11 +14,11 @@ export class FilterPipe implements PipeTransform {
         if (item[propName].toLowerCase().includes(term.toLowerCase()) && item[adItemProp] === adItemType) {
           filteredItems.push(item);
         }
-      } else if (term && adItemType === undefined) {
+      } else if (term && !adItemType) {
         if (item[propName].toLowerCase().includes(term.toLowerCase())) {
           filteredItems.push(item);
         }
-      } else if (adItemType && term === undefined) {
+      } else if (adItemType && !term) {
           if (item[adItemProp] === adItemType) {
             filteredItems.push(item);
           }

@@ -18,7 +18,7 @@ import {AuthInterceptor} from './interceptors/auth.interceptor';
 import {
   MatButtonModule,
   MatCardModule,
-  MatDialogModule,
+  MatDialogModule, MatExpansionModule,
   MatFormFieldModule,
   MatInputModule,
   MatRadioModule,
@@ -74,6 +74,7 @@ const appRoutes: Routes = [
     MatFormFieldModule,
     MatRadioModule,
     MatSelectModule,
+    MatExpansionModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,

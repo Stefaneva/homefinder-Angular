@@ -1,20 +1,39 @@
 <ng4-loading-spinner></ng4-loading-spinner>
 <div class="add__details__container">
-  <p class="ad__title">{{userService.adDetails.title}}</p>
+  <h2 class="ad__title">{{userService.adDetails.title}}</h2>
+  <hr>
+  <h3 class="price">Pret: {{userService.adDetails.price}} <span class="fa fa-euro"></span></h3>
+  <h3 class="text__label">Poze Anunt</h3>
   <div class="my__carousel">
     <carousel>
       <div *ngFor="let image of images">
         <slide>
-          <img [src]="image" class="carousel__item">
+          <img [src]="image" class="carousel__item img-thumbnail">
         </slide>
       </div>
     </carousel>
   </div>
+  <br>
+  <div class="description__container">
+    <mat-accordion>
+      <mat-expansion-panel (opened)="panelOpenState = true"
+                           (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Descriere anunt...
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p>{{userService.adDetails.description}}</p>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <br>
   <h3 class="map__label">Locatie: </h3>
   <div class="map__class">
       <agm-map [latitude]="lat" [longitude]="lng" [scrollwheel]="true" [fullscreenControl]="true" [zoom]="zoom">
         <agm-marker [latitude]="lat" [longitude]="lng" *ngIf="lat !=0 && lng != 0"></agm-marker>
       </agm-map>
   </div>
+  <br>
 </div>
 

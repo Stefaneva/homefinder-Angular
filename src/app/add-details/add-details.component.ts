@@ -15,6 +15,7 @@ export class AddDetailsComponent implements OnInit {
   lng = 0;
   zoom = 15;
   time = {hour: 13, minute: 30};
+  panelOpenState = false;
 
   constructor(public userService: UserService,
               private spinnerService: Ng4LoadingSpinnerService) { }
