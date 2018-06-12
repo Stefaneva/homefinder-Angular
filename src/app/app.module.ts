@@ -34,6 +34,7 @@ import {UICarouselModule} from 'ui-carousel';
 import {CarouselModule} from 'ngx-bootstrap';
 import {OwlModule} from 'ngx-owl-carousel';
 import {FilterPipe} from './home/FilterPipe';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent},
@@ -73,6 +74,7 @@ const appRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     OwlModule,
+    NgbModule.forRoot(),
     Ng4LoadingSpinnerModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     BsDropdownModule.forRoot(),
