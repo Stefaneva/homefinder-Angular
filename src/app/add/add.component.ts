@@ -5,6 +5,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MapsAPILoader} from '@agm/core';
 import {} from '@types/googlemaps';
 import {AddDto} from './addDto';
+import {Ng4LoadingSpinnerService} from 'ng4-loading-spinner';
 
 
 @Component({
@@ -31,7 +32,8 @@ export class AddComponent implements OnInit {
   constructor(private userService: UserService,
               private authService: AuthService,
               private mapsAPILoader: MapsAPILoader,
-              private ngZone: NgZone) { }
+              private ngZone: NgZone,
+              private spinnerService: Ng4LoadingSpinnerService,) { }
 
   ngOnInit() {
     this.addNewAdForm = new FormGroup({
@@ -118,8 +120,11 @@ export class AddComponent implements OnInit {
     this.userService.postNewAdImages(frmData).subscribe(
       (response) => {
         console.log(response);
+        this.spinnerService.show();
         this.userService.getAdsWithImages().subscribe(
-          (response1) => {console.log(response1); this.userService.ads = response1;
+          (response1) => {console.log(response1);
+          this.userService.ads = response1;
+          this.spinnerService.hide();
             this.userService.ads.forEach( ad => ad.image = this.imageType + ad.image);
           }
         );
