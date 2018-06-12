@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../auth/auth.service';
 import {UserService} from '../user.service';
 import {AddDto} from '../add/addDto';
 import {Ng4LoadingSpinnerService} from 'ng4-loading-spinner';
+import {Router} from '@angular/router';
+import {FilterPipe} from './FilterPipe';
 
 @Component({
   selector: 'app-home',
@@ -13,13 +15,14 @@ export class HomeComponent implements OnInit {
 
   private readonly imageType: string = 'data:image/PNG;base64,';
   public image: any = [];
-  page: number;
-
+  term: any;
+  adItemType: string;
   // public ads: AddDto[] = [];
 
   constructor(private authService: AuthService,
               public userService: UserService,
-              private spinnerService: Ng4LoadingSpinnerService) { }
+              private spinnerService: Ng4LoadingSpinnerService,
+              private router: Router) { }
 
   ngOnInit() {
     this.spinnerService.show();
@@ -29,8 +32,12 @@ export class HomeComponent implements OnInit {
         this.spinnerService.hide();
         this.userService.ads = response;
         this.userService.ads.forEach( ad => ad.image = this.imageType + ad.image);
-        // this.image = this.imageType + response.image;
       }
     );
+  }
+
+  viewAdDetails(ad: AddDto) {
+    this.userService.adDetails = ad;
+    this.router.navigateByUrl('/AdDetails');
   }
 }

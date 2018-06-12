@@ -1,0 +1,33 @@
+/*.add__details__container {*/
+  /*display: flex;*/
+  /*justify-content: center;*/
+/*}*/
+
+.ad__title {
+  display: flex;
+  justify-content: center;
+}
+
+.my__carousel {
+  display: flex;
+  justify-content: center;
+}
+
+.carousel__item {
+  width: 600px;
+  height: 600px;
+}
+
+agm-map {
+  width: 600px;
+}
+
+.map__class {
+  display: flex;
+  justify-content: center;
+}
+
+.map__label {
+  display: flex;
+  justify-content: center;
+}

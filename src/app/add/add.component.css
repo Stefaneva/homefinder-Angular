@@ -6,10 +6,6 @@ div.container {
   flex-direction: column;
 }
 
-agm-map {
-  height: 300px;
-}
-
 .container > * {
   width: 100%;
 }

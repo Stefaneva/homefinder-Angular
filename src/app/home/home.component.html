@@ -1,21 +1,33 @@
 <ng4-loading-spinner></ng4-loading-spinner>
+<form>
+  <mat-form-field>
+    <input type="text" name="search" matInput placeholder="Cauta Anunt..." [(ngModel)]="term">
+    <!-- <mat-icon matSuffix>mode_search</mat-icon> -->
+  </mat-form-field>
+</form>
+  <mat-radio-group [(ngModel)]="adItemType">
+    <mat-radio-button value="Casa">Casa</mat-radio-button>
+    <mat-radio-button value="Apartament">Apartament</mat-radio-button>
+  </mat-radio-group>
+
 <h1>Anunturi: </h1>
 <div class="custom__container">
-  <div *ngFor="let ad of userService.ads | paginate: {itemsPerPage: 5, currentPage: page}; let i = index">
+  <div *ngFor="let ad of userService.ads | filter : term : 'title' : adItemType : 'adItemType' | paginate: {itemsPerPage: 5, currentPage: userService.page}; let i = index">
     <mat-card class="card__class">
       <mat-card-header>
         <mat-card-title>{{ ad.title}}</mat-card-title>
         <mat-card-subtitle>{{ ad.adType }} - {{ad.adItemType}}</mat-card-subtitle>
       </mat-card-header>
+      <mat-card-content>Pret: {{ ad.price }} <span class="fa fa-euro"></span></mat-card-content>
       <img mat-card-image height="500px"  [src]="ad.image">
       <mat-card-actions class="viewAddButton">
-        <button mat-raised-button mat-button color="primary" >Vizualizeaza Anunt</button>
+        <button mat-raised-button mat-button color="primary" (click)="viewAdDetails(ad)">Vizualizeaza Anunt</button>
       </mat-card-actions>
     </mat-card><br>
   </div>
 </div>
 <div class="myPaginationContainer">
-  <pagination-controls class="myPagination" (pageChange)="page = $event"
+  <pagination-controls class="myPagination" (pageChange)="userService.page = $event"
                        previousLabel="Inapoi"
                        nextLabel="Inainte" maxSize="5">
   </pagination-controls>

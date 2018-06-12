@@ -15,6 +15,7 @@ import {AddDto} from './addDto';
 export class AddComponent implements OnInit {
 
   addNewAdForm: FormGroup;
+  imageType = 'data:image/PNG;base64,';
   lat = 51.678418;
   lng = 7.809007;
   zoom: number;
@@ -102,8 +103,7 @@ export class AddComponent implements OnInit {
     this.addDto.lat = this.lat;
     this.addDto.lng = this.lng;
     this.addDto.userEmail = this.userService.currentUser.email;
-    // this.userService.ads.push(this.addDto);
-    this.userService.ads.splice(0, 0 , this.addDto);
+    // this.userService.ads.splice(0, 0 , this.addDto);
     frmData.append('title', this.addNewAdForm.value.title);
     frmData.append('description', this.addNewAdForm.value.description);
     frmData.append('adItemType', this.addNewAdForm.value.adItemType);
@@ -116,8 +116,15 @@ export class AddComponent implements OnInit {
     frmData.append('userEmail', this.userService.currentUser.email);
     console.log(frmData.getAll('fileUpload'));
     this.userService.postNewAdImages(frmData).subscribe(
-      (response) => console.log(response),
-      (error) => console.log(error)
+      (response) => {
+        console.log(response);
+        this.userService.getAdsWithImages().subscribe(
+          (response1) => {console.log(response1); this.userService.ads = response1;
+            this.userService.ads.forEach( ad => ad.image = this.imageType + ad.image);
+          }
+        );
+      },
+          (error) => console.log(error)
     );
   }
 

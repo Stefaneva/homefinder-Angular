@@ -17,10 +17,13 @@ export class UserService {
   private _NEW_AD_URL_IMAGES = this._BASE_URL + '/newAdImages';
   private _NEW_AD_URL_INFO = this._BASE_URL + '/newAdInfo';
   private _GET_ADS_WITH_IMAGES = this._BASE_URL + '/adsWithImages';
+  private _GET_AD_IMAGES = this._BASE_URL + '/getAdImages';
 
   data: Object;
+  page: number;
   currentUser = new User;
   public ads: AddDto[] = [];
+  public adDetails: AddDto;
 
   constructor(private http: HttpClient,
               private authService: AuthService) {
@@ -32,6 +35,10 @@ export class UserService {
 
   postUserData(): Observable<UserDto> {
     return this.http.post<UserDto>(this._USER_DATA_URL, {email: this.currentUser.email});
+  }
+
+  getAdImages(adId: number): Observable<string[]> {
+    return this.http.post<string[]>(this._GET_AD_IMAGES, adId);
   }
 
   postNewAdImages(data: FormData): Observable<void> {

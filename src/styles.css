@@ -14,3 +14,6 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
 
+agm-map {
+  height: 300px;
+}

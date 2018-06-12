@@ -1,0 +1,19 @@
+<ng4-loading-spinner></ng4-loading-spinner>
+<div class="add__details__container">
+  <p class="ad__title">{{userService.adDetails.title}}</p>
+<div class="my__carousel">
+  <carousel>
+    <div *ngFor="let image of images">
+      <slide>
+        <img [src]="image" class="carousel__item">
+      </slide>
+    </div>
+  </carousel>
+</div>
+<h3 class="map__label">Locatie: </h3>
+<div class="map__class">
+    <agm-map [latitude]="lat" [longitude]="lng" [scrollwheel]="true" [fullscreenControl]="true" [zoom]="zoom">
+      <agm-marker [latitude]="lat" [longitude]="lng" *ngIf="lat !=0 && lng != 0"></agm-marker>
+    </agm-map>
+</div>
+</div>

@@ -29,26 +29,36 @@ import {AddComponent} from './add/add.component';
 import {AgmCoreModule} from '@agm/core';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {Ng4LoadingSpinnerModule} from 'ng4-loading-spinner';
+import { AddDetailsComponent } from './add-details/add-details.component';
+import {UICarouselModule} from 'ui-carousel';
+import {CarouselModule} from 'ngx-bootstrap';
+import {OwlModule} from 'ngx-owl-carousel';
+import {FilterPipe} from './home/FilterPipe';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent},
   { path: 'signup' , component: SignupComponent},
   { path: 'signin' , component: SigninComponent},
-  { path: 'add', component: AddComponent}
+  { path: 'add', component: AddComponent},
+  { path: 'AdDetails', component: AddDetailsComponent}
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
+    FilterPipe,
     UserListComponent,
     HomeComponent,
     SignupComponent,
     SigninComponent,
     HeaderComponent,
-    AddComponent
+    AddComponent,
+    AddDetailsComponent
   ],
   imports: [
     BrowserModule,
+    CarouselModule,
+    UICarouselModule,
     MatFormFieldModule,
     BrowserAnimationsModule,
     MatDialogModule,
@@ -62,6 +72,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    OwlModule,
     Ng4LoadingSpinnerModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     BsDropdownModule.forRoot(),
