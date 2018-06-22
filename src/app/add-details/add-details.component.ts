@@ -2,6 +2,7 @@ import {Component, NgZone, OnInit} from '@angular/core';
 import {UserService} from '../user.service';
 import {Ng4LoadingSpinnerService} from 'ng4-loading-spinner';
 import {ActivatedRoute} from '@angular/router';
+import {AddDto} from '../add/addDto';
 
 @Component({
   selector: 'app-add-details',
@@ -26,13 +27,27 @@ export class AddDetailsComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.userService.adDetails = new AddDto();
     this.spinnerService.show();
     this.route.params.subscribe( params => {
       this.adId = parseInt(params['id'], 10);
       // this.userService.adDetails.id = parseInt(this.adId, 10);
     } );
-    this.lat = this.userService.adDetails.lat;
-    this.lng = this.userService.adDetails.lng;
+    this.userService.getAdInfo(this.adId).subscribe(
+      response1 => {
+        console.log(response1);
+        this.userService.adDetails.id = response1.id;
+        this.userService.adDetails.title = response1.title;
+        this.userService.adDetails.description = response1.description;
+        this.userService.adDetails.adItemType = response1.adItemType;
+        this.userService.adDetails.adType = response1.adType;
+        this.userService.adDetails.surface = response1.surface;
+        this.userService.adDetails.rooms = response1.rooms;
+        this.userService.adDetails.price = response1.price;
+        this.userService.adDetails.lat = response1.lat;
+        this.userService.adDetails.lng = response1.lng;
+        this.lat = this.userService.adDetails.lat;
+        this.lng = this.userService.adDetails.lng;
     console.log(this.userService.adDetails.id);
     // this.userService.getAdImages(this.userService.adDetails.id).subscribe(
     this.userService.getAdImages(this.adId).subscribe(
@@ -56,6 +71,8 @@ export class AddDetailsComponent implements OnInit {
             }
           }
         });
+      }
+    );
       }
     );
   }

@@ -20,7 +20,7 @@ import {
   MatCardModule,
   MatDialogModule, MatExpansionModule,
   MatFormFieldModule,
-  MatInputModule,
+  MatInputModule, MatPaginatorModule,
   MatRadioModule,
   MatSelectModule
 } from '@angular/material';
@@ -75,6 +75,7 @@ const appRoutes: Routes = [
     MatFormFieldModule,
     MatRadioModule,
     MatSelectModule,
+    MatPaginatorModule,
     MatExpansionModule,
     HttpClientModule,
     FormsModule,

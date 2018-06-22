@@ -6,6 +6,7 @@ import {AuthService} from './auth/auth.service';
 import {UserDto} from './models/userDto';
 import {AddDto} from './add/addDto';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {AdDetailsDto} from './models/adDetails';
 
 
 @Injectable()
@@ -18,9 +19,11 @@ export class UserService {
   private _NEW_AD_URL_INFO = this._BASE_URL + '/newAdInfo';
   private _GET_ADS_WITH_IMAGES = this._BASE_URL + '/adsWithImages';
   private _GET_AD_IMAGES = this._BASE_URL + '/getAdImages';
+  private _GET_AD_DETAILS = this._BASE_URL + '/getAdInfo';
 
   data: Object;
   page: number;
+  itemsOnPage = 5;
   currentUser = new User;
   public ads: AddDto[] = [];
   public adDetails: AddDto;
@@ -48,5 +51,9 @@ export class UserService {
 
   getAdsWithImages(): Observable<AddDto[]> {
     return this.http.post<AddDto[]>(this._GET_ADS_WITH_IMAGES, {});
+  }
+
+  getAdInfo(adId: number): Observable<AdDetailsDto> {
+    return this.http.post<AdDetailsDto>(this._GET_AD_DETAILS, adId);
   }
 }

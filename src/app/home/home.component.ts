@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {AuthService} from '../auth/auth.service';
 import {UserService} from '../user.service';
 import {AddDto} from '../add/addDto';
 import {Ng4LoadingSpinnerService} from 'ng4-loading-spinner';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FilterPipe} from './FilterPipe';
+import {MatPaginator} from '@angular/material';
 
 @Component({
   selector: 'app-home',
@@ -18,6 +19,7 @@ export class HomeComponent implements OnInit {
   term: any;
   adItemType: string;
   // public ads: AddDto[] = [];
+  itemsPerPageOptions = [5, 7, 10];
 
   constructor(private authService: AuthService,
               public userService: UserService,
@@ -42,4 +44,5 @@ export class HomeComponent implements OnInit {
     // this.router.navigateByUrl('/AdDetails');
     this.router.navigate(['/AdDetails', ad.id]);
   }
+
 }

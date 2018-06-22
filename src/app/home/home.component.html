@@ -5,13 +5,16 @@
     <!-- <mat-icon matSuffix>mode_search</mat-icon> -->
   </mat-form-field>
 </form>
-  <mat-radio-group [(ngModel)]="adItemType">
-    <mat-radio-button value="Casa">Casa</mat-radio-button>
-    <mat-radio-button value="Apartament">Apartament</mat-radio-button>
-  </mat-radio-group>
+<mat-radio-group [(ngModel)]="adItemType">
+  <mat-radio-button value="Casa">Casa</mat-radio-button>
+  <mat-radio-button value="Apartament">Apartament</mat-radio-button>
+</mat-radio-group>
+<mat-select [(value)]="userService.itemsOnPage">
+  <mat-option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}</mat-option>
+</mat-select>
 <h1 class="ads__title">Anunturi: </h1>
 <div class="custom__container">
-  <div *ngFor="let ad of userService.ads | filter : term : 'title' : adItemType : 'adItemType' | paginate: {itemsPerPage: 5, currentPage: userService.page}; let i = index">
+  <div *ngFor="let ad of userService.ads | filter : term : 'title' : adItemType : 'adItemType' | paginate: {itemsPerPage: userService.itemsOnPage, currentPage: userService.page}; let i = index">
     <mat-card class="card__class">
       <mat-card-header>
         <mat-card-title>{{ ad.title}}</mat-card-title>

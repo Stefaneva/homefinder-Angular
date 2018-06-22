@@ -1,4 +1,6 @@
-export class AddDetailsDto {
+import {UserDto} from './userDto';
+
+export class AdDetailsDto {
   id: number;
   title: string;
   adType: string;
@@ -9,6 +11,5 @@ export class AddDetailsDto {
   adItemType: string;
   lat: number;
   lng: number;
-  userEmail: string;
-  image: string;
+  userDetails: UserDto;
 }
