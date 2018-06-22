@@ -44,7 +44,7 @@ const appRoutes: Routes = [
   { path: 'signup' , component: SignupComponent},
   { path: 'signin' , component: SigninComponent},
   { path: 'add', component: AddComponent},
-  { path: 'AdDetails', component: AddDetailsComponent},
+  { path: 'AdDetails/:id', component: AddDetailsComponent},
   {path: 'calendar', component: CalendarComponent}
 ];
 

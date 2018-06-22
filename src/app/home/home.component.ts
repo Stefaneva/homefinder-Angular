@@ -3,7 +3,7 @@ import {AuthService} from '../auth/auth.service';
 import {UserService} from '../user.service';
 import {AddDto} from '../add/addDto';
 import {Ng4LoadingSpinnerService} from 'ng4-loading-spinner';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {FilterPipe} from './FilterPipe';
 
 @Component({
@@ -38,6 +38,8 @@ export class HomeComponent implements OnInit {
 
   viewAdDetails(ad: AddDto) {
     this.userService.adDetails = ad;
-    this.router.navigateByUrl('/AdDetails');
+    const url = '/AdDetails/' + ad.id;
+    // this.router.navigateByUrl('/AdDetails');
+    this.router.navigate(['/AdDetails', ad.id]);
   }
 }
