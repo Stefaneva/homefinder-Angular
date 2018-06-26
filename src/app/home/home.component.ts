@@ -44,5 +44,4 @@ export class HomeComponent implements OnInit {
     // this.router.navigateByUrl('/AdDetails');
     this.router.navigate(['/AdDetails', ad.id]);
   }
-
 }

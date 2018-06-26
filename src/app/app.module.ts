@@ -37,6 +37,9 @@ import {NgbModalModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {CalendarModule} from 'angular-calendar';
 import { CalendarComponent } from './calendar/calendar.component';
 import {DemoUtilsModule} from './demo-utils/module';
+import { MyAdsComponent } from './my-ads/my-ads.component';
+import {NgxSmartModalModule} from 'ngx-smart-modal';
+import { ModalAgreementComponent } from './modal-agreement/modal-agreement.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home' , pathMatch: 'full' },
@@ -45,7 +48,8 @@ const appRoutes: Routes = [
   { path: 'signin' , component: SigninComponent},
   { path: 'add', component: AddComponent},
   { path: 'AdDetails/:id', component: AddDetailsComponent},
-  {path: 'calendar', component: CalendarComponent}
+  { path: 'calendar', component: CalendarComponent},
+  { path: 'myAds', component: MyAdsComponent}
 ];
 
 @NgModule({
@@ -60,6 +64,8 @@ const appRoutes: Routes = [
     AddComponent,
     CalendarComponent,
     AddDetailsComponent,
+    MyAdsComponent,
+    ModalAgreementComponent,
   ],
   imports: [
     BrowserModule,
@@ -93,6 +99,7 @@ const appRoutes: Routes = [
       libraries: ['places']
     })
   ],
+  entryComponents: [ModalAgreementComponent],
   providers: [
     UserService,
     AuthService,

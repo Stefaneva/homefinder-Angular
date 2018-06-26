@@ -20,6 +20,8 @@ export class UserService {
   private _GET_ADS_WITH_IMAGES = this._BASE_URL + '/adsWithImages';
   private _GET_AD_IMAGES = this._BASE_URL + '/getAdImages';
   private _GET_AD_DETAILS = this._BASE_URL + '/getAdInfo';
+  private _GET_USER_ADS = this._BASE_URL + '/getUserAds';
+  private _DELETE_AD = this._BASE_URL + '/deleteAd';
 
   data: Object;
   page: number;
@@ -27,6 +29,8 @@ export class UserService {
   currentUser = new User;
   public ads: AddDto[] = [];
   public adDetails: AddDto;
+  adDeleted = new AddDto();
+  public myAds: AddDto[] = [];
 
   constructor(private http: HttpClient,
               private authService: AuthService) {
@@ -53,7 +57,15 @@ export class UserService {
     return this.http.post<AddDto[]>(this._GET_ADS_WITH_IMAGES, {});
   }
 
+  getUserAds(): Observable<AddDto[]> {
+    return this.http.post<AddDto[]>(this._GET_USER_ADS, {email: this.currentUser.email});
+  }
+
   getAdInfo(adId: number): Observable<AdDetailsDto> {
     return this.http.post<AdDetailsDto>(this._GET_AD_DETAILS, adId);
+  }
+
+  deleteAd(adId: number): Observable<void> {
+    return this.http.post<void>(this._DELETE_AD, adId);
   }
 }

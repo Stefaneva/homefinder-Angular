@@ -7,12 +7,14 @@ export class AuthService {
   data: Object;
 
   private _BASE_URL = 'https://home--finder.herokuapp.com';
+  // private local = 'http://localhost:8080';
 
   constructor(private http: HttpClient) { }
 
   register(data: Object) {
     console.log(data);
     return this.http.post(this._BASE_URL + '/signup', data);
+    // return this.http.post(this.local + '/signup', data);
   }
 
   login(Username: string, Password: string) {
