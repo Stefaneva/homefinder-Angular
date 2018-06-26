@@ -41,6 +41,9 @@ export class CalendarComponent implements OnInit {
   @ViewChild('modalContent') modalContent: TemplateRef<any>;
 
   modalRef;
+  i = 0;
+
+  newEvent: CalendarEvent;
 
   view = 'month';
   viewDate: Date = new Date();
@@ -141,7 +144,20 @@ export class CalendarComponent implements OnInit {
   }
 
   addEvent(): void {
-    this.events.push({
+    // this.events.push({
+    //   title: 'New event',
+    //   start: startOfDay(new Date()),
+    //   end: endOfDay(new Date()),
+    //   color: colors.red,
+    //   draggable: true,
+    //   resizable: {
+    //     beforeStart: true,
+    //     afterEnd: true
+    //   }
+    // });
+    // this.refresh.next();
+    // const event: CalendarEvent = {
+    this.newEvent = {
       title: 'New event',
       start: startOfDay(new Date()),
       end: endOfDay(new Date()),
@@ -151,8 +167,10 @@ export class CalendarComponent implements OnInit {
         beforeStart: true,
         afterEnd: true
       }
-    });
+    };
+    this.events.push(this.newEvent);
     this.refresh.next();
+    console.log(this.newEvent);
   }
 
   ngOnInit() {
@@ -160,5 +178,9 @@ export class CalendarComponent implements OnInit {
 
   closeModal() {
     this.modalRef.close(true);
+  }
+
+  confirmChanges() {
+    alert(this.i++);
   }
 }

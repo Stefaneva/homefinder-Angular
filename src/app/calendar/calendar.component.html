@@ -169,6 +169,10 @@
         (click)="events.splice(index, 1); refresh.next()">
         Delete
       </button>
+      <button class="btn btn-success"
+        (click)="confirmChanges()" >
+        Confirm Changes
+      </button>
     </td>
   </tr>
   </tbody>

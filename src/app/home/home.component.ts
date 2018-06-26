@@ -17,7 +17,12 @@ export class HomeComponent implements OnInit {
   private readonly imageType: string = 'data:image/PNG;base64,';
   public image: any = [];
   term: any;
+  priceMin: number;
+  priceMax: number;
   adItemType: string;
+  adType: string;
+  surface: number;
+  rooms: number;
   // public ads: AddDto[] = [];
   itemsPerPageOptions = [5, 7, 10];
 

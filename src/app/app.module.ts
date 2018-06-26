@@ -96,7 +96,7 @@ const appRoutes: Routes = [
     NgxIntlTelInputModule,
     AgmCoreModule.forRoot(  {
       apiKey: 'AIzaSyCP6Jh0CirrZAf-IDtdktCuhKPtIgh94_0',
-      libraries: ['places']
+      libraries: ['places', 'geometry']
     })
   ],
   entryComponents: [ModalAgreementComponent],

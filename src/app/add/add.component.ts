@@ -33,7 +33,7 @@ export class AddComponent implements OnInit {
               private authService: AuthService,
               private mapsAPILoader: MapsAPILoader,
               private ngZone: NgZone,
-              private spinnerService: Ng4LoadingSpinnerService,) { }
+              private spinnerService: Ng4LoadingSpinnerService, ) { }
 
   ngOnInit() {
     this.addNewAdForm = new FormGroup({
@@ -76,6 +76,16 @@ export class AddComponent implements OnInit {
         });
       });
     });
+
+    this.onChanges();
+  }
+
+  onChanges(): void {
+    // this.addNewAdForm.get('adItemType').valueChanges.subscribe(
+    //   val => {
+    //
+    //   }
+    // );
   }
 
   private setCurrentPosition() {

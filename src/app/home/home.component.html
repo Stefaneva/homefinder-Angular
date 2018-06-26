@@ -14,7 +14,9 @@
 </mat-select>
 <h1 class="ads__title">Anunturi: </h1>
 <div class="custom__container">
-  <div *ngFor="let ad of userService.ads | filter : term : 'title' : adItemType : 'adItemType' | paginate: {itemsPerPage: userService.itemsOnPage, currentPage: userService.page}; let i = index">
+  <div *ngFor="let ad of userService.ads | filter : term : 'title' :
+    adItemType : 'adItemType' : priceMin : 'price' : priceMax : 'price' :
+     adType: 'adType' : surface : 'surface' : rooms : 'rooms' | paginate: {itemsPerPage: userService.itemsOnPage, currentPage: userService.page}; let i = index">
     <mat-card class="card__class">
       <mat-card-header>
         <mat-card-title>{{ ad.title}}</mat-card-title>
@@ -23,7 +25,7 @@
         <img src="../../assets/bloc.jpg" *ngIf="ad.adItemType == 'Apartament'" mat-card-avatar>
       </mat-card-header>
       <mat-card-content>Pret: {{ ad.price }} <span class="fa fa-euro"></span></mat-card-content>
-      <img mat-card-image height="500px"  [src]="ad.image">
+      <img mat-card-image height="300px"  [src]="ad.image">
       <mat-card-actions class="viewAddButton">
         <button mat-raised-button mat-button color="primary" (click)="viewAdDetails(ad)">Vizualizeaza Anunt</button>
       </mat-card-actions>
