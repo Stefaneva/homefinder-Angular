@@ -20,13 +20,42 @@
       <textarea type="text" placeholder="Descriere..." matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=10 formControlName="description" autocomplete="off"></textarea>
     </mat-form-field>
     <mat-form-field>
-      <input type="number" placeholder="Pret..." matInput formControlName="price" autocomplete="off">
-    </mat-form-field>
-    <mat-form-field>
       <input type="number" placeholder="Suprafata..." matInput formControlName="surface" autocomplete="off">
     </mat-form-field>
+    <div *ngIf="addNewAdForm.get('adItemType').value === 'Apartament'">
+      <mat-form-field>
+        <input type="number" placeholder="Confort..." matInput formControlName="comfort" autocomplete="off">
+      </mat-form-field>
+      <mat-form-field>
+        <input type="text" placeholder="Etaj..." matInput formControlName="floorLevel" autocomplete="off">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Compartimentare..." matInput formControlName="partitioning">
+          <mat-option value="Decomandat">Decomandat</mat-option>
+          <mat-option value="Semidecomandat">Semidecomandata</mat-option>
+          <mat-option value="Necomandat">Necomandata</mat-option>
+          <mat-option value="Vagon">Vagon</mat-option>
+          <mat-option value="Circular">Circular</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div *ngIf="addNewAdForm.get('adItemType').value === 'Casa'">
+      <mat-form-field>
+        <input type="number" placeholder="Suprafata Utila..." matInput formControlName="areaSurface" autocomplete="off">
+      </mat-form-field>
+    </div>
     <mat-form-field>
-      <input type="number" placeholder="Camere..." matInput formControlName="rooms" autocomplete="off">
+      <input type="number" placeholder="Numar Camere..." matInput formControlName="rooms" autocomplete="off">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Tip locuinta..." matInput formControlName="furnished">
+        <mat-option value="Mobilata">Mobilata</mat-option>
+        <mat-option value="Mobilata Partial">Mobilata Partial</mat-option>
+        <mat-option value="Nemobilata">Nemobilata</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <input type="number" placeholder="An Constructie..." matInput formControlName="yearBuilt" autocomplete="off">
     </mat-form-field>
     <div class="form-group">
       <input placeholder="Localizare..." autocorrect="on" autocapitalize="on" spellcheck="on" type="text" class="form-control" #search formControlName="searchControl">
@@ -34,10 +63,17 @@
     <agm-map [latitude]="lat" [longitude]="lng" [scrollwheel]="true" [fullscreenControl]="true" (mapClick)="onChoseLocation($event)" [zoom]="zoom">
       <agm-marker [latitude]="lat" [longitude]="lng" *ngIf="locationChosen"></agm-marker>
     </agm-map>
-    <label> Imagini... (PNG/JPG/DICOM/DCM):</label>
+    <div class="suggested__price" *ngIf="adSuggestedPrice !== 0">
+      <p>Pret sugerat: {{ adSuggestedPrice }}
+    </div>
+    <mat-form-field>
+      <input type="number" placeholder="Pret..." matInput formControlName="price" autocomplete="off">
+    </mat-form-field>
+    <label> Imagini... (PNG/JPG/...):</label>
     <br>
     <input type="file" id="file" multiple (change)="getFileDetails($event)" accept="image/*">
-    <button [disabled]="!addNewAdForm.valid || !locationChosen || myFiles.length <= 0" class="btn btn-success form-control custom__button" type="submit">Adauga Anunt</button>
+    <br>
+    <button [disabled]="!validForm() || !locationChosen || myFiles.length <= 0" class="btn btn-success form-control custom__button" type="submit">Adauga Anunt</button>
   </form>
 </div>
 </mat-dialog-content>

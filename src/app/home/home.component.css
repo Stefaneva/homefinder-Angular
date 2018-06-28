@@ -1,6 +1,7 @@
 .card__class {
   /*max-width: 600px;*/
   width: 300px;
+  margin-right: 10px;
 }
 
 .custom__container {

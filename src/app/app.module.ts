@@ -19,7 +19,7 @@ import {
   MatButtonModule,
   MatCardModule,
   MatDialogModule, MatExpansionModule,
-  MatFormFieldModule,
+  MatFormFieldModule, MatIconModule,
   MatInputModule, MatPaginatorModule,
   MatRadioModule,
   MatSelectModule
@@ -75,6 +75,7 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     MatDialogModule,
     MatInputModule,
+    MatIconModule,
     MatCardModule,
     MatButtonModule,
     NgxPaginationModule,

@@ -1,29 +1,61 @@
 <ng4-loading-spinner></ng4-loading-spinner>
 <div class="add__details__container">
   <h2 class="ad__title">{{userService.adDetails.title}}</h2>
-  <hr>
-  <h3 class="price">Pret: {{userService.adDetails.price}} <span class="fa fa-euro"></span></h3>
-  <h3 class="text__label">Poze Anunt</h3>
-  <div class="my__carousel">
-    <carousel>
-      <div *ngFor="let image of images">
-        <slide>
-          <img [src]="image" class="carousel__item img-thumbnail">
-        </slide>
-      </div>
-    </carousel>
+  <hr class="hr__line">
+  <h3 class="text__label">Poze Anunt: </h3>
+  <div class="price__carousel">
+    <div class="my__carousel">
+      <carousel>
+        <div *ngFor="let image of images">
+          <slide>
+            <img [src]="image" class="carousel__item img-thumbnail">
+          </slide>
+        </div>
+      </carousel>
+    </div>
+    <div class="buttons">
+      <button class="btn btn-success price">Pret: {{userService.adDetails.price}} <span class="fa fa-euro"></span></button>
+      <button class="btn btn-danger favourite">Adauga la Favorite&nbsp;<mat-icon>favorite_border</mat-icon></button>
+      <button class="btn btn-info favourite">E-mail: {{userService.adDetails.userEmail}}&nbsp;<mat-icon>email</mat-icon></button>
+    </div>
   </div>
   <br>
   <div class="description__container">
-    <mat-accordion>
-      <mat-expansion-panel (opened)="panelOpenState = true"
-                           (closed)="panelOpenState = false">
+    <mat-accordion class="mat__accordion">
+      <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)"
+                                                 (closed)="panelOpenState = false" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Descriere Anunt...
+        </mat-panel-title>
+        <mat-panel-description class="mat__panel__description"><mat-icon>info</mat-icon></mat-panel-description>
+      </mat-expansion-panel-header>
+      <div>
+        <p>Descriere: {{userService.adDetails.description}}
+      </div>
+      <mat-action-row>
+        <button mat-button color="warn" (click)="prevStep()">Predecesor</button>
+        <button mat-button color="primary" (click)="nextStep()">Urmator</button>
+      </mat-action-row>
+      </mat-expansion-panel>
+      <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)"
+                           (closed)="panelOpenState = false" hideToggle>
         <mat-expansion-panel-header>
           <mat-panel-title>
-            Descriere anunt...
+            Detalii Anunt...
           </mat-panel-title>
+          <mat-panel-description class="mat__panel__description"><mat-icon>assignment</mat-icon></mat-panel-description>
         </mat-expansion-panel-header>
-        <p>{{userService.adDetails.description}}</p>
+        <div class="expansion__panel__content">
+          <p>Numar Camere: {{userService.adDetails.rooms}}
+          <p>Suprafata: {{userService.adDetails.surface}}
+          <p>Suprafata teren:{{userService.adDetails.areaSurface}}
+          <p>An constructie: {{userService.adDetails.yearBuilt}}
+        </div>
+        <mat-action-row>
+          <button mat-button color="warn" (click)="prevStep()">Predecesor</button>
+          <button mat-button color="primary" (click)="nextStep()">Final</button>
+        </mat-action-row>
       </mat-expansion-panel>
     </mat-accordion>
   </div>

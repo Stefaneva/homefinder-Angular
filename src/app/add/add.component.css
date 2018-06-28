@@ -6,6 +6,13 @@ div.container {
   flex-direction: column;
 }
 
+.suggested__price {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  size: 7px;
+}
+
 .container > * {
   width: 100%;
 }

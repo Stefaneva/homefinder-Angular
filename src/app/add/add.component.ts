@@ -24,6 +24,7 @@ export class AddComponent implements OnInit {
   myFiles: File [] = [];
   sMsg = '';
   base64String: string;
+  adSuggestedPrice = 0;
   addDto: AddDto = new AddDto();
 
   @ViewChild('search')
@@ -44,7 +45,13 @@ export class AddComponent implements OnInit {
       'surface' : new FormControl(null, Validators.required),
       'rooms' : new FormControl(null, Validators.required),
       'adItemType' : new FormControl(null, Validators.required),
-      'searchControl' : new FormControl(null)
+      'searchControl' : new FormControl(null),
+      'partitioning' : new FormControl(null, Validators.required),
+      'comfort' : new FormControl(null, Validators.required),
+      'floorLevel' : new FormControl(null, Validators.required),
+      'furnished' : new FormControl(null, Validators.required),
+      'areaSurface' : new FormControl(null, Validators.required),
+      'yearBuilt' : new FormControl(null, Validators.required)
     });
 
     this.zoom = 4;
@@ -119,6 +126,14 @@ export class AddComponent implements OnInit {
     frmData.append('title', this.addNewAdForm.value.title);
     frmData.append('description', this.addNewAdForm.value.description);
     frmData.append('adItemType', this.addNewAdForm.value.adItemType);
+    if (this.addNewAdForm.value.adItemType === 'Casa') {
+      this.addNewAdForm.get('comfort').setValue(0);
+      this.addNewAdForm.get('floorLevel').setValue(0);
+      this.addNewAdForm.get('partitioning').setValue(null);
+      this.addNewAdForm.get('furnished').setValue(null);
+    } else {
+      this.addNewAdForm.get('areaSurface').setValue(0);
+    }
     frmData.append('adType', this.addNewAdForm.value.adType);
     frmData.append('price', this.addNewAdForm.value.price);
     frmData.append('rooms', this.addNewAdForm.value.rooms);
@@ -126,6 +141,12 @@ export class AddComponent implements OnInit {
     frmData.append('lat', this.lat.toString());
     frmData.append('lng', this.lng.toString());
     frmData.append('userEmail', this.userService.currentUser.email);
+    frmData.append('partitioning', this.addNewAdForm.value.partitioning);
+    frmData.append('comfort', this.addNewAdForm.value.comfort);
+    frmData.append('floorLevel', this.addNewAdForm.value.floorLevel);
+    frmData.append('areaSurface', this.addNewAdForm.value.areaSurface);
+    frmData.append('furnished', this.addNewAdForm.value.furnished);
+    frmData.append('yearBuilt', this.addNewAdForm.value.yearBuilt);
     console.log(frmData.getAll('fileUpload'));
     this.userService.postNewAdImages(frmData).subscribe(
       (response) => {
@@ -135,7 +156,7 @@ export class AddComponent implements OnInit {
           (response1) => {console.log(response1);
           this.userService.ads = response1;
           this.spinnerService.hide();
-            this.userService.ads.forEach( ad => ad.image = this.imageType + ad.image);
+          this.userService.ads.forEach( ad => ad.image = this.imageType + ad.image);
           }
         );
       },
@@ -144,9 +165,28 @@ export class AddComponent implements OnInit {
   }
 
   onChoseLocation(event) {
+    this.adSuggestedPrice = 0;
     this.lat = event.coords.lat;
     this.lng = event.coords.lng;
     this.locationChosen = true;
+    const locationLatLng = new google.maps.LatLng(this.lat, this.lng);
+    let adNumber = 0;
+    if (this.addNewAdForm.get('adItemType').value) {
+      const adItemType = this.addNewAdForm.get('adItemType').value;
+      const adType = this.addNewAdForm.get('adType').value;
+      for (const i of this.userService.ads) {
+        const adLocation = new google.maps.LatLng(i.lat, i.lng);
+        const distanceInKm = google.maps.geometry.spherical.computeDistanceBetween(locationLatLng, adLocation) / 1000;
+        console.log(distanceInKm);
+        if (i.adItemType === adItemType && distanceInKm <= 3.0 && i.adType === adType) {
+          this.adSuggestedPrice = this.adSuggestedPrice + i.price;
+          adNumber++;
+        }
+      }
+    }
+    if (this.adSuggestedPrice !== 0) {
+      this.adSuggestedPrice = this.adSuggestedPrice / adNumber;
+    }
   }
 
 
@@ -171,6 +211,23 @@ export class AddComponent implements OnInit {
     const frmData = new FormData();
     for (let i = 0; i < this.myFiles.length; i++) {
       frmData.append('fileUpload', this.myFiles[i]);
+    }
+  }
+
+  validForm(): boolean {
+    if (this.addNewAdForm.get('adItemType').value === 'Apartament') {
+      return !(!this.addNewAdForm.get('price').valid || !this.addNewAdForm.get('title').valid
+        || !this.addNewAdForm.get('description').valid ||
+        !this.addNewAdForm.get('adType').valid || !this.addNewAdForm.get('rooms').valid || !this.addNewAdForm.get('surface').valid &&
+        !this.addNewAdForm.get('partitioning').valid || !this.addNewAdForm.get('comfort').valid ||
+        !this.addNewAdForm.get('floorLevel').valid || !this.addNewAdForm.get('yearBuilt').valid);
+    }
+    if (this.addNewAdForm.get('adItemType').value === 'Casa') {
+      return !(!this.addNewAdForm.get('title').valid || !this.addNewAdForm.get('description').valid ||
+        !this.addNewAdForm.get('adType').valid ||
+        !this.addNewAdForm.get('rooms').valid || !this.addNewAdForm.get('surface').valid ||
+        !this.addNewAdForm.get('yearBuilt').valid || !this.addNewAdForm.get('areaSurface').valid ||
+        !this.addNewAdForm.get('furnished').valid || !this.addNewAdForm.get('price').valid);
     }
   }
 }

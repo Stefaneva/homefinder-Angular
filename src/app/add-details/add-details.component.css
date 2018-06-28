@@ -8,9 +8,13 @@
   justify-content: center;
 }
 
+.hr__line {
+  width: 80%;
+}
+
 .my__carousel {
-  display: flex;
-  justify-content: flex-start;
+  /*display: flex;*/
+  /*justify-content: flex-start;*/
   margin-left: 50px;
 }
 
@@ -21,8 +25,9 @@
 }
 
 agm-map {
-  width: 800px;
+  width: 1000px;
   height: 600px;
+  margin-bottom: 40px;
 }
 
 .map__class {
@@ -46,9 +51,36 @@ agm-map {
   margin-right: 200px;
 }
 
+.price__carousel {
+  display: flex;
+  justify-content: space-evenly;
+  margin-right: 50px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+
 .price {
+  margin-top: 140px;
+  height: 50px;
+}
+
+.favourite {
+  margin-top: 20px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.expansion__panel__content {
+  display: flex;
+  justify-content: space-around;
+}
+
+.mat__panel__description {
   display: flex;
   justify-content: flex-end;
-  margin-right: 300px;
-  color: red;
 }

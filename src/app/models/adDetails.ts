@@ -12,4 +12,10 @@ export class AdDetailsDto {
   lat: number;
   lng: number;
   userDetails: UserDto;
+  partitioning: string;
+  comfort: number;
+  furnished: string;
+  floorLevel: string;
+  areaSurface: number;
+  yearBuilt: number;
 }

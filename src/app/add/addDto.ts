@@ -11,4 +11,10 @@ export class AddDto {
   lng: number;
   userEmail: string;
   image: string;
+  partitioning: string;
+  comfort: number;
+  furnished: string;
+  floorLevel: string;
+  areaSurface: number;
+  yearBuilt: number;
 }
