@@ -1,6 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
+body {
+  font-family: 'Lato', sans-serif;
+}
 
 .spinner {
   background: darkslateblue;
@@ -17,4 +22,6 @@ input::-webkit-inner-spin-button {
 
 agm-map {
   height: 300px;
+  border: 3px cornflowerblue;
+  border-bottom-style: solid;
 }

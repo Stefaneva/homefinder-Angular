@@ -27,7 +27,7 @@
         <input type="number" placeholder="Confort..." matInput formControlName="comfort" autocomplete="off">
       </mat-form-field>
       <mat-form-field>
-        <input type="text" placeholder="Etaj..." matInput formControlName="floorLevel" autocomplete="off">
+        <input type="text" pattern="(^Parter$)|(^Demisol$)|(^[0-9]{1,3}$)"  placeholder="Etaj..." matInput formControlName="floorLevel" autocomplete="off">
       </mat-form-field>
       <mat-form-field>
         <mat-select placeholder="Compartimentare..." matInput formControlName="partitioning">
@@ -64,7 +64,7 @@
       <agm-marker [latitude]="lat" [longitude]="lng" *ngIf="locationChosen"></agm-marker>
     </agm-map>
     <div class="suggested__price" *ngIf="adSuggestedPrice !== 0">
-      <p>Pret sugerat: {{ adSuggestedPrice }}
+      <p>Pret sugerat: {{ adSuggestedPrice.toFixed(0) }}
     </div>
     <mat-form-field>
       <input type="number" placeholder="Pret..." matInput formControlName="price" autocomplete="off">

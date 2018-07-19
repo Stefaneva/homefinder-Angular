@@ -5,6 +5,7 @@ import {UserService} from '../../user.service';
 import {User} from '../../models/user';
 import {Router} from '@angular/router';
 import {HttpErrorResponse} from '@angular/common/http';
+import {Ng4LoadingSpinnerService} from 'ng4-loading-spinner';
 
 @Component({
   selector: 'app-signin',
@@ -17,7 +18,8 @@ export class SigninComponent implements OnInit {
 
   constructor(private authService: AuthService,
               private userService: UserService,
-              private router: Router) { }
+              private router: Router,
+              private spinnerService: Ng4LoadingSpinnerService) { }
 
   ngOnInit() {
   }
@@ -25,12 +27,13 @@ export class SigninComponent implements OnInit {
   onLogin(form: NgForm) {
     const username = form.value.username;
     const password = form.value.password;
-
+    this.spinnerService.show();
     this.authService.login(username, password).subscribe(
       (data: any) => {
         this.userService.currentUser = new User;
         this.userService.currentUser.email = username;
         this.userService.currentUser.token = data.token;
+        this.spinnerService.hide();
         this.userService.postUserData().subscribe(
           result => {
             this.userService.currentUser.name = result.name;

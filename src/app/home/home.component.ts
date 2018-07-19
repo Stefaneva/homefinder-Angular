@@ -5,7 +5,7 @@ import {AddDto} from '../add/addDto';
 import {Ng4LoadingSpinnerService} from 'ng4-loading-spinner';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FilterPipe} from './FilterPipe';
-import {MatPaginator} from '@angular/material';
+import {MatPaginator, MatSidenav} from '@angular/material';
 
 @Component({
   selector: 'app-home',
@@ -16,15 +16,6 @@ export class HomeComponent implements OnInit {
 
   private readonly imageType: string = 'data:image/PNG;base64,';
   public image: any = [];
-  term: any;
-  priceMin: number;
-  priceMax: number;
-  adItemType: string;
-  adType: string;
-  surface: number;
-  rooms: number;
-  // public ads: AddDto[] = [];
-  itemsPerPageOptions = [5, 7, 10];
 
   constructor(private authService: AuthService,
               public userService: UserService,

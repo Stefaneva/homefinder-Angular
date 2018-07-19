@@ -16,21 +16,24 @@ export class SignupComponent implements OnInit {
   signupForm: FormGroup;
   user_types: string[] = ['Cumparator/Chirias' , 'Agent Imobiliar'];
   password = '';
+  userEmails: string[] = [];
 
   constructor(private authService: AuthService,
               public userService: UserService,
               private router: Router) { }
 
   ngOnInit() {
+    this.userService.getUserEmails().subscribe(
+      response => this.userEmails = response
+    );
     this.signupForm = new FormGroup({
       'username' : new FormControl(null, Validators.required),
-      'email' : new FormControl(null, [Validators.required, Validators.email]),
+      'email' : new FormControl(null, [Validators.required, Validators.email, this.checkMail.bind(this)]),
       'password' : new FormControl(null, Validators.required),
       'confirm_password' : new FormControl(null, [Validators.required, this.confirmPassword.bind(this)]),
       'phone' : new FormControl(null, [Validators.required, Validators.pattern('[0-9]{10}')]),
       'user_type' : new FormControl('Cumparator/Chirias')
     });
-    // this.signupForm.setValidators(this.confirmPassword.bind(this));
   }
 
   onSubmit() {
@@ -62,5 +65,14 @@ export class SignupComponent implements OnInit {
 
   keyPress(event: any) {
     this.password = event.target.value;
+  }
+
+  checkMail(control: FormGroup): {[s: string]: boolean} {
+    for (let i = 0; i < this.userEmails.length; i++) {
+      if (control.value === this.userEmails[i]) {
+        return {'mailUsed': false};
+      }
+    }
+    return null;
   }
 }

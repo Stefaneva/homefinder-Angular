@@ -1,0 +1,17 @@
+.sidenav {
+  width: 500px;
+  height: 100%;
+}
+
+.numar__anunturi {
+  width: 80%;
+  margin-left: 40px;
+  border: 1px solid;
+  color: black;
+  background-color: white;
+  margin-bottom: 30px;
+}
+
+.form__field__input {
+  margin-left: 20px;
+}

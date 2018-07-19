@@ -1,40 +1,40 @@
 <ng4-loading-spinner></ng4-loading-spinner>
+<div class="body__container">
 <form>
   <mat-form-field>
-    <input type="text" name="search" matInput placeholder="Cauta Anunt..." [(ngModel)]="term">
+    <input type="text" name="search" matInput placeholder="Cauta Anunt..." [(ngModel)]="userService.term">
     <!-- <mat-icon matSuffix>mode_search</mat-icon> -->
   </mat-form-field>
 </form>
-<mat-radio-group [(ngModel)]="adItemType">
-  <mat-radio-button value="Casa">Casa</mat-radio-button>
-  <mat-radio-button value="Apartament">Apartament</mat-radio-button>
-</mat-radio-group>
-<mat-select [(value)]="userService.itemsOnPage">
-  <mat-option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}</mat-option>
-</mat-select>
-<h1 class="ads__title">Anunturi: </h1>
-<div class="custom__container">
-  <div *ngFor="let ad of userService.ads | filter : term : 'title' :
-    adItemType : 'adItemType' : priceMin : 'price' : priceMax : 'price' :
-     adType: 'adType' : surface : 'surface' : rooms : 'rooms' | paginate: {itemsPerPage: userService.itemsOnPage, currentPage: userService.page}; let i = index">
-    <mat-card class="card__class">
-      <mat-card-header>
-        <mat-card-title>{{ ad.title}}</mat-card-title>
-        <mat-card-subtitle>{{ ad.adType }} - {{ad.adItemType}}</mat-card-subtitle>
-        <img src="../../assets/casa.jpg" *ngIf="ad.adItemType == 'Casa'" mat-card-avatar>
-        <img src="../../assets/bloc.jpg" *ngIf="ad.adItemType == 'Apartament'" mat-card-avatar>
-      </mat-card-header>
-      <mat-card-content>Pret: {{ ad.price }} <span class="fa fa-euro"></span></mat-card-content>
-      <img mat-card-image height="300px"  [src]="ad.image">
-      <mat-card-actions class="viewAddButton">
-        <button mat-raised-button mat-button color="primary" (click)="viewAdDetails(ad)">Vizualizeaza Anunt</button>
-      </mat-card-actions>
-    </mat-card><br>
-  </div>
-</div>
-<div class="myPaginationContainer">
-  <pagination-controls class="myPagination" (pageChange)="userService.page = $event"
-                       previousLabel="Inapoi"
-                       nextLabel="Inainte" maxSize="5">
-  </pagination-controls>
+  <p><button mat-button (click)="userService.sidenav.toggle()">Filtreaza Cautarea</button></p>
+    <h1 class="ads__title">Anunturi: </h1>
+    <div class="custom__container">
+      <div *ngFor="let ad of userService.ads | filter : userService.term : 'title' :
+      userService.adItemType : 'adItemType' : userService.priceMin : userService.priceMax : 'price' :
+      userService.rentCheckbox: userService.saleCheckbox : 'adType' : userService.surfaceMin : userService.surfaceMax : 'surface' :
+      userService.areaSurfaceMin : userService.areaSurfaceMax : 'areaSurface' : userService.roomsMin : userService.roomsMax : 'rooms' :
+      userService.partitioning: 'partitioning' : userService.yearBuiltMin : userService.yearBuiltMax : 'yearBuilt' : userService.comfort : 'comfort' :
+      userService.floorLevelMin : userService.floorLevelMax : 'floorLevel' : userService.furnished : 'furnished'
+      | paginate: {itemsPerPage: userService.itemsOnPage, currentPage: userService.page}; let i = index">
+        <mat-card class="card__class">
+          <mat-card-header>
+            <mat-card-title>{{ ad.title}}</mat-card-title>
+            <mat-card-subtitle>{{ ad.adType }} - {{ad.adItemType}}</mat-card-subtitle>
+            <img src="../../assets/casa.jpg" *ngIf="ad.adItemType == 'Casa'" mat-card-avatar>
+            <img src="../../assets/bloc.jpg" *ngIf="ad.adItemType == 'Apartament'" mat-card-avatar>
+          </mat-card-header>
+          <mat-card-content>Pret: {{ ad.price }} <span class="fa fa-euro"></span></mat-card-content>
+          <img mat-card-image height="300px"  [src]="ad.image">
+          <mat-card-actions class="viewAddButton">
+            <button mat-raised-button mat-button color="primary" (click)="viewAdDetails(ad)">Vizualizeaza Anunt</button>
+          </mat-card-actions>
+        </mat-card><br>
+      </div>
+    </div>
+    <div class="myPaginationContainer">
+      <pagination-controls class="myPagination" (pageChange)="userService.page = $event"
+                           previousLabel="Inapoi"
+                           nextLabel="Inainte" maxSize="5">
+      </pagination-controls>
+    </div>
 </div>

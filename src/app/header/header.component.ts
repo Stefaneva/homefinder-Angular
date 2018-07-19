@@ -4,6 +4,7 @@ import {MatDialog} from '@angular/material';
 import {SigninComponent} from '../auth/signin/signin.component';
 import {SignupComponent} from '../auth/signup/signup.component';
 import {AddComponent} from '../add/add.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +14,8 @@ import {AddComponent} from '../add/add.component';
 export class HeaderComponent implements OnInit {
 
   constructor(public userService: UserService,
-              private dialog: MatDialog) { }
+              private dialog: MatDialog,
+              private router: Router) { }
 
   ngOnInit() {
   }
@@ -36,6 +38,7 @@ export class HeaderComponent implements OnInit {
     this.userService.currentUser.blocked = null;
     this.userService.currentUser.phone = null;
     this.userService.currentUser.type = null;
+    this.router.navigateByUrl('/home');
   }
 
   addNewAd(): void {

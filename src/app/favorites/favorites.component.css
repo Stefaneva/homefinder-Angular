@@ -11,7 +11,7 @@
   align-items: flex-start !important;
 }
 
-.viewAddButton {
+.ad__buttons {
   display: flex;
   justify-content: center;
 }
@@ -19,33 +19,9 @@
 .myPaginationContainer {
   display: flex;
   justify-content: center;
-  align-items: flex-end;
 }
 
 .ads__title {
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
-}
-
-.example-container {
-  background-color: white;
-}
-
-.sidenav {
-  width: 500px;
-  height: 100%;
-}
-
-.numar__anunturi {
-  width: 80%;
-  margin-left: 40px;
-  border: 1px solid;
-  color: black;
-  background-color: white;
-  margin-bottom: 30px;
-}
-
-.form__field__input {
-  margin-left: 20px;
 }

@@ -40,10 +40,27 @@ agm-map {
   justify-content: center;
 }
 
+.img__label__container {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  margin-top: 20px;
+}
+
 .text__label {
   display: flex;
   justify-content: flex-start;
   margin-left: 300px;
+}
+
+.img__save__button {
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 350px;
+}
+
+.img__replace_button {
+  margin-left: 20px;
 }
 
 .description__container {
@@ -75,12 +92,95 @@ agm-map {
   justify-content: center;
 }
 
+.mat__panel__description {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .expansion__panel__content {
   display: flex;
   justify-content: space-around;
 }
 
-.mat__panel__description {
+.expansion__panel__content__logged {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-around;
+  flex-flow: row wrap;
+  align-items: flex-start !important;
 }
+
+.form__field__input {
+  width: 10%;
+}
+
+.descriere {
+  width: 100%;
+}
+
+.search__location {
+  width: 1000px;
+}
+
+.search__location__formGroup {
+  display: flex;
+  justify-content: center;
+}
+
+.map__buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.map__button {
+  margin-right: 20px;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.material__select {
+  margin-top: 9px;
+}
+
+.expansion__panel__content__apartment {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.apartemnt__detail {
+  width: 30%;
+}
+
+.apartemnt__detail__form {
+  margin-right: 200px;
+}
+
+.apartemnt__detail__last__element {
+  width: 60%;
+}
+
+.review__container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.box {
+  width:100%;
+  max-width:50%;
+}
+
+.comment__first__row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.review__rating__container {
+  display: flex;
+  justify-content: space-between;
+}
+

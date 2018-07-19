@@ -186,6 +186,7 @@ export class AddComponent implements OnInit {
     }
     if (this.adSuggestedPrice !== 0) {
       this.adSuggestedPrice = this.adSuggestedPrice / adNumber;
+      console.log(this.adSuggestedPrice);
     }
   }
 

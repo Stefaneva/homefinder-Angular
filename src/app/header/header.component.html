@@ -8,11 +8,16 @@
       <a class="nav-link" routerLink="/home"><span class="fa fa-home"></span>Home</a>
     </li>
     <li class="nav-item">
-      <button class="btn btn-outline-warning" type="button" *ngIf="userService.currentUser.email"(click)="addNewAd()">Adaug&#259; Anun&#539;</button>
+      <button class="btn btn-warning" type="button" *ngIf="userService.currentUser.email"(click)="addNewAd()">Adaug&#259; Anun&#539;</button>
     </li>
     <li class="nav-item" *ngIf="userService.currentUser.token">
       <a routerLink="/myAds">
-        <button class="btn btn-outline-warning" type="button">Anun&#539;urile Mele</button>
+        <button class="btn btn-success" type="button">Anun&#539;urile Mele</button>
+      </a>
+    </li>
+    <li class="nav-item" *ngIf="userService.currentUser.token">
+      <a routerLink="/favorites">
+        <button class="btn btn-danger" type="button">Favorite</button>
       </a>
     </li>
   </ul>

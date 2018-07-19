@@ -1,7 +1,7 @@
 <ng4-loading-spinner></ng4-loading-spinner>
-<h1 class="ads__title">Anunturile Mele: </h1>
+<h1 class="ads__title">Favorite: </h1>
 <div class="custom__container">
-  <div *ngFor="let ad of userService.myAds | paginate: {itemsPerPage: userService.itemsOnPage, currentPage: userService.page}; let i = index">
+  <div *ngFor="let ad of userService.favoriteAds | paginate: {itemsPerPage: userService.itemsOnPage, currentPage: userService.page}; let i = index">
     <mat-card class="card__class">
       <mat-card-header>
         <mat-card-title>{{ ad.title}}</mat-card-title>
@@ -24,4 +24,5 @@
                        nextLabel="Inainte" maxSize="5">
   </pagination-controls>
 </div>
+
 

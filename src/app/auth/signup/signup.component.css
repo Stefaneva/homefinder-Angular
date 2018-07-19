@@ -7,16 +7,42 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
 
-input.ng-invalid.ng-touched {
-  border: 1px solid red;
-}
-
 span{
   color: red;
 }
 
-.custom__button{
-  width: 265px;
+div.container {
+  width: 40vw;
+  height: auto;
+  padding: 30px 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+}
+
+.container > * {
+  width: 100%;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.container form {
+  width: 100%;
+}
+
+.custom__button__position{
+  display: flex;
+  justify-content: center;
+}
+
+.custom__button {
+  width: 70%;
 }
 
 .enrollForm{

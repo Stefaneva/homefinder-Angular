@@ -17,12 +17,17 @@ import {LoggingInterceptor} from './interceptors/logging.interceptor';
 import {AuthInterceptor} from './interceptors/auth.interceptor';
 import {
   MatButtonModule,
-  MatCardModule,
-  MatDialogModule, MatExpansionModule,
-  MatFormFieldModule, MatIconModule,
-  MatInputModule, MatPaginatorModule,
+  MatCardModule, MatCheckboxModule,
+  MatDialogModule,
+  MatExpansionModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule,
+  MatPaginatorModule,
   MatRadioModule,
-  MatSelectModule
+  MatSelectModule,
+  MatSidenavModule,
+  MatSnackBarModule
 } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AddComponent} from './add/add.component';
@@ -35,11 +40,12 @@ import {CarouselModule} from 'ngx-bootstrap';
 import {FilterPipe} from './home/FilterPipe';
 import {NgbModalModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {CalendarModule} from 'angular-calendar';
-import { CalendarComponent } from './calendar/calendar.component';
+import {CalendarComponent} from './calendar/calendar.component';
 import {DemoUtilsModule} from './demo-utils/module';
-import { MyAdsComponent } from './my-ads/my-ads.component';
-import {NgxSmartModalModule} from 'ngx-smart-modal';
-import { ModalAgreementComponent } from './modal-agreement/modal-agreement.component';
+import {MyAdsComponent} from './my-ads/my-ads.component';
+import {ModalAgreementComponent} from './modal-agreement/modal-agreement.component';
+import {FavoritesComponent} from './favorites/favorites.component';
+import {RatingModule} from 'ngx-rating';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home' , pathMatch: 'full' },
@@ -49,7 +55,8 @@ const appRoutes: Routes = [
   { path: 'add', component: AddComponent},
   { path: 'AdDetails/:id', component: AddDetailsComponent},
   { path: 'calendar', component: CalendarComponent},
-  { path: 'myAds', component: MyAdsComponent}
+  { path: 'myAds', component: MyAdsComponent},
+  { path: 'favorites', component: FavoritesComponent}
 ];
 
 @NgModule({
@@ -66,6 +73,7 @@ const appRoutes: Routes = [
     AddDetailsComponent,
     MyAdsComponent,
     ModalAgreementComponent,
+    FavoritesComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,15 +81,19 @@ const appRoutes: Routes = [
     UICarouselModule,
     MatFormFieldModule,
     BrowserAnimationsModule,
+    RatingModule,
     MatDialogModule,
     MatInputModule,
     MatIconModule,
+    MatCheckboxModule,
+    MatSidenavModule,
     MatCardModule,
     MatButtonModule,
     NgxPaginationModule,
     MatFormFieldModule,
     MatRadioModule,
     MatSelectModule,
+    MatSnackBarModule,
     MatPaginatorModule,
     MatExpansionModule,
     HttpClientModule,
