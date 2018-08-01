@@ -58,7 +58,8 @@ const appRoutes: Routes = [
   { path: 'calendar', component: CalendarComponent},
   { path: 'myAds', component: MyAdsComponent},
   { path: 'favorites', component: FavoritesComponent},
-  { path: 'EditUser', component: EditUserComponent}
+  { path: 'EditUser', component: EditUserComponent},
+  { path: 'userList', component: UserListComponent}
 ];
 
 @NgModule({

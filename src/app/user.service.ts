@@ -23,6 +23,7 @@ export class UserService {
   closeDialog = new EventEmitter<boolean>();
 
   private _BASE_URL = 'https://home--finder.herokuapp.com';
+  private _USERS_URL = this._BASE_URL + '/userList';
   private _USER_DATA_URL = this._BASE_URL + '/getUserData';
   private _UPDATE_USER_DATA = this._BASE_URL + '/updateUserData';
   private _NEW_AD_URL_IMAGES = this._BASE_URL + '/newAdImages';
@@ -93,8 +94,8 @@ export class UserService {
               private authService: AuthService) {
   }
 
-  getUser(): Observable<any> {
-    return this.http.get(this._BASE_URL + '/users');
+  getUsers(): Observable<any> {
+    return this.http.get(this._USERS_URL);
   }
 
   postUserData(): Observable<UserDto> {

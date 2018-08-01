@@ -12,8 +12,10 @@
               (click)="addNewAd()">Adaug&#259; Anun&#539;</button>
     </li>
     <li class="nav-item">
-      <button class="btn btn-warning" type="button" *ngIf="userService.currentUser.token && userService.currentUser.type === 'ADMIN'"
-              >Manage Users</button>
+      <a routerLink="/userList">
+        <button class="btn btn-warning" type="button" *ngIf="userService.currentUser.token && userService.currentUser.type === 'ADMIN'"
+                >Manage Users</button>
+      </a>
     </li>
     <li class="nav-item">
       <button class="btn btn-warning" type="button" *ngIf="userService.currentUser.token && userService.currentUser.type === 'ADMIN'"

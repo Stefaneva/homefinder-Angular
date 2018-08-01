@@ -7,12 +7,12 @@ import {UserService} from '../user.service';
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent implements OnInit {
-  users: Array<any>;
+  users: any[] = [];
 
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.userService.getUser().subscribe(data => {
+    this.userService.getUsers().subscribe(data => {
       this.users = data;
     });
   }
