@@ -1,0 +1,21 @@
+.nav-item {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.user__options {
+  display: flex;
+  flex-direction: column;
+}
+
+.option {
+  width: 160px;
+}
+
+.login__logout {
+  padding-right: 100px;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}

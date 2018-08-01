@@ -1,4 +1,4 @@
-export class AddDto {
+export class AdDto {
   id: number;
   title: string;
   adType: string;
@@ -17,4 +17,5 @@ export class AddDto {
   floorLevel: string;
   areaSurface: number;
   yearBuilt: number;
+  location: string;
 }

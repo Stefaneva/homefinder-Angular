@@ -1,8 +1,8 @@
 import {Component, ElementRef, NgZone, OnInit, ViewChild} from '@angular/core';
 import {UserService} from '../user.service';
 import {Ng4LoadingSpinnerService} from 'ng4-loading-spinner';
-import {ActivatedRoute} from '@angular/router';
-import {AddDto} from '../add/addDto';
+import {ActivatedRoute, Router} from '@angular/router';
+import {AdDto} from '../add/adDto';
 import {MapsAPILoader} from '@agm/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import * as FileSaver from 'file-saver';
@@ -29,12 +29,12 @@ export class AddDetailsComponent implements OnInit {
   panelOpenState = false;
   adId: number;
   step = 0;
-  adDetailsChanges: AddDto = new AddDto();
+  adDetailsChanges: AdDto = new AdDto();
   changeLocation = false;
   newLocation: FormGroup;
   hidden = true;
   adUserPhone: number;
-  addDto: AddDto = new AddDto();
+  addDto: AdDto = new AdDto();
   myFiles: File [] = [];
   reviews: ReviewDtoRequest[] = [];
   rating = 0;
@@ -52,10 +52,11 @@ export class AddDetailsComponent implements OnInit {
               private mapsAPILoader: MapsAPILoader,
               private route: ActivatedRoute,
               public domSanitizer: DomSanitizer,
-              public snackBar: MatSnackBar) { }
+              public snackBar: MatSnackBar,
+              private router: Router) { }
 
   ngOnInit() {
-    this.userService.adDetails = new AddDto();
+    this.userService.adDetails = new AdDto();
     this.spinnerService.show();
     this.route.params.subscribe( params => {
       this.adId = parseInt(params['id'], 10);
@@ -381,6 +382,12 @@ export class AddDetailsComponent implements OnInit {
   editReviewCancel(review: ReviewDtoRequest) {
     this.reviewChanges = review;
     this.editReview = false;
+  }
+
+  calendarRedirect() {
+    this.userService.adDetailsCalendar = this.userService.adDetails;
+    this.userService.userCalendar = false;
+    this.router.navigateByUrl('/calendar');
   }
 }
 

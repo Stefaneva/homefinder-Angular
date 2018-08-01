@@ -76,6 +76,13 @@
       <input type="number" placeholder="Suprafata utila maxim..." matInput [(ngModel)]="userService.areaSurfaceMax" autocomplete="off">
     </mat-form-field>
   </div>
+  <div>
+    <form [formGroup]="userService.searchLocation">
+      <div class="form-group search__location">
+        <input placeholder="Localizare..." autocorrect="on" autocapitalize="on" spellcheck="on" type="text" class="form-control" #search formControlName="searchControl">
+      </div>
+    </form>
+  </div>
 </mat-sidenav>
 <mat-sidenav-content>
   <app-header></app-header>

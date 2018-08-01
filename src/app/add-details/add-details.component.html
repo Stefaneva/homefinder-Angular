@@ -14,6 +14,7 @@
     </div>
     <div class="buttons">
       <button class="btn btn-success price">Pret: {{userService.adDetails.price}} <span class="fa fa-euro"></span></button>
+      <button class="btn btn-warning favourite" (click)="calendarRedirect()">Programeaza vizita <mat-icon>assignment</mat-icon></button>
       <button class="btn btn-danger favourite" (click)="saveFavorite()">Adauga la Favorite&nbsp;<mat-icon>favorite_border</mat-icon></button>
       <button class="btn btn-info favourite">E-mail: {{userService.adDetails.userEmail}}&nbsp;<mat-icon>email</mat-icon></button>
       <button class="btn btn-info favourite">Telefon: 0{{adUserPhone}} <mat-icon>phone</mat-icon></button>
@@ -68,33 +69,33 @@
         <div *ngIf="userService.adDetails.adItemType === 'Casa'">
             <div *ngIf="userService.currentUser.email === userService.adDetails.userEmail">
               <div class="expansion__panel__content__logged">
-                <mat-form-field class="form__field__input">
+                <mat-form-field class="form__field__input apartemnt__detail__form">
                   <label>
                     <input type="number" matInput placeholder="Pret..." [(ngModel)]="adDetailsChanges.price" autocomplete="off">
                   </label>
                 </mat-form-field>
-                <mat-form-field>
+                <mat-form-field class="form__field__input apartemnt__detail__form">
                   <label>
                     <input type="number" matInput placeholder="Numar camere..." [(ngModel)]="adDetailsChanges.rooms" autocomplete="off">
                   </label>
                 </mat-form-field>
-                <mat-form-field>
+                <mat-form-field class="form__field__input apartemnt__detail__form">
                   <label>
                     <input type="number" matInput placeholder="Suprafata..." [(ngModel)]="adDetailsChanges.surface" autocomplete="off">
                   </label>
                 </mat-form-field>
-                <mat-form-field>
+                <mat-form-field class="form__field__input apartemnt__detail__form">
                   <label>
                     <input type="number" matInput placeholder="Suprafata utila..." [(ngModel)]="adDetailsChanges.areaSurface" autocomplete="off">
                   </label>
                 </mat-form-field>
-                <mat-form-field>
+                <mat-form-field class="form__field__input apartemnt__detail__form">
                   <mat-select placeholder="Tip anunt..." matInput class="material__select" [(ngModel)]="adDetailsChanges.adType">
                     <mat-option value="Inchiriere">Inchiriere</mat-option>
                     <mat-option value="Vanzare">Vanzare</mat-option>
                   </mat-select>
                 </mat-form-field>
-                <mat-form-field>
+                <mat-form-field class="form__field__input apartemnt__detail__form">
                   <label>
                     <input type="number" matInput placeholder="An constructie..." [(ngModel)]="adDetailsChanges.yearBuilt" autocomplete="off">
                   </label>
@@ -102,13 +103,14 @@
               </div>
             </div>
             <div *ngIf="userService.currentUser.email !== userService.adDetails.userEmail || !userService.currentUser.email">
-              <div class="expansion__panel__content">
-                <p>Pret(euro): {{userService.adDetails.price}}
-                <p>Numar Camere: {{userService.adDetails.rooms}}
-                <p>Suprafata: {{userService.adDetails.surface}}(m<sup>3</sup>)
-                <p>Suprafata teren: {{userService.adDetails.areaSurface}} (m<sup>3</sup>)
-                <p>Tip Proprietate: {{userService.adDetails.adItemType}}
-                <p>An constructie: {{userService.adDetails.yearBuilt}}
+              <div class="expansion__panel__content__apartment">
+                <p class="apartemnt__detail__form">Pret(euro): {{userService.adDetails.price}}
+                <p class="apartemnt__detail__form">Numar Camere: {{userService.adDetails.rooms}}
+                <p class="apartemnt__detail__form">Suprafata(m<sup>3</sup>): {{userService.adDetails.surface}}
+                <p class="apartemnt__detail__form">Suprafata teren(m<sup>3</sup>): {{userService.adDetails.areaSurface}}
+                <p class="apartemnt__detail__form">Tip Proprietate: {{userService.adDetails.adItemType}}
+                <p class="apartemnt__detail__form">Tip anunt: {{userService.adDetails.adType}}</p>
+                <p class="apartemnt__detail__last__element">An constructie: {{userService.adDetails.yearBuilt}}
               </div>
             </div>
           <mat-action-row>

@@ -7,10 +7,6 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
 
-span{
-  color: red;
-}
-
 div.container {
   width: 40vw;
   height: auto;

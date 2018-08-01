@@ -8,38 +8,50 @@
       <a class="nav-link" routerLink="/home"><span class="fa fa-home"></span>Home</a>
     </li>
     <li class="nav-item">
-      <button class="btn btn-warning" type="button" *ngIf="userService.currentUser.email"(click)="addNewAd()">Adaug&#259; Anun&#539;</button>
+      <button class="btn btn-warning" type="button" *ngIf="userService.currentUser.token && userService.currentUser.type !== 'ADMIN'"
+              (click)="addNewAd()">Adaug&#259; Anun&#539;</button>
     </li>
-    <li class="nav-item" *ngIf="userService.currentUser.token">
-      <a routerLink="/myAds">
-        <button class="btn btn-success" type="button">Anun&#539;urile Mele</button>
-      </a>
+    <li class="nav-item">
+      <button class="btn btn-warning" type="button" *ngIf="userService.currentUser.token && userService.currentUser.type === 'ADMIN'"
+              >Manage Users</button>
     </li>
-    <li class="nav-item" *ngIf="userService.currentUser.token">
-      <a routerLink="/favorites">
-        <button class="btn btn-danger" type="button">Favorite</button>
-      </a>
+    <li class="nav-item">
+      <button class="btn btn-warning" type="button" *ngIf="userService.currentUser.token && userService.currentUser.type === 'ADMIN'"
+              >Statistici</button>
     </li>
   </ul>
   <ul class="navbar-nav ml-auto">
-    <li class="nav-item">
-      <div *ngIf="!userService.currentUser.token">
-        <button class="btn btn-outline-warning" type="button" (click)="openLogin()">Sign In</button>
+      <div class="user__options">
+        <li class="nav-item dropdown" *ngIf="userService.currentUser.token && userService.currentUser.type != 'ADMIN'">
+          <button class="btn btn-warning dropdown-toggle" data-toggle="dropdown">Contul meu</button>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a routerLink="/myAds" class="dropdown-item">
+              <button class="btn btn-success option" type="button">Anun&#539;urile Mele</button>
+            </a>
+            <div class="dropdown-item">
+              <button class="btn btn-warning option" (click)="openEdit()">Editeaza date cont</button>
+            </div>
+            <a routerLink="/favorites" class="dropdown-item">
+              <button class="btn btn-danger option" type="button">Favorite</button>
+            </a>
+            <a routerLink="/calendar" class="dropdown-item">
+              <button class="btn btn-info option" type="button">Programari</button>
+            </a>
+          </div>
+        </li>
       </div>
-      <div *ngIf="userService.currentUser.token">
-        <button class="btn btn-outline-warning" type="button" (click)="logout()">Sign Out</button>
-      </div>
-    </li>
-    <li class="nav-item">
-      <button *ngIf="!userService.currentUser.token" class="btn btn-outline-warning" type="button" (click)="openRegister()">Sign Up</button>
-    </li>
-    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">            Dropdown on Right</a>
-      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item" routerLink="/calendar">Calendar</a>
-        <a class="dropdown-item" href="#">Another action with a lot of text inside of an item</a>
-      </div>
-    </li>
+      <li class="nav-item">
+        <button *ngIf="!userService.currentUser.token" class="btn btn-outline-warning" type="button" (click)="openRegister()">Sign Up</button>
+      </li>
+      <li class="nav-item login__logout">
+          <div *ngIf="!userService.currentUser.token">
+            <button class="btn btn-outline-warning" type="button" (click)="openLogin()">Sign In</button>
+          </div>
+          <div *ngIf="userService.currentUser.token">
+            <button class="btn btn-outline-warning" type="button" (click)="logout()">Sign Out</button>
+          </div>
+      </li>
+
   </ul>
 </nav>
 <br>

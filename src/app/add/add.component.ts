@@ -4,7 +4,7 @@ import {AuthService} from '../auth/auth.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MapsAPILoader} from '@agm/core';
 import {} from '@types/googlemaps';
-import {AddDto} from './addDto';
+import {AdDto} from './adDto';
 import {Ng4LoadingSpinnerService} from 'ng4-loading-spinner';
 
 
@@ -25,7 +25,8 @@ export class AddComponent implements OnInit {
   sMsg = '';
   base64String: string;
   adSuggestedPrice = 0;
-  addDto: AddDto = new AddDto();
+  addDto: AdDto = new AdDto();
+  address: string;
 
   @ViewChild('search')
   searchElementRef: ElementRef;
@@ -67,7 +68,6 @@ export class AddComponent implements OnInit {
       });
       autocomplete.addListener('place_changed', () => {
         this.ngZone.run(() => {
-
           // get the place result
           const place: google.maps.places.PlaceResult = autocomplete.getPlace();
           // verify result
@@ -80,6 +80,22 @@ export class AddComponent implements OnInit {
           this.lng = place.geometry.location.lng();
           this.zoom = 16;
           this.locationChosen = true;
+          // price Suggestion
+          const locationLatLng = new google.maps.LatLng(this.lat, this.lng);
+          let adNumber = 0;
+          if (this.addNewAdForm.get('adItemType').value) {
+            const adItemType = this.addNewAdForm.get('adItemType').value;
+            const adType = this.addNewAdForm.get('adType').value;
+            for (const i of this.userService.ads) {
+              const adLocation = new google.maps.LatLng(i.lat, i.lng);
+              const distanceInKm = google.maps.geometry.spherical.computeDistanceBetween(locationLatLng, adLocation) / 1000;
+              console.log(distanceInKm);
+              if (i.adItemType === adItemType && distanceInKm <= 3.0 && i.adType === adType) {
+                this.adSuggestedPrice = this.adSuggestedPrice + i.price;
+                adNumber++;
+              }
+            }
+          }
         });
       });
     });
@@ -147,7 +163,9 @@ export class AddComponent implements OnInit {
     frmData.append('areaSurface', this.addNewAdForm.value.areaSurface);
     frmData.append('furnished', this.addNewAdForm.value.furnished);
     frmData.append('yearBuilt', this.addNewAdForm.value.yearBuilt);
+    frmData.append('location', this.addDto.location);
     console.log(frmData.getAll('fileUpload'));
+    console.log(frmData.get('location'));
     this.userService.postNewAdImages(frmData).subscribe(
       (response) => {
         console.log(response);
@@ -169,6 +187,20 @@ export class AddComponent implements OnInit {
     this.lat = event.coords.lat;
     this.lng = event.coords.lng;
     this.locationChosen = true;
+    // Location:
+    const geocoder = new google.maps.Geocoder();
+    const latlng = new google.maps.LatLng(this.lat, this.lng);
+    const request = {
+      location: latlng
+    };
+    geocoder.geocode(request, (results, status) => {
+      if (status === google.maps.GeocoderStatus.OK) {
+        if (results[0] != null) {
+          this.addDto.location = results[0].formatted_address;
+          console.log(this.addDto.location);
+        }
+      }
+    });
     const locationLatLng = new google.maps.LatLng(this.lat, this.lng);
     let adNumber = 0;
     if (this.addNewAdForm.get('adItemType').value) {
@@ -184,6 +216,7 @@ export class AddComponent implements OnInit {
         }
       }
     }
+    // Price Suggestion
     if (this.adSuggestedPrice !== 0) {
       this.adSuggestedPrice = this.adSuggestedPrice / adNumber;
       console.log(this.adSuggestedPrice);

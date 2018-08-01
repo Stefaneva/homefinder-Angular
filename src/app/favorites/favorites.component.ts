@@ -3,7 +3,7 @@ import {Ng4LoadingSpinnerService} from 'ng4-loading-spinner';
 import {UserService} from '../user.service';
 import {Router} from '@angular/router';
 import {MatDialog, MatSnackBar} from '@angular/material';
-import {AddDto} from '../add/addDto';
+import {AdDto} from '../add/adDto';
 
 @Component({
   selector: 'app-favorites',
@@ -30,12 +30,12 @@ export class FavoritesComponent implements OnInit {
     );
   }
 
-  viewAdDetails(ad: AddDto) {
+  viewAdDetails(ad: AdDto) {
     this.userService.adDetails = ad;
     this.router.navigate(['/AdDetails', ad.id]);
   }
 
-  deleteAd(ad: AddDto) {
+  deleteAd(ad: AdDto) {
     const index = this.userService.favoriteAds.indexOf(ad);
     this.userService.favoriteAds.splice(index, 1);
     this.userService.deleteFavoriteAd(ad.id).subscribe(

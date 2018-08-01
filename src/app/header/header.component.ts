@@ -5,6 +5,7 @@ import {SigninComponent} from '../auth/signin/signin.component';
 import {SignupComponent} from '../auth/signup/signup.component';
 import {AddComponent} from '../add/add.component';
 import {Router} from '@angular/router';
+import {EditUserComponent} from '../edit-user/edit-user.component';
 
 @Component({
   selector: 'app-header',
@@ -38,11 +39,17 @@ export class HeaderComponent implements OnInit {
     this.userService.currentUser.blocked = null;
     this.userService.currentUser.phone = null;
     this.userService.currentUser.type = null;
-    this.router.navigateByUrl('/home');
+    // this.userService.userEvent = true;
+    // this.router.navigateByUrl('/home');
   }
 
   addNewAd(): void {
     this.userService.closeDialog.subscribe(result => this.dialog.closeAll());
     const dialogRef = this.dialog.open(AddComponent, {});
+  }
+
+  openEdit() {
+    this.userService.closeDialog.subscribe(result => this.dialog.closeAll());
+    const dialogRef = this.dialog.open(EditUserComponent, {});
   }
 }

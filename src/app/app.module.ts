@@ -46,6 +46,7 @@ import {MyAdsComponent} from './my-ads/my-ads.component';
 import {ModalAgreementComponent} from './modal-agreement/modal-agreement.component';
 import {FavoritesComponent} from './favorites/favorites.component';
 import {RatingModule} from 'ngx-rating';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home' , pathMatch: 'full' },
@@ -56,7 +57,8 @@ const appRoutes: Routes = [
   { path: 'AdDetails/:id', component: AddDetailsComponent},
   { path: 'calendar', component: CalendarComponent},
   { path: 'myAds', component: MyAdsComponent},
-  { path: 'favorites', component: FavoritesComponent}
+  { path: 'favorites', component: FavoritesComponent},
+  { path: 'EditUser', component: EditUserComponent}
 ];
 
 @NgModule({
@@ -74,6 +76,7 @@ const appRoutes: Routes = [
     MyAdsComponent,
     ModalAgreementComponent,
     FavoritesComponent,
+    EditUserComponent,
   ],
   imports: [
     BrowserModule,

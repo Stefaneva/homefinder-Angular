@@ -1,11 +1,10 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../auth/auth.service';
 import {UserService} from '../user.service';
-import {AddDto} from '../add/addDto';
+import {AdDto} from '../add/adDto';
 import {Ng4LoadingSpinnerService} from 'ng4-loading-spinner';
-import {ActivatedRoute, Router} from '@angular/router';
-import {FilterPipe} from './FilterPipe';
-import {MatPaginator, MatSidenav} from '@angular/material';
+import {Router} from '@angular/router';
+import {MapsAPILoader} from '@agm/core';
 
 @Component({
   selector: 'app-home',
@@ -16,25 +15,50 @@ export class HomeComponent implements OnInit {
 
   private readonly imageType: string = 'data:image/PNG;base64,';
   public image: any = [];
+  places: string[] = [];
 
   constructor(private authService: AuthService,
+              private mapsAPILoader: MapsAPILoader,
               public userService: UserService,
               private spinnerService: Ng4LoadingSpinnerService,
               private router: Router) { }
 
   ngOnInit() {
+    this.mapsAPILoader.load();
     this.spinnerService.show();
     this.userService.getAdsWithImages().subscribe(
       (response) => {
         console.log(response);
-        this.spinnerService.hide();
         this.userService.ads = response;
-        this.userService.ads.forEach( ad => ad.image = this.imageType + ad.image);
+        this.userService.ads.forEach(
+          ad => {
+            ad.image = this.imageType + ad.image;
+          });
+        // const geocoder = new google.maps.Geocoder();
+        // for (let i = 0; i < this.userService.ads.length; i++) {
+        //   const latlng = new google.maps.LatLng(this.userService.ads[i].lat, this.userService.ads[i].lng);
+        //   const request = {
+        //     location: latlng
+        //   };
+        //   geocoder.geocode(request, (results, status) => {
+        //     if (status === google.maps.GeocoderStatus.OK) {
+        //       if (results[0] != null) {
+        //         this.userService.ads[i].locationPlace = results[0].formatted_address;
+        //         console.log(this.userService.ads[i].locationPlace);
+        //       } else {
+        //         console.log('1');
+        //       }
+        //     } else {
+        //       console.log(this.userService.ads[i].title + ' ' + this.userService.ads[i].locationPlace + ' ' + this.userService.ads[i].id);
+        //     }
+        //   });
+        // }
+        this.spinnerService.hide();
       }
     );
   }
 
-  viewAdDetails(ad: AddDto) {
+  viewAdDetails(ad: AdDto) {
     this.userService.adDetails = ad;
     const url = '/AdDetails/' + ad.id;
     // this.router.navigateByUrl('/AdDetails');

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../user.service';
-import {AddDto} from '../add/addDto';
+import {AdDto} from '../add/adDto';
 import {Ng4LoadingSpinnerService} from 'ng4-loading-spinner';
 import {Router} from '@angular/router';
 import {NgxSmartModalService} from 'ngx-smart-modal';
@@ -33,12 +33,12 @@ export class MyAdsComponent implements OnInit {
     );
   }
 
-  viewAdDetails(ad: AddDto) {
+  viewAdDetails(ad: AdDto) {
     this.userService.adDetails = ad;
     this.router.navigate(['/AdDetails', ad.id]);
   }
 
-  deleteAd(ad: AddDto) {
+  deleteAd(ad: AdDto) {
     this.userService.adDeleted = ad;
     this.userService.closeDialog.subscribe(result => this.dialog.closeAll());
     const dialogRef = this.dialog.open(ModalAgreementComponent, {});

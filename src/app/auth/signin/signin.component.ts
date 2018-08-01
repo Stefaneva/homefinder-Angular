@@ -25,6 +25,7 @@ export class SigninComponent implements OnInit {
   }
 
   onLogin(form: NgForm) {
+    this.userService.userEvent = true;
     const username = form.value.username;
     const password = form.value.password;
     this.spinnerService.show();
@@ -48,6 +49,10 @@ export class SigninComponent implements OnInit {
             this.isLoginError = true;
           }
         );
+      },
+      (error1) => {
+        this.spinnerService.hide();
+        this.isLoginError = true;
       }
     );
   }
