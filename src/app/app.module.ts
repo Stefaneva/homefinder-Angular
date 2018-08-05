@@ -47,6 +47,9 @@ import {ModalAgreementComponent} from './modal-agreement/modal-agreement.compone
 import {FavoritesComponent} from './favorites/favorites.component';
 import {RatingModule} from 'ngx-rating';
 import { EditUserComponent } from './edit-user/edit-user.component';
+import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
+import { ChartsComponent } from './charts/charts.component';
+import {ChartsModule} from 'ng2-charts';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home' , pathMatch: 'full' },
@@ -59,7 +62,8 @@ const appRoutes: Routes = [
   { path: 'myAds', component: MyAdsComponent},
   { path: 'favorites', component: FavoritesComponent},
   { path: 'EditUser', component: EditUserComponent},
-  { path: 'userList', component: UserListComponent}
+  { path: 'userList', component: UserListComponent},
+  { path: 'statistics', component: ChartsComponent}
 ];
 
 @NgModule({
@@ -78,6 +82,7 @@ const appRoutes: Routes = [
     ModalAgreementComponent,
     FavoritesComponent,
     EditUserComponent,
+    ChartsComponent,
   ],
   imports: [
     BrowserModule,
@@ -102,8 +107,10 @@ const appRoutes: Routes = [
     MatExpansionModule,
     HttpClientModule,
     FormsModule,
+    ChartsModule,
     ReactiveFormsModule,
     DemoUtilsModule,
+    SnotifyModule.forRoot(),
     NgbModalModule.forRoot(),
     CalendarModule.forRoot(),
     NgbModule.forRoot(),
@@ -121,7 +128,9 @@ const appRoutes: Routes = [
     UserService,
     AuthService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true}
+    { provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true},
+    { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
+    SnotifyService
     ],
   bootstrap: [AppComponent]
 })

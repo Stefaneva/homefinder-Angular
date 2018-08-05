@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../user.service';
+import {UserDataDto} from '../models/userDataDto';
 
 @Component({
   selector: 'app-user-list',
@@ -7,7 +8,7 @@ import {UserService} from '../user.service';
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent implements OnInit {
-  users: any[] = [];
+  users: UserDataDto[] = [];
 
   constructor(private userService: UserService) { }
 
@@ -17,4 +18,17 @@ export class UserListComponent implements OnInit {
     });
   }
 
+  blockUser(user: UserDataDto) {
+    user.enabled = false;
+    this.userService.updateUser(user).subscribe(
+      result => console.log(result)
+    );
+  }
+
+  unblockUser(user: UserDataDto) {
+    user.enabled = true;
+    this.userService.updateUser(user).subscribe(
+      result => console.log(result)
+    );
+  }
 }

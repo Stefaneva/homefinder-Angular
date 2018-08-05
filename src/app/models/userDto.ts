@@ -4,5 +4,6 @@ export class UserDto {
   userType: string;
   lastLoginDate: string;
   phone: number;
-  blocked: number;
+  enabled: boolean;
+  notification: number;
 }

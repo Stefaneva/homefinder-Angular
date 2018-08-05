@@ -20,6 +20,7 @@ import {UserService} from '../user.service';
 import {EventDto} from '../models/event';
 import {EventDate} from '../models/eventDate';
 import {MatSnackBar} from '@angular/material';
+import {Router} from '@angular/router';
 
 const colors: any = {
   red: {
@@ -47,6 +48,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
   modalRef;
   i = 0;
   owner = false;
+  userEvents = false;
   newEvent: CalendarEvent;
 
   view = 'month';
@@ -243,6 +245,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
     } else {
       this.userService.getUserEvents().subscribe(
         response => {
+          this.userEvents = true;
           console.log(response);
           this.eventsDto = response;
           this.userService.eventsCalendar = response;
@@ -250,6 +253,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
             eventDto => {
               if (eventDto.owner) {
                 this.owner = true;
+                this.userEvents = false;
               }
               const event: CalendarEvent = {
                 title: eventDto.message,

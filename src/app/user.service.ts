@@ -16,6 +16,9 @@ import {UserDtoUpdate} from './models/userDtoUpdate';
 import {EventDto} from './models/event';
 import {EventDate} from './models/eventDate';
 import {FormGroup} from '@angular/forms';
+import {UserDataDto} from './models/userDataDto';
+import {SnotifyService} from 'ng-snotify';
+import {EventsReportDto} from './models/eventsReportDto';
 
 
 @Injectable()
@@ -25,6 +28,7 @@ export class UserService {
   private _BASE_URL = 'https://home--finder.herokuapp.com';
   private _USERS_URL = this._BASE_URL + '/userList';
   private _USER_DATA_URL = this._BASE_URL + '/getUserData';
+  private _USER_UPDATE_URL = this._BASE_URL + '/updateUser';
   private _UPDATE_USER_DATA = this._BASE_URL + '/updateUserData';
   private _NEW_AD_URL_IMAGES = this._BASE_URL + '/newAdImages';
   private _NEW_AD_URL_INFO = this._BASE_URL + '/newAdInfo';
@@ -48,6 +52,7 @@ export class UserService {
   private _SAVE_EVENT = this._BASE_URL + '/saveEvent';
   private _UPDATE_EVENT = this._BASE_URL + '/updateEvent';
   private _DELETE_EVENT = this._BASE_URL + '/deleteEvent';
+  private _GET_EVENTS_REPORTS = this._BASE_URL + '/eventsReport';
 
   data: Object;
   page: number;
@@ -56,7 +61,8 @@ export class UserService {
   public ads: AdDto[] = [];
   public adDetails: AdDto;
   public adDetailsCalendar: AdDto;
-  adDeleted = new AdDto();
+  adDeletedOwner: AdDto;
+  adDeletedAdmin: AdDto;
   public myAds: AdDto[] = [];
   public favoriteAds: AdDto[] = [];
   // vars for sidenav
@@ -91,11 +97,16 @@ export class UserService {
   userEvent: boolean;
 
   constructor(private http: HttpClient,
-              private authService: AuthService) {
+              private authService: AuthService,
+              public snotifyService: SnotifyService) {
   }
 
-  getUsers(): Observable<any> {
-    return this.http.get(this._USERS_URL);
+  getUsers(): Observable<UserDataDto[]> {
+    return this.http.get<UserDataDto[]>(this._USERS_URL);
+  }
+
+  updateUser(user: UserDataDto): Observable<void> {
+    return this.http.post<void>(this._USER_UPDATE_URL, user);
   }
 
   postUserData(): Observable<UserDto> {
@@ -193,5 +204,9 @@ export class UserService {
 
   deleteEvent(eventDto: EventDate): Observable<void> {
     return this.http.post<void>(this._DELETE_EVENT, eventDto);
+  }
+
+  getEventsReport(): Observable<EventsReportDto> {
+    return this.http.get<EventsReportDto>(this._GET_EVENTS_REPORTS);
   }
 }

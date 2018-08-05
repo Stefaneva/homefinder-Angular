@@ -5,6 +5,9 @@ import {AdDto} from '../add/adDto';
 import {Ng4LoadingSpinnerService} from 'ng4-loading-spinner';
 import {Router} from '@angular/router';
 import {MapsAPILoader} from '@agm/core';
+import {ModalAgreementComponent} from '../modal-agreement/modal-agreement.component';
+import {MatDialog} from '@angular/material';
+import {SnotifyService} from 'ng-snotify';
 
 @Component({
   selector: 'app-home',
@@ -21,7 +24,8 @@ export class HomeComponent implements OnInit {
               private mapsAPILoader: MapsAPILoader,
               public userService: UserService,
               private spinnerService: Ng4LoadingSpinnerService,
-              private router: Router) { }
+              private router: Router,
+              private dialog: MatDialog) { }
 
   ngOnInit() {
     this.mapsAPILoader.load();
@@ -49,11 +53,13 @@ export class HomeComponent implements OnInit {
         //         console.log('1');
         //       }
         //     } else {
-        //       console.log(this.userService.ads[i].title + ' ' + this.userService.ads[i].locationPlace + ' ' + this.userService.ads[i].id);
+        //       console.log(this.userService.ads[i].title + ' ' +
+        //       this.userService.ads[i].locationPlace + ' ' + this.userService.ads[i].id);
         //     }
         //   });
         // }
         this.spinnerService.hide();
+        // this.userService.snotifyService.success('Body content', { position: 'rightTop'});
       }
     );
   }
@@ -63,5 +69,11 @@ export class HomeComponent implements OnInit {
     const url = '/AdDetails/' + ad.id;
     // this.router.navigateByUrl('/AdDetails');
     this.router.navigate(['/AdDetails', ad.id]);
+  }
+
+  deleteAd(ad: AdDto) {
+    this.userService.adDeletedAdmin = ad;
+    this.userService.closeDialog.subscribe(result => this.dialog.closeAll());
+    const dialogRef = this.dialog.open(ModalAgreementComponent, {});
   }
 }

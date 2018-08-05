@@ -10,6 +10,15 @@
           Date despre user
         </mat-panel-description>
       </mat-expansion-panel-header>
+      <p>{{user.username}}</p>
+      <p>{{user.email}}</p>
+      <p>{{user.phone}}</p>
+      <p>{{user.lastLoginDate}}</p>
+      <p>{{user.lastPasswordResetDate}}</p>
+      <mat-action-row>
+        <button  *ngIf="user.enabled" mat-raised-button mat-button color="warn" (click)="blockUser(user)">Blocheaza Cont!</button>
+        <button  *ngIf="!user.enabled"mat-raised-button mat-button color="primary" (click)="unblockUser(user)">Deblocheaza Cont</button>
+      </mat-action-row>
     </mat-expansion-panel>
   </mat-accordion>
 </div>

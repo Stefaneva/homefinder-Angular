@@ -15,13 +15,16 @@
 .my__carousel {
   /*display: flex;*/
   /*justify-content: flex-start;*/
-  margin-left: 50px;
+  /*margin-left: 50px;*/
+  margin-left: 5vw;
 }
 
 
 .carousel__item {
-  width: 700px;
-  height: 500px;
+  /*width: 700px;*/
+  /*height: 500px;*/
+  width: 50vw;
+  height: 70vh;
 }
 
 agm-map {

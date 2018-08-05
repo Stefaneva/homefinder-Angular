@@ -15,13 +15,23 @@ export class ModalAgreementComponent implements OnInit {
 
   confirmDelete() {
     this.userService.closeDialog.emit(true);
-    const index = this.userService.myAds.indexOf(this.userService.adDeleted);
-    this.userService.myAds.splice(index, 1);
-    this.userService.deleteAd(this.userService.adDeleted.id).subscribe(
-      result => {
-        console.log(result);
-      }
-    );
+    if (this.userService.adDeletedOwner) {
+      const index = this.userService.myAds.indexOf(this.userService.adDeletedOwner);
+      this.userService.myAds.splice(index, 1);
+      this.userService.deleteAd(this.userService.adDeletedOwner.id).subscribe(
+        result => {
+          console.log(result);
+        }
+      );
+    } else {
+      const index = this.userService.ads.indexOf(this.userService.adDeletedAdmin);
+      this.userService.ads.splice(index, 1);
+      this.userService.deleteAd(this.userService.adDeletedAdmin.id).subscribe(
+        result => {
+          console.log(result);
+        }
+      );
+    }
   }
 
   closeModal() {

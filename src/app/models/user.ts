@@ -4,6 +4,7 @@ export class User {
   type: string;
   token: string;
   phone: number;
-  blocked: number;
+  enabled: boolean;
   lastLoginDate: string;
+  notification: number;
 }

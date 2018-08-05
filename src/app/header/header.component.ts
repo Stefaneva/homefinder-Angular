@@ -36,10 +36,10 @@ export class HeaderComponent implements OnInit {
     this.userService.currentUser.email = null;
     this.userService.currentUser.token = null;
     this.userService.currentUser.lastLoginDate = null;
-    this.userService.currentUser.blocked = null;
+    this.userService.currentUser.enabled = null;
     this.userService.currentUser.phone = null;
     this.userService.currentUser.type = null;
-    // this.userService.userEvent = true;
+    console.log(this.router.url);
     // this.router.navigateByUrl('/home');
   }
 

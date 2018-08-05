@@ -49,3 +49,11 @@
 .form__field__input {
   margin-left: 20px;
 }
+
+.notification {
+  margin-right: 200px;
+}
+
+.body__container {
+  margin-top: 10vh;
+}

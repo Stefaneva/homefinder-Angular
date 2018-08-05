@@ -39,7 +39,7 @@ export class MyAdsComponent implements OnInit {
   }
 
   deleteAd(ad: AdDto) {
-    this.userService.adDeleted = ad;
+    this.userService.adDeletedOwner = ad;
     this.userService.closeDialog.subscribe(result => this.dialog.closeAll());
     const dialogRef = this.dialog.open(ModalAgreementComponent, {});
       // const index = this.myAds.indexOf(ad);

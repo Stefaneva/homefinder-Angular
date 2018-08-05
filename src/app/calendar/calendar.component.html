@@ -107,9 +107,14 @@
 </div>
 
 <br><br><br>
-<div *ngIf="userService.currentUser.token && ((userService.adDetailsCalendar && userService.adDetailsCalendar !== null) || owner)">
+<div *ngIf="userService.currentUser.token && ((userService.adDetailsCalendar && userService.adDetailsCalendar !== null) || owner || userEvents)">
 <h3>
-  Adauga Programare:
+  <div *ngIf="!owner && !userEvents">
+    Adauga Programare:
+  </div>
+  <div *ngIf="owner || userEvents">
+    Programari:
+  </div>
   <button
     *ngIf="userService.userEvent && userService.adDetailsCalendar && userService.adDetailsCalendar !== null
           && userService.currentUser.email !== userService.adDetailsCalendar.userEmail"
@@ -141,12 +146,12 @@
       <textarea placeholder="Mesaj..." class="form-control" [(ngModel)]="event.title" (keyup)="refresh.next()">
       </textarea>
     </td>
-    <td *ngIf="owner || userService.adDetailsCalendar && userService.adDetailsCalendar !== null &&
+    <td *ngIf="owner || userEvents || userService.adDetailsCalendar && userService.adDetailsCalendar !== null &&
                 userService.currentUser.email === userService.adDetailsCalendar.userEmail">
       <p *ngIf="event.title">{{event.title}}</p>
       <p *ngIf="!event.title">Programarea nu are un mesaj!</p>
     </td>
-    <td *ngIf="owner || userService.adDetailsCalendar && userService.adDetailsCalendar !== null &&
+    <td *ngIf="owner ||  userEvents || userService.adDetailsCalendar && userService.adDetailsCalendar !== null &&
     ((userService.currentUser.email !== userService.adDetailsCalendar.userEmail && userService.currentUser.email === eventsDto[index].userEmail)
     || userService.currentUser.email === userService.adDetailsCalendar.userEmail)">
       <mwl-demo-utils-date-time-picker
@@ -155,7 +160,7 @@
         placeholder="Not set">
       </mwl-demo-utils-date-time-picker>
     </td>
-    <td *ngIf="owner || userService.adDetailsCalendar && userService.adDetailsCalendar !== null &&
+    <td *ngIf="owner || userEvents || userService.adDetailsCalendar && userService.adDetailsCalendar !== null &&
     ((userService.currentUser.email !== userService.adDetailsCalendar.userEmail && userService.currentUser.email === eventsDto[index].userEmail)
     || userService.currentUser.email === userService.adDetailsCalendar.userEmail)">
       <mwl-demo-utils-date-time-picker
@@ -164,11 +169,11 @@
         placeholder="Not set">
       </mwl-demo-utils-date-time-picker>
     </td>
-    <td *ngIf="owner || userService.adDetailsCalendar && userService.adDetailsCalendar !== null &&
+    <td *ngIf="owner || userEvents || userService.adDetailsCalendar && userService.adDetailsCalendar !== null &&
     ((userService.currentUser.email !== userService.adDetailsCalendar.userEmail && userService.currentUser.email === eventsDto[index].userEmail)
     || userService.currentUser.email === userService.adDetailsCalendar.userEmail)">
       <button
-        *ngIf="eventsDto[index] && eventsDto[index].status !== 'ACCEPTED'"
+        *ngIf="userEvents && eventsDto[index] && eventsDto[index].status !== 'ACCEPTED'"
         class="btn btn-danger"
         (click)="deleteAppointment(index)">
         Anuleaza Programarea
@@ -187,11 +192,13 @@
         (click)="sendAppointment(index)">
         Programeaza
       </button>
-      <button *ngIf="eventsDto[index] && eventsDto[index].status === 'PENDING' && eventsDto[index].userEmail === userService.currentUser.email"
+      <button *ngIf="(userEvents && eventsDto[index] && eventsDto[index].status === 'PENDING')
+                      || (eventsDto[index] && eventsDto[index].status === 'PENDING' && eventsDto[index].userEmail === userService.currentUser.email)"
               class="btn btn-info">
         Se asteapta confirmarea
       </button>
       <button *ngIf="(owner && eventsDto[index] && eventsDto[index].status === 'ACCEPTED')
+              || (userEvents && eventsDto[index] && eventsDto[index].status === 'ACCEPTED')
               || userService.adDetailsCalendar && userService.adDetailsCalendar !== null && eventsDto[index] && eventsDto[index].status === 'ACCEPTED'
               && (eventsDto[index].userEmail === userService.currentUser.email || userService.currentUser.email === userService.adDetailsCalendar.userEmail)"
               class="btn btn-info">
