@@ -54,6 +54,24 @@
   margin-right: 200px;
 }
 
-.body__container {
-  margin-top: 10vh;
+.search__filter__container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: -5.2vh;
+  margin-left: 3vw;
+  margin-right: 3vw;
 }
+
+.options {
+  margin-bottom: 5vh;
+}
+
+.filter__button {
+  color: white;
+  background-color: royalblue;
+}
+
+.search__icon {
+  margin-right: 9vw;
+}
+

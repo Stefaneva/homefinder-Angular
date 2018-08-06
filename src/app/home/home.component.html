@@ -1,14 +1,17 @@
 <ng4-loading-spinner></ng4-loading-spinner>
 <ng-snotify></ng-snotify>
+<h1 class="ads__title">Anunturi: </h1>
 <div class="body__container">
-<form>
-  <mat-form-field>
-    <input type="text" name="search" matInput placeholder="Cauta Anunt..." [(ngModel)]="userService.term">
-    <!-- <mat-icon matSuffix>mode_search</mat-icon> -->
-  </mat-form-field>
-</form>
-  <p><button mat-button (click)="userService.sidenav.toggle()">Filtreaza Cautarea</button></p>
-    <h1 class="ads__title">Anunturi: </h1>
+  <div class="search__filter__container">
+    <form>
+      <mat-form-field class="search__field">
+        <input type="text" name="search" matInput placeholder="Cauta Anunt..." [(ngModel)]="userService.term" autocomplete="off">
+        <mat-icon matSuffix class="search__icon">mode_search</mat-icon>
+      </mat-form-field>
+    </form>
+    <p><button mat-raised-button mat-button (click)="userService.sidenav.toggle()" class="filter__button">Filtreaza Cautarea</button></p>
+  </div>
+  <hr class="options">
     <div class="custom__container">
       <div *ngFor="let ad of userService.ads | filter : userService.term : 'title' :
       userService.adItemType : 'adItemType' : userService.priceMin : userService.priceMax : 'price' :
