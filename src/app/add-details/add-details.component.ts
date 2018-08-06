@@ -225,6 +225,7 @@ export class AddDetailsComponent implements OnInit {
     this.lng = this.adDetailsChanges.lng;
     this.changeLocation = false;
     this.hidden = true;
+    this.newLocation.get('searchControl').setValue(null);
   }
 
   saveLocationChanges() {

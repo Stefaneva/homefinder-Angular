@@ -272,7 +272,9 @@
         <label for="comment_box">Adauga comentariu si rating: <rating [(ngModel)]="rating" [max]=5></rating></label>
         <textarea id="comment_box" [(ngModel)]="comment" rows=5 cols=20 placeholder="Adauga comentariu..." class="form-control comment"></textarea>
         <br>
-        <button class="btn btn-info" (click)="addReview()">Adauga Review</button>
+        <div class="add__review__button">
+          <button class="btn btn-info" (click)="addReview()">Adauga Review</button>
+        </div>
       </div>
     </div>
   </div>

@@ -28,9 +28,12 @@
 }
 
 agm-map {
-  width: 1000px;
-  height: 600px;
-  margin-bottom: 40px;
+  /*width: 1000px;*/
+  /*height: 600px;*/
+  width: 70vw;
+  height: 70vh;
+  /*margin-bottom: 40px;*/
+  margin-bottom: 4vh;
 }
 
 .map__class {
@@ -41,13 +44,14 @@ agm-map {
 .map__label {
   display: flex;
   justify-content: center;
+  size: 5vw;
 }
 
 .img__label__container {
   display: flex;
   justify-content: flex-start;
   flex-direction: row;
-  margin-top: 20px;
+  margin-top: 3vh;
 }
 
 .text__label {
@@ -59,22 +63,45 @@ agm-map {
 .img__save__button {
   display: flex;
   justify-content: flex-start;
-  margin-left: 350px;
+  margin-left: 24vw;
 }
 
 .img__replace_button {
-  margin-left: 20px;
+  margin-left: 3vw;
 }
 
 .description__container {
-  margin-left: 200px;
-  margin-right: 200px;
+  /*margin-left: 200px;*/
+  /*margin-right: 200px;*/
+  margin-left: 10vw;
+  margin-right:  10vw;
 }
 
 .price__carousel {
   display: flex;
   justify-content: space-evenly;
-  margin-right: 50px;
+  margin-right: 7vw;
+}
+
+@media only screen and (max-width: 600px) {
+  .price__carousel {
+    display: flex;
+    flex-direction: column;
+    margin-right: 0;
+  }
+
+  .carousel__item {
+    width: 95%;
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+  }
+
+  .buttons{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 }
 
 .buttons {
@@ -82,15 +109,14 @@ agm-map {
   flex-direction: column;
 }
 
-
 .price {
-  margin-top: 100px;
-  height: 50px;
+  margin-top: 11vh;
+  height: 7vh;
 }
 
 .favourite {
-  margin-top: 20px;
-  height: 50px;
+  margin-top: 3vh;
+  height: 7vh;
   display: flex;
   justify-content: center;
 }
@@ -123,7 +149,7 @@ agm-map {
 }
 
 .search__location {
-  width: 1000px;
+  width: 60vw;
 }
 
 .search__location__formGroup {
@@ -134,11 +160,11 @@ agm-map {
 .map__buttons {
   display: flex;
   justify-content: center;
-  margin-bottom: 30px;
+  margin-bottom: 6vh;
 }
 
 .map__button {
-  margin-right: 20px;
+  margin-right: 5vw;
 }
 
 input[type="file"] {
@@ -146,7 +172,7 @@ input[type="file"] {
 }
 
 .material__select {
-  margin-top: 9px;
+  margin-top: 2vh;
 }
 
 .expansion__panel__content__apartment {
@@ -189,3 +215,8 @@ input[type="file"] {
   justify-content: space-between;
 }
 
+.add__review__button {
+  /*margin-left: 7vw;*/
+  display: flex;
+  justify-content: center;
+}

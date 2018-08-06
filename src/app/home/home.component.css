@@ -57,13 +57,13 @@
 .search__filter__container {
   display: flex;
   justify-content: space-between;
-  margin-bottom: -5.2vh;
+  margin-bottom: -5vh;
   margin-left: 3vw;
   margin-right: 3vw;
 }
 
 .options {
-  margin-bottom: 5vh;
+  margin-bottom: 4vh;
 }
 
 .filter__button {
