@@ -1,5 +1,6 @@
 .sidenav {
-  width: 500px;
+  /*width: 500px;*/
+  width: 35vw;
   height: 100%;
 }
 
@@ -12,6 +13,41 @@
   margin-bottom: 30px;
 }
 
-.form__field__input {
-  margin-left: 20px;
+/*.form__field__input {*/
+  /*margin-left: 1.8vw;*/
+/*}*/
+
+.sidenav__buttons {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+}
+
+.options__container {
+  margin-left: 2vw;
+}
+
+.adItemType__options {
+  display: flex;
+  justify-content: space-around;
+}
+
+.checkbox__options {
+  display: flex;
+  justify-content: space-around;
+}
+
+.form__options {
+  display: flex;
+  justify-content: space-around;
+}
+
+.furnished {
+  display: flex;
+  justify-content: center;
+}
+
+.location__search__field {
+  width: 90%;
 }
