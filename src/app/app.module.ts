@@ -50,6 +50,8 @@ import { EditUserComponent } from './edit-user/edit-user.component';
 import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
 import { ChartsComponent } from './charts/charts.component';
 import {ChartsModule} from 'ng2-charts';
+import {GuardService} from './guard.service';
+import {GuardRoleService} from './guard-role.service';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home' , pathMatch: 'full' },
@@ -58,12 +60,30 @@ const appRoutes: Routes = [
   { path: 'signin' , component: SigninComponent},
   { path: 'add', component: AddComponent},
   { path: 'AdDetails/:id', component: AddDetailsComponent},
-  { path: 'calendar', component: CalendarComponent},
-  { path: 'myAds', component: MyAdsComponent},
-  { path: 'favorites', component: FavoritesComponent},
-  { path: 'EditUser', component: EditUserComponent},
-  { path: 'userList', component: UserListComponent},
-  { path: 'statistics', component: ChartsComponent}
+  { path: 'calendar',
+    component: CalendarComponent,
+    canActivate: [GuardService]
+  },
+  { path: 'myAds',
+    component: MyAdsComponent,
+    canActivate: [GuardService]
+  },
+  { path: 'favorites',
+    component: FavoritesComponent,
+    canActivate: [GuardService]
+  },
+  { path: 'EditUser',
+    component: EditUserComponent,
+    canActivate: [GuardService]
+  },
+  { path: 'userList',
+    component: UserListComponent,
+    canActivate: [GuardRoleService]
+  },
+  { path: 'statistics',
+    component: ChartsComponent,
+    canActivate: [GuardRoleService]
+  }
 ];
 
 @NgModule({
@@ -125,6 +145,8 @@ const appRoutes: Routes = [
   ],
   entryComponents: [ModalAgreementComponent],
   providers: [
+    GuardRoleService,
+    GuardService,
     UserService,
     AuthService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

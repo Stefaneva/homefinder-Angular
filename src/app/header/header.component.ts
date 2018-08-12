@@ -39,8 +39,11 @@ export class HeaderComponent implements OnInit {
     this.userService.currentUser.enabled = null;
     this.userService.currentUser.phone = null;
     this.userService.currentUser.type = null;
-    console.log(this.router.url);
-    // this.router.navigateByUrl('/home');
+    if (this.router.url === '/calendar' || this.router.url === '/statistics'
+        || this.router.url === 'myAds' || this.router.url === 'favorites'
+        || this.router.url === 'userList') {
+      this.router.navigateByUrl('/home');
+    }
   }
 
   addNewAd(): void {
