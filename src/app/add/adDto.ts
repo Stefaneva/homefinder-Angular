@@ -18,4 +18,5 @@ export class AdDto {
   areaSurface: number;
   yearBuilt: number;
   location: string;
+  avgAdReview: number;
 }

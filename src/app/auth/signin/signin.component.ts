@@ -15,6 +15,7 @@ import {SnotifyService} from 'ng-snotify';
 })
 export class SigninComponent implements OnInit {
 
+  private readonly imageType: string = 'data:image/PNG;base64,';
   isLoginError = false;
   isLoginError2 = false;
 
@@ -37,7 +38,6 @@ export class SigninComponent implements OnInit {
         this.userService.currentUser = new User;
         this.userService.currentUser.email = username;
         this.userService.currentUser.token = data.token;
-        this.spinnerService.hide();
         this.userService.postUserData().subscribe(
           result => {
             this.userService.currentUser.name = result.name;
@@ -50,13 +50,41 @@ export class SigninComponent implements OnInit {
               form.resetForm();
               console.log(this.userService.currentUser.email + ' ' + this.userService.currentUser.name);
               this.userService.closeDialog.emit(true);
+              this.userService.getFavoriteAds().subscribe(
+                response => {
+                  this.userService.favoriteAds = response;
+                  this.userService.favoriteAds.forEach( ad => ad.image = this.imageType + ad.image);
+                  console.log(response);
+                  // Favourite Button Check
+                  if (this.userService.favoriteAds.length > 0 && this.userService.adDetails) {
+                    this.userService.favoriteAds.forEach(
+                      ad => {
+                        console.log(ad.id);
+                        console.log(this.userService.adDetails.id);
+                        if (ad.id === this.userService.adDetails.id) {
+                          this.userService.isFavourite = true;
+                        }
+                      }
+                    );
+                  }
+                  if (this.userService.reviews.length > 0) {
+                    for (const review1 of this.userService.reviews) {
+                      if (review1.mail === this.userService.currentUser.email) {
+                        this.userService.userReviewedAd = true;
+                        return;
+                      }
+                    }
+                  }
+                }
+              );
+              this.spinnerService.hide();
             } else {
               this.isLoginError2 = true;
               this.userService.currentUser = null;
             }
             console.log(this.userService.currentUser.notification);
             if (!this.userService.currentUser.notification) {
-              this.userService.snotifyService.success('Body content', { position: 'rightTop'});
+              this.userService.snotifyService.success('Bine ai venit, ' + this.userService.currentUser.name + '!', { position: 'rightTop'});
             } else if (this.userService.currentUser.notification === 1) {
               this.userService.snotifyService.info('O programare a fost acceptata', { position: 'rightTop'});
             } else if (this.userService.currentUser.notification === 2) {
@@ -72,7 +100,7 @@ export class SigninComponent implements OnInit {
       },
       (error1: HttpErrorResponse) => {
         this.spinnerService.hide();
-        if (error1.name === 'Bad credentials!') {
+        if (error1.error === 'Bad credentials!') {
           this.isLoginError = true;
         } else {
           this.isLoginError2 = true;

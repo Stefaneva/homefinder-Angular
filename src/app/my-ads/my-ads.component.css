@@ -9,6 +9,7 @@
   justify-content: space-around;
   flex-flow: row wrap;
   align-items: flex-start !important;
+  margin-top: 4vh;
 }
 
 .ad__buttons {
@@ -24,4 +25,6 @@
 .ads__title {
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }

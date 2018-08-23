@@ -6,11 +6,16 @@
 
 .numar__anunturi {
   width: 80%;
-  margin-left: 40px;
+  /*margin-left: 40px;*/
+  margin-left: 3vw;
   border: 1px solid;
   color: black;
   background-color: white;
-  margin-bottom: 30px;
+  /*margin-bottom: 30px;*/
+}
+
+.ad__number__option {
+  padding-bottom: 2vh;
 }
 
 /*.form__field__input {*/
@@ -25,7 +30,8 @@
 }
 
 .options__container {
-  margin-left: 2vw;
+  margin-left: 1.5vw;
+  margin-right: 1vw;
 }
 
 .adItemType__options {

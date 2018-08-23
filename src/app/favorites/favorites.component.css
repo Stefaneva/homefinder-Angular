@@ -24,4 +24,11 @@
 .ads__title {
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
+
+.ads__message {
+  margin-top: 10vh;
+}
+

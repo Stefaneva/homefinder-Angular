@@ -13,19 +13,23 @@
       </carousel>
     </div>
     <div class="buttons">
-      <button class="btn btn-success price">Pret: {{userService.adDetails.price}} <span class="fa fa-euro"></span></button>
-      <button class="btn btn-warning favourite" (click)="calendarRedirect()">Programeaza vizita <mat-icon>assignment</mat-icon></button>
-      <button class="btn btn-danger favourite" (click)="saveFavorite()">Adauga la Favorite&nbsp;<mat-icon>favorite_border</mat-icon></button>
+      <button class="btn btn-success price">Preț: {{userService.adDetails.price}} <span class="fa fa-euro"></span></button>
+      <button *ngIf="userService.currentUser.email !== userService.adDetails.userEmail"
+              class="btn btn-warning favourite" (click)="calendarRedirect()">Programează vizită <mat-icon>assignment</mat-icon></button>
+      <button  *ngIf="userService.currentUser.email !== userService.adDetails.userEmail" [disabled]="userService.isFavourite"
+               class="btn btn-danger favourite" (click)="saveFavorite()">Adaugă la Favorite&nbsp;<mat-icon>favorite_border</mat-icon></button>
       <button class="btn btn-info favourite">E-mail: {{userService.adDetails.userEmail}}&nbsp;<mat-icon>email</mat-icon></button>
-      <button class="btn btn-info favourite">Telefon: 0{{adUserPhone}} <mat-icon>phone</mat-icon></button>
+      <button class="btn btn-info favourite">Telefon: 0{{userService.adUserPhone}} <mat-icon>phone</mat-icon></button>
+      <rating [(ngModel)]="userService.adDetails.avgAdReview" [max]=5 [float]="true" [readonly]="true"
+              class="general__rating"></rating>
     </div>
   </div>
   <div class="img__label__container" *ngIf="userService.currentUser.token && userService.currentUser.email === userService.adDetails.userEmail">
     <button mat-button mat-raised-button class="img__save__button" color="accent"
-            (click)="saveImages()">Salveaza Imaginile <mat-icon>archive</mat-icon></button>
+            (click)="saveImages()">Salvează imaginile <mat-icon>archive</mat-icon></button>
     <input (change)="getFileDetails($event)" id="fileInput" name="file" type="file" class="ng-hide" multiple>
     <button mat-button mat-raised-button color="accent"
-            (click)="replaceImages()" class="img__replace_button">Inlocuieste Imaginile <mat-icon>cloud_upload</mat-icon></button>
+            (click)="replaceImages()" class="img__replace_button">Înlocuieste imaginile <mat-icon>cloud_upload</mat-icon></button>
   </div>
   <br>
   <div class="description__container">
@@ -34,7 +38,7 @@
                                                  (closed)="panelOpenState = false" hideToggle>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Descriere Anunt...
+          Descriere Anunț...
         </mat-panel-title>
         <mat-panel-description class="mat__panel__description"><mat-icon>info</mat-icon></mat-panel-description>
       </mat-expansion-panel-header>
@@ -48,13 +52,13 @@
           <p>Descriere: {{userService.adDetails.description}}
         </div>
       <mat-action-row>
-        <button mat-button color="warn" (click)="prevStep()">Inchide</button>
+        <button mat-button color="warn" (click)="prevStep()">Închide</button>
         <button mat-button color="primary" (click)="nextStep()">Urmator</button>
         <button mat-button mat-raised-button color="accent"
-                *ngIf="userService.currentUser.email === userService.adDetails.userEmail" (click)="saveChanges(step)">Salveaza Modificarile
+                *ngIf="userService.currentUser.email === userService.adDetails.userEmail" (click)="saveChanges(step)">Salvează modificarile
         </button>
         <button mat-button mat-raised-button color="accent"
-                *ngIf="userService.currentUser.email === userService.adDetails.userEmail" (click)="cancelChanges(step)">Anuleaza Modificarile
+                *ngIf="userService.currentUser.email === userService.adDetails.userEmail" (click)="cancelChanges(step)">Anulează modificarile
         </button>
       </mat-action-row>
       </mat-expansion-panel>
@@ -62,7 +66,7 @@
                            (closed)="panelOpenState = false" hideToggle>
         <mat-expansion-panel-header>
           <mat-panel-title>
-            Detalii Anunt...
+            Detalii Anunț...
           </mat-panel-title>
           <mat-panel-description class="mat__panel__description"><mat-icon>assignment</mat-icon></mat-panel-description>
         </mat-expansion-panel-header>
@@ -91,8 +95,8 @@
                 </mat-form-field>
                 <mat-form-field class="form__field__input apartemnt__detail__form">
                   <mat-select placeholder="Tip anunt..." matInput class="material__select" [(ngModel)]="adDetailsChanges.adType">
-                    <mat-option value="Inchiriere">Inchiriere</mat-option>
-                    <mat-option value="Vanzare">Vanzare</mat-option>
+                    <mat-option value="Inchiriere">Închiriere</mat-option>
+                    <mat-option value="Vanzare">Vânzare</mat-option>
                   </mat-select>
                 </mat-form-field>
                 <mat-form-field class="form__field__input apartemnt__detail__form">
@@ -104,23 +108,23 @@
             </div>
             <div *ngIf="userService.currentUser.email !== userService.adDetails.userEmail || !userService.currentUser.email">
               <div class="expansion__panel__content__apartment">
-                <p class="apartemnt__detail__form">Pret(euro): {{userService.adDetails.price}}
-                <p class="apartemnt__detail__form">Numar Camere: {{userService.adDetails.rooms}}
-                <p class="apartemnt__detail__form">Suprafata(m<sup>3</sup>): {{userService.adDetails.surface}}
-                <p class="apartemnt__detail__form">Suprafata teren(m<sup>3</sup>): {{userService.adDetails.areaSurface}}
-                <p class="apartemnt__detail__form">Tip Proprietate: {{userService.adDetails.adItemType}}
+                <p class="apartemnt__detail__form">Preț(euro): {{userService.adDetails.price}}
+                <p class="apartemnt__detail__form">Număr camere: {{userService.adDetails.rooms}}
+                <p class="apartemnt__detail__form">Suprafață(m<sup>3</sup>): {{userService.adDetails.surface}}
+                <p class="apartemnt__detail__form">Suprafață teren(m<sup>3</sup>): {{userService.adDetails.areaSurface}}
+                <p class="apartemnt__detail__form">Tip proprietate: {{userService.adDetails.adItemType}}
                 <p class="apartemnt__detail__form">Tip anunt: {{userService.adDetails.adType}}</p>
-                <p class="apartemnt__detail__last__element">An constructie: {{userService.adDetails.yearBuilt}}
+                <p class="apartemnt__detail__last__element">An construcție: {{userService.adDetails.yearBuilt}}
               </div>
             </div>
           <mat-action-row>
             <button mat-button color="warn" (click)="prevStep()">Predecesor</button>
             <button mat-button color="primary" (click)="nextStep()">Final</button>
             <button mat-button mat-raised-button color="accent"
-                    *ngIf="userService.currentUser.email === userService.adDetails.userEmail" (click)="saveChanges(step)">Salveaza Modificarile
+                    *ngIf="userService.currentUser.email === userService.adDetails.userEmail" (click)="saveChanges(step)">Salvează modificarile
             </button>
             <button mat-button mat-raised-button color="accent"
-                    *ngIf="userService.currentUser.email === userService.adDetails.userEmail" (click)="cancelChanges(step)">Anuleaza Modificarile
+                    *ngIf="userService.currentUser.email === userService.adDetails.userEmail" (click)="cancelChanges(step)">Anulează modificarile
             </button>
           </mat-action-row>
         </div>
@@ -151,16 +155,16 @@
               <mat-form-field class="form__field__input apartemnt__detail__form">
                 <mat-select placeholder="Compartimentare..." matInput class="material__select" [(ngModel)]="adDetailsChanges.partitioning">
                   <mat-option value="Decomandat">Decomandat</mat-option>
-                  <mat-option value="Semidecomandat">Semidecomandata</mat-option>
-                  <mat-option value="Necomandat">Necomandata</mat-option>
+                  <mat-option value="Semidecomandat">Semidecomandat</mat-option>
+                  <mat-option value="Necomandat">Necomandat</mat-option>
                   <mat-option value="Vagon">Vagon</mat-option>
                   <mat-option value="Circular">Circular</mat-option>
                 </mat-select>
               </mat-form-field>
               <mat-form-field class="form__field__input apartemnt__detail__form">
                 <mat-select placeholder="Tip anunt..." matInput class="material__select" [(ngModel)]="adDetailsChanges.adType">
-                  <mat-option value="Inchiriere">Inchiriere</mat-option>
-                  <mat-option value="Vanzare">Vanzare</mat-option>
+                  <mat-option value="Inchiriere">Închiriere</mat-option>
+                  <mat-option value="Vanzare">Vânzare</mat-option>
                 </mat-select>
               </mat-form-field>
               <mat-form-field class="form__field__input apartemnt__detail__form">
@@ -178,14 +182,14 @@
           </div>
           <div *ngIf="userService.currentUser.email !== userService.adDetails.userEmail || !userService.currentUser.email">
             <div class="expansion__panel__content__apartment">
-              <p class="apartemnt__detail">Pret(euro): {{userService.adDetails.price}}
-              <p class="apartemnt__detail">Numar Camere: {{userService.adDetails.rooms}}
-              <p class="apartemnt__detail">Suprafata: {{userService.adDetails.surface}}(m<sup>3</sup>)
+              <p class="apartemnt__detail">Preț(euro): {{userService.adDetails.price}}
+              <p class="apartemnt__detail">Număr camere: {{userService.adDetails.rooms}}
+              <p class="apartemnt__detail">Suprafață: {{userService.adDetails.surface}}(m<sup>3</sup>)
               <p class="apartemnt__detail">Confort: {{userService.adDetails.comfort}}
               <p class="apartemnt__detail">Compartimentare: {{userService.adDetails.partitioning}}
-              <p class="apartemnt__detail">Tip Proprietate: {{userService.adDetails.adItemType}}
+              <p class="apartemnt__detail">Tip proprietate: {{userService.adDetails.adItemType}}
               <p class="apartemnt__detail" *ngIf="userService.adDetails.floorLevel !== '0'">Etaj: {{userService.adDetails.floorLevel}}
-              <p class="apartemnt__detail__last__element">An constructie: {{userService.adDetails.yearBuilt}}
+              <p class="apartemnt__detail__last__element">An construcție: {{userService.adDetails.yearBuilt}}
               <p></p>
             </div>
           </div>
@@ -193,10 +197,10 @@
             <button mat-button color="warn" (click)="prevStep()">Predecesor</button>
             <button mat-button color="primary" (click)="nextStep()">Final</button>
             <button mat-button mat-raised-button color="accent"
-                    *ngIf="userService.currentUser.email === userService.adDetails.userEmail" (click)="saveChanges(step)">Salveaza Modificarile
+                    *ngIf="userService.currentUser.email === userService.adDetails.userEmail" (click)="saveChanges(step)">Salvează modificarile
             </button>
             <button mat-button mat-raised-button color="accent"
-                    *ngIf="userService.currentUser.email === userService.adDetails.userEmail" (click)="cancelChanges(step)">Anuleaza Modificarile
+                    *ngIf="userService.currentUser.email === userService.adDetails.userEmail" (click)="cancelChanges(step)">Anulează modificarile
             </button>
           </mat-action-row>
         </div>
@@ -204,7 +208,7 @@
     </mat-accordion>
   </div>
   <br>
-  <h3 class="map__label">Locatie: {{this.address}}</h3>
+  <h3 class="map__label">Locație: {{this.address}}</h3>
   <div class="map__class">
       <agm-map [latitude]="lat" [longitude]="lng" [scrollwheel]="true" [fullscreenControl]="true" (mapClick)="onChoseLocation($event)" [zoom]="zoom">
         <agm-marker [latitude]="lat" [longitude]="lng" *ngIf="lat !=0 && lng != 0"></agm-marker>
@@ -219,18 +223,18 @@
   </div>
   <div class="map__buttons">
     <button *ngIf="changeLocation === false && userService.currentUser.email === userService.adDetails.userEmail"
-            mat-button mat-raised-button color="accent" (click)="changeTheLocation()">Alege o noua locatie</button>
-    <button *ngIf="changeLocation === true" class="map__button" mat-button mat-raised-button color="accent" (click)="cancelLocationChanges()">Anuleaza</button>
-    <button *ngIf="changeLocation === true"  mat-button mat-raised-button color="accent" (click)="saveLocationChanges()">Salveaza Locatia</button>
+            mat-button mat-raised-button color="accent" (click)="changeTheLocation()">Alege o noua locație</button>
+    <button *ngIf="changeLocation === true" class="map__button" mat-button mat-raised-button color="accent" (click)="cancelLocationChanges()">Anulează</button>
+    <button *ngIf="changeLocation === true"  mat-button mat-raised-button color="accent" (click)="saveLocationChanges()">Salvează locația</button>
     <button *ngIf="userService.currentUser.email !== userService.adDetails.userEmail" mat-button mat-raised-button color="accent"
             (click)="googleMapsDirection()">Traseu</button>
   </div>
   <div class="review__container">
     <div class="box">
       <h3>Review-uri: </h3>
-      <hr>
       <div *ngIf="!editReview">
-        <div *ngFor="let review of reviews; let i = index" class="reviews">
+        <hr>
+        <div *ngFor="let review of userService.reviews; let i = index" class="reviews">
           <div class="comment__first__row">
             <p>{{review.username}} - {{review.userType}}</p>
             <p>Data adaugarii: {{reviewsDates[i] | date:'dd/MM/yyyy'}}</p>
@@ -243,13 +247,14 @@
               <button mat-icon-button color="warn"><mat-icon (click)="deleteUserReview(review)">delete</mat-icon></button>
             </div>
           </div>
+          <hr>
         </div>
       </div>
        <div *ngIf="editReview">
-         <div *ngFor="let review of reviews; let i = index" class="reviews">
+         <div *ngFor="let review of userService.reviews; let i = index" class="reviews">
            <div class="comment__first__row">
              <p>{{review.username}} - {{review.userType}}</p>
-             <p>Data adaugarii: {{reviewsDates[i] | date:'dd/MM/yyyy'}}</p>
+             <p>Data adăugarii: {{reviewsDates[i] | date:'dd/MM/yyyy'}}</p>
            </div>
            <mat-form-field class="descriere">
             <textarea type="text" placeholder="Editeaza comentariu..." matInput matTextareaAutosize matAutosizeMinRows=5 matAutosizeMaxRows=10
@@ -258,22 +263,23 @@
            <div class="review__rating__container">
              <rating [(ngModel)]="reviewChanges.rating" [max]=5></rating>
              <div>
-               <button mat-raised-button mat-button="" color="primary" (click)="editUserReviewSave(review)">Salveaza</button>
-               <button mat-raised-button mat-button="" color="warn" (click)="editReviewCancel(review)">Anuleaza</button>
+               <button mat-raised-button mat-button="" color="primary" (click)="editUserReviewSave(review)">Salvează</button>
+               <button mat-raised-button mat-button="" color="warn" (click)="editReviewCancel(review)">Anulează</button>
              </div>
            </div>
+           <hr>
         </div>
-       </div>
-       <hr>
-      <div *ngIf="reviews.length === 0">
-        <p>Anuntul nu are momentan review-uri.</p>
       </div>
-      <div>
-        <label for="comment_box">Adauga comentariu si rating: <rating [(ngModel)]="rating" [max]=5></rating></label>
-        <textarea id="comment_box" [(ngModel)]="comment" rows=5 cols=20 placeholder="Adauga comentariu..." class="form-control comment"></textarea>
+      <div *ngIf="userService.reviews.length === 0">
+        <p>Anunțul nu are momentan review-uri.</p>
+        <hr>
+      </div>
+      <div *ngIf="(userService.currentUser.email !== userService.adDetails.userEmail) && !userService.userReviewedAd">
+        <label for="comment_box">Adaugă comentariu și rating: <rating [(ngModel)]="rating" [max]=5></rating></label>
+        <textarea id="comment_box" [(ngModel)]="comment" rows=5 cols=20 placeholder="Adaugă comentariu..." class="form-control comment"></textarea>
         <br>
         <div class="add__review__button">
-          <button class="btn btn-info" (click)="addReview()">Adauga Review</button>
+          <button class="btn btn-info" (click)="addReview()">Adaugă recenzie</button>
         </div>
       </div>
     </div>

@@ -5,10 +5,12 @@
       <button mat-button mat-raised-button color="warn" (click)="sidenav.toggle()">Inchide</button>
       <button mat-button mat-raised-button color="accent" (click)="resetFilters()">Reseteaza Filtre</button>
     </div>
+  <div class="ad__number__option">
   <h4>Anunturi pe pagina</h4>
-  <mat-select [(value)]="userService.itemsOnPage" class="numar__anunturi">
-    <mat-option *ngFor="let option of userService.itemsPerPageOptions" [value]="option">{{ option }}</mat-option>
-  </mat-select>
+    <mat-select [(value)]="userService.itemsOnPage" class="numar__anunturi">
+      <mat-option *ngFor="let option of userService.itemsPerPageOptions" [value]="option">{{ option }}</mat-option>
+    </mat-select>
+  </div>
   <mat-radio-group [(ngModel)]="userService.adItemType" class="adItemType__options">
     <mat-radio-button value="Casa">Casa</mat-radio-button>
     <mat-radio-button value="Apartament">Apartament</mat-radio-button>

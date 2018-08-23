@@ -18,4 +18,5 @@ export class AdDetailsDto {
   floorLevel: string;
   areaSurface: number;
   yearBuilt: number;
+  avgAdReview: number;
 }

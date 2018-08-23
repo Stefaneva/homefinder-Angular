@@ -95,6 +95,11 @@ export class UserService {
   userCalendar: boolean;
   eventsCalendar: EventDto[] = [];
   userEvent: boolean;
+  adUserPhone: number;
+  isFavourite: boolean;
+  // Reviews
+  reviews: ReviewDtoRequest[] = [];
+  userReviewedAd: boolean;
 
   constructor(private http: HttpClient,
               private authService: AuthService,
@@ -170,8 +175,8 @@ export class UserService {
     return this.http.post<ReviewDtoRequest[]>(this._GET_AD_REVIEW, adId);
   }
 
-  saveReview(review: ReviewDtoResponse): Observable<void> {
-    return this.http.post<void>(this._SAVE_AD_REVIEW, review);
+  saveReview(review: ReviewDtoResponse): Observable<number> {
+    return this.http.post<number>(this._SAVE_AD_REVIEW, review);
   }
 
   editReview(review: ReviewDtoResponse): Observable<void> {

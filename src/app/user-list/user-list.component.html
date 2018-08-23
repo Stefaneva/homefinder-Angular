@@ -1,13 +1,13 @@
-<h2 class="title">Users</h2>
+<h2 class="title">Utilizatori: </h2>
 <div *ngFor="let user of users" class="description__container">
   <mat-accordion>
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Informatii User
+          Informații utilizator
         </mat-panel-title>
         <mat-panel-description>
-          Date despre user
+          Date utilizator
         </mat-panel-description>
       </mat-expansion-panel-header>
       <p>{{user.username}}</p>
@@ -16,8 +16,8 @@
       <p>{{user.lastLoginDate}}</p>
       <p>{{user.lastPasswordResetDate}}</p>
       <mat-action-row>
-        <button  *ngIf="user.enabled" mat-raised-button mat-button color="warn" (click)="blockUser(user)">Blocheaza Cont!</button>
-        <button  *ngIf="!user.enabled"mat-raised-button mat-button color="primary" (click)="unblockUser(user)">Deblocheaza Cont</button>
+        <button  *ngIf="user.enabled" mat-raised-button mat-button color="warn" (click)="blockUser(user)">Blochează cont!</button>
+        <button  *ngIf="!user.enabled"mat-raised-button mat-button color="primary" (click)="unblockUser(user)">Deblochează cont!</button>
       </mat-action-row>
     </mat-expansion-panel>
   </mat-accordion>

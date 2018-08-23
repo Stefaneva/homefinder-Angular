@@ -32,7 +32,6 @@ export class HomeComponent implements OnInit {
     this.spinnerService.show();
     this.userService.getAdsWithImages().subscribe(
       (response) => {
-        console.log(response);
         this.userService.ads = response;
         this.userService.ads.forEach(
           ad => {

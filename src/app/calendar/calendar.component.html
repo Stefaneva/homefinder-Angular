@@ -13,9 +13,11 @@
     <div>
       Event:
       <!--<pre>{{ modalData?.event }} + {{modalData.num}}</pre>-->
-      <pre>{{modalData.eventTitle}}</pre>
-      <pre>{{modalData.eventStart | date:'yyyy-MM-dd HH:mm'}}</pre>
-      <pre>{{modalData.eventEnd | date:'yyyy-MM-dd HH:mm'}}</pre>
+      <pre>Programare: {{modalData.eventTitle}}</pre>
+      <pre>Denumire anunț: {{modalData.adTitle}}</pre>
+      <pre>De la: {{modalData.eventStart | date:'yyyy-MM-dd HH:mm'}}</pre>
+      <pre>Pâna la: {{modalData.eventEnd | date:'yyyy-MM-dd HH:mm'}}</pre>
+      <button mat-raised-button color="primary" (click)="adDetails(modalData.index)">Detalii anunț</button>
     </div>
   </div>
   <div class="modal-footer">
@@ -85,7 +87,7 @@
     [refresh]="refresh"
     [activeDayIsOpen]="activeDayIsOpen"
     (dayClicked)="dayClicked($event.day)"
-    (eventClicked)="handleEvent('Clicked', $event.event)"
+    (eventClicked)="handleEvent('Clicked', $event.event, events.indexOf($event.event))"
     (eventTimesChanged)="eventTimesChanged($event)">
   </mwl-calendar-month-view>
   <mwl-calendar-week-view
@@ -117,7 +119,7 @@
   </div>
   <button
     *ngIf="userService.userEvent && userService.adDetailsCalendar && userService.adDetailsCalendar !== null
-          && userService.currentUser.email !== userService.adDetailsCalendar.userEmail"
+          && userService.currentUser.email !== userService.adDetailsCalendar.userEmail && !eventAdded"
     class="btn btn-primary pull-right"
     (click)="addEvent()">
     Add new
@@ -142,9 +144,11 @@
   <tbody>
   <tr *ngFor="let event of events; let index = index">
     <td *ngIf="userService.adDetailsCalendar && userService.adDetailsCalendar !== null &&
-               userService.currentUser.email !== userService.adDetailsCalendar.userEmail && userService.currentUser.email === eventsDto[index].userEmail">
-      <textarea placeholder="Mesaj..." class="form-control" [(ngModel)]="event.title" (keyup)="refresh.next()">
+               userService.currentUser.email !== userService.adDetailsCalendar.userEmail &&
+               userService.currentUser.email === eventsDto[index].userEmail">
+      <textarea *ngIf="userService.userEvent" placeholder="Mesaj..." class="form-control" [(ngModel)]="event.title" (keyup)="refresh.next()">
       </textarea>
+      <p *ngIf="!userService.userEvent">{{event.title}}</p>
     </td>
     <td *ngIf="owner || userEvents || userService.adDetailsCalendar && userService.adDetailsCalendar !== null &&
                 userService.currentUser.email === userService.adDetailsCalendar.userEmail">
@@ -176,7 +180,7 @@
         *ngIf="userEvents && eventsDto[index] && eventsDto[index].status !== 'ACCEPTED'"
         class="btn btn-danger"
         (click)="deleteAppointment(index)">
-        Anuleaza Programarea
+        Anulează programarea!
       </button>
       <button
         *ngIf="(owner && eventsDto[index] && eventsDto[index].status === 'ACCEPTED')
@@ -184,25 +188,33 @@
                eventsDto[index] && eventsDto[index].status === 'ACCEPTED' && userService.currentUser.email === userService.adDetailsCalendar.userEmail"
         class="btn btn-danger"
         (click)="deleteAppointment(index)">
-        Anuleaza Programarea
+        Anulează programarea!
       </button>
       <button
         *ngIf="((eventsDto[index] && eventsDto[index].status !== 'PENDING' && eventsDto[index].status !== 'ACCEPTED') || !eventsDto[index])"
         class="btn btn-success"
         (click)="sendAppointment(index)">
-        Programeaza
+        Programează!
       </button>
       <button *ngIf="(userEvents && eventsDto[index] && eventsDto[index].status === 'PENDING')
                       || (eventsDto[index] && eventsDto[index].status === 'PENDING' && eventsDto[index].userEmail === userService.currentUser.email)"
               class="btn btn-info">
-        Se asteapta confirmarea
+        Se așteaptă confirmarea!
       </button>
       <button *ngIf="(owner && eventsDto[index] && eventsDto[index].status === 'ACCEPTED')
               || (userEvents && eventsDto[index] && eventsDto[index].status === 'ACCEPTED')
               || userService.adDetailsCalendar && userService.adDetailsCalendar !== null && eventsDto[index] && eventsDto[index].status === 'ACCEPTED'
               && (eventsDto[index].userEmail === userService.currentUser.email || userService.currentUser.email === userService.adDetailsCalendar.userEmail)"
               class="btn btn-info">
-        Programare Confirmata!
+        Programare confirmată!
+      </button>
+      <button
+        class="btn btn-warning"
+        *ngIf="(owner && eventsDto[index] && eventsDto[index].status === 'PENDING')
+               || userService.adDetailsCalendar && userService.adDetailsCalendar !== null &&
+               userService.currentUser.email === userService.adDetailsCalendar.userEmail && eventsDto[index].status === 'PENDING'"
+        (click)="deleteAppointment(index)">
+        Anulează programarea!
       </button>
       <button
         class="btn btn-success"
@@ -210,7 +222,7 @@
                || userService.adDetailsCalendar && userService.adDetailsCalendar !== null &&
                userService.currentUser.email === userService.adDetailsCalendar.userEmail && eventsDto[index].status === 'PENDING'"
         (click)="confirmAppointment(index)">
-        Confirma
+        Confirmă!
       </button>
     </td>
   </tr>

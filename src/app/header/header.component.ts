@@ -44,11 +44,16 @@ export class HeaderComponent implements OnInit {
         || this.router.url === 'userList') {
       this.router.navigateByUrl('/home');
     }
+    this.userService.isFavourite = false;
+    this.userService.userReviewedAd = false;
   }
 
   addNewAd(): void {
     this.userService.closeDialog.subscribe(result => this.dialog.closeAll());
-    const dialogRef = this.dialog.open(AddComponent, {});
+    const dialogRef = this.dialog.open(AddComponent, {
+      height: '75vh',
+      width: '50vw',
+    });
   }
 
   openEdit() {

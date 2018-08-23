@@ -48,6 +48,7 @@ export class EditUserComponent implements OnInit {
     this.userService.updateUserData(userDtoUpdate).subscribe(
       response => console.log(response)
     );
+    this.userService.adUserPhone = parseInt(userDtoUpdate.phone, 10);
     this.userService.closeDialog.emit(true);
   }
 

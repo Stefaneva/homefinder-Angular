@@ -50,7 +50,6 @@ export class CalendarComponent implements OnInit, OnDestroy {
   owner = false;
   userEvents = false;
   newEvent: CalendarEvent;
-
   view = 'month';
   viewDate: Date = new Date();
   // modalData: {
@@ -60,29 +59,31 @@ export class CalendarComponent implements OnInit, OnDestroy {
   // };
   modalData: {
     action: string;
+    adTitle: string;
     eventTitle: string;
     eventStart: Date;
     eventEnd: Date;
+    index: number;
   };
   actions: CalendarEventAction[] = [
     {
       label: '<i class="fa fa-fw fa-pencil"></i>',
       onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.handleEvent('Edited', event);
+        this.handleEvent('Edited', event, 0);
       }
     },
     {
       label: '<i class="fa fa-fw fa-times"></i>',
       onClick: ({ event }: { event: CalendarEvent }): void => {
         this.events = this.events.filter(iEvent => iEvent !== event);
-        this.handleEvent('Deleted', event);
+        this.handleEvent('Deleted', event, 0);
       }
     }
   ];
 
   refresh: Subject<any> = new Subject();
   eventsDto: EventDto[] = [];
-
+  eventAdded: boolean;
   events: CalendarEvent[] = [];
   //   {
   //     start: new Date('06/12/2018'),
@@ -127,7 +128,8 @@ export class CalendarComponent implements OnInit, OnDestroy {
 
   constructor(private modal: NgbModal,
               public snackBar: MatSnackBar,
-              public userService: UserService) {}
+              public userService: UserService,
+              private router: Router) {}
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
@@ -150,17 +152,19 @@ export class CalendarComponent implements OnInit, OnDestroy {
                     }: CalendarEventTimesChangedEvent): void {
     event.start = newStart;
     event.end = newEnd;
-    this.handleEvent('Dropped or resized', event);
+    this.handleEvent('Dropped or resized', event, 0);
     this.refresh.next();
   }
 
-  handleEvent(action: string, event: CalendarEvent): void {
+  handleEvent(action: string, event: CalendarEvent, index: number): void {
     const num = this.i++;
+    console.log(index);
     // this.modalData = { event, action, num };
     const eventTitle = event.title;
     const eventStart = event.start;
     const eventEnd = event.end;
-    this.modalData = {action, eventTitle, eventStart, eventEnd};
+    const adTitle = this.eventsDto[index].adTitle;
+    this.modalData = {action, adTitle, eventTitle, eventStart, eventEnd, index};
     this.modalRef = this.modal.open(this.modalContent, { size: 'lg' });
   }
 
@@ -178,6 +182,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
     // });
     // this.refresh.next();
     // const event: CalendarEvent = {
+    this.eventAdded = true;
     this.newEvent = {
       title: '',
       start: startOfDay(new Date()),
@@ -203,6 +208,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.eventAdded = false;
     this.userService.userEvent = true;
     this.userService.eventsCalendar = [];
     if (this.userService.adDetailsCalendar) {
@@ -317,6 +323,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
       eventDto.status = 'PENDING';
       eventDto.userEmail = this.userService.currentUser.email;
       eventDto.adId = this.userService.adDetailsCalendar.id;
+      this.userService.userEvent = false;
       this.userService.saveEvent(eventDto).subscribe(
         response => console.log(response)
       );
@@ -335,7 +342,11 @@ export class CalendarComponent implements OnInit, OnDestroy {
     } else {
       eventDto.userEmail = this.eventsDto[index].userEmail;
     }
-    eventDto.adId = this.userService.adDetailsCalendar.id;
+    if (this.userService.adDetailsCalendar) {
+      eventDto.adId = this.userService.adDetailsCalendar.id;
+    } else {
+      eventDto.adId = this.eventsDto[index].adId;
+    }
     this.userService.deleteEvent(eventDto).subscribe(
       result => console.log(result)
     );
@@ -362,5 +373,9 @@ export class CalendarComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.userService.adDetailsCalendar = null;
+  }
+
+  adDetails(index: number) {
+    this.router.navigate(['/AdDetails', this.eventsDto[index].adId]);
   }
 }

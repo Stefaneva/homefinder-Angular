@@ -24,3 +24,7 @@ mat-form-field {
 .container form {
   width: 100%;
 }
+
+.custom__button {
+  margin-top: 3vh;
+}

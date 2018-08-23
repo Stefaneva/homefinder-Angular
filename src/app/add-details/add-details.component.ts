@@ -33,15 +33,16 @@ export class AddDetailsComponent implements OnInit {
   changeLocation = false;
   newLocation: FormGroup;
   hidden = true;
-  adUserPhone: number;
+  // adUserPhone: number;
   addDto: AdDto = new AdDto();
   myFiles: File [] = [];
-  reviews: ReviewDtoRequest[] = [];
+  // reviews: ReviewDtoRequest[] = [];
   rating = 0;
   comment: string;
   reviewsDates: Date[] = [];
   editReview = false;
   reviewChanges: ReviewDtoRequest;
+  // userReviewedAd: boolean;
 
   @ViewChild('search')
   searchElementRef: ElementRef;
@@ -56,6 +57,8 @@ export class AddDetailsComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
+    this.userService.userReviewedAd = false;
+    this.userService.isFavourite = false;
     this.userService.adDetails = new AdDto();
     this.spinnerService.show();
     this.route.params.subscribe( params => {
@@ -81,6 +84,7 @@ export class AddDetailsComponent implements OnInit {
         this.adDetailsChanges.areaSurface = response1.areaSurface;
         this.adDetailsChanges.yearBuilt = response1.yearBuilt;
         this.adDetailsChanges.userEmail = response1.userDetails.mail;
+        this.adDetailsChanges.avgAdReview = response1.avgAdReview;
         console.log(response1);
         this.userService.adDetails.id = response1.id;
         this.userService.adDetails.title = response1.title;
@@ -99,10 +103,23 @@ export class AddDetailsComponent implements OnInit {
         this.userService.adDetails.areaSurface = response1.areaSurface;
         this.userService.adDetails.yearBuilt = response1.yearBuilt;
         this.userService.adDetails.userEmail = response1.userDetails.mail;
-        this.adUserPhone = response1.userDetails.phone;
+        this.userService.adDetails.avgAdReview = response1.avgAdReview;
+        this.userService.adUserPhone = response1.userDetails.phone;
         this.lat = this.userService.adDetails.lat;
         this.lng = this.userService.adDetails.lng;
-    console.log(this.userService.adDetails.id);
+        console.log(this.userService.adDetails.id);
+        // Favourite Button Check
+        if (this.userService.favoriteAds.length > 0) {
+          this.userService.favoriteAds.forEach(
+            ad => {
+              console.log(ad.id);
+              console.log(this.userService.adDetails.id);
+              if (ad.id === this.userService.adDetails.id) {
+                this.userService.isFavourite = true;
+              }
+            }
+          );
+        }
     // Location
         const geocoder = new google.maps.Geocoder();
         const latlng = new google.maps.LatLng(this.lat, this.lng);
@@ -133,10 +150,10 @@ export class AddDetailsComponent implements OnInit {
     );
     this.userService.getReviews(this.adId).subscribe(
         response => {
-          this.reviews = response;
-          console.log(this.reviews);
+          this.userService.reviews = response;
+          console.log(this.userService.reviews);
           let i = 0;
-          this.reviews.forEach(
+          this.userService.reviews.forEach(
             review => {
               this.reviewsDates[i++] = new Date(review.date);
               if (review.userType === 'AGENT_IMOBILIAR') {
@@ -290,13 +307,14 @@ export class AddDetailsComponent implements OnInit {
 
   saveFavorite() {
     if (this.userService.currentUser.token) {
+      this.userService.isFavourite = true;
       const favorite: FavoriteDto = new FavoriteDto();
       favorite.adId = this.userService.adDetails.id;
       favorite.userEmail = this.userService.currentUser.email;
       this.userService.saveFavorite(favorite).subscribe(
         response => {
           console.log(response);
-          this.snackBar.open('Anuntul a fost adaugat la favorite!', 'OK', {duration: 5000});
+          this.snackBar.open('Anunțul a fost adăugat la favorite!', 'OK', {duration: 5000});
           this.userService.getFavoriteAds().subscribe(
             result => {
               this.userService.favoriteAds = result;
@@ -306,7 +324,7 @@ export class AddDetailsComponent implements OnInit {
         }
       );
     } else {
-      this.snackBar.open('Intra in cont pentru a adauga anuntul la favorite!', 'OK', {duration: 5000});
+      this.snackBar.open('Intra în cont pentru a adăuga anunțul la favorite!', 'OK', {duration: 5000});
     }
   }
 
@@ -317,14 +335,12 @@ export class AddDetailsComponent implements OnInit {
 
   addReview() {
     if (!this.userService.currentUser.token) {
-      this.snackBar.open('Intra in cont pentru a adauga un review!', 'Ok', {duration: 5000});
+      this.snackBar.open('Intra în cont pentru a adăuga o recenzie!', 'Ok', {duration: 5000});
       return;
     }
-    for (const review1 of this.reviews) {
-          if (review1.mail === this.userService.currentUser.email) {
-            this.snackBar.open('Ati adaugat un review deja!', 'Ok', {duration: 5000});
-            return;
-          }
+    if (this.userService.userReviewedAd) {
+      this.snackBar.open('Ați adăugat deja o recenzie!', 'Ok', {duration: 5000});
+      return;
     }
     const reviewNewArrayElement = new ReviewDtoRequest();
     const review = new ReviewDtoResponse();
@@ -332,17 +348,24 @@ export class AddDetailsComponent implements OnInit {
     review.mail = this.userService.currentUser.email;
     review.comment = this.comment;
     review.rating = this.rating;
-    reviewNewArrayElement.idReview = this.reviews[this.reviews.length - 1].idReview + 1;
-    reviewNewArrayElement.mail = review.mail;
-    reviewNewArrayElement.comment = review.comment;
-    reviewNewArrayElement.rating = review.rating;
-    reviewNewArrayElement.date = new Date().toDateString();
-    reviewNewArrayElement.username = this.userService.currentUser.name;
-    reviewNewArrayElement.userType = this.userService.currentUser.type;
     this.userService.saveReview(review).subscribe(
-      result => console.log(result)
+      result => {
+        console.log(result);
+        reviewNewArrayElement.idReview = result;
+        reviewNewArrayElement.mail = review.mail;
+        reviewNewArrayElement.comment = review.comment;
+        reviewNewArrayElement.rating = review.rating;
+        reviewNewArrayElement.date = new Date().toDateString();
+        reviewNewArrayElement.username = this.userService.currentUser.name;
+        reviewNewArrayElement.userType = this.userService.currentUser.type;
+      }
     );
-    this.reviews.splice(0, 0, reviewNewArrayElement);
+    this.userService.userReviewedAd = true;
+    this.userService.adDetails.avgAdReview = (this.userService.adDetails.avgAdReview + review.rating)
+                                              / (this.userService.reviews.length + 1);
+    this.userService.reviews.splice(0, 0, reviewNewArrayElement);
+    this.rating = null;
+    this.comment = null;
   }
 
   editUserReview(review: ReviewDtoRequest) {
@@ -351,20 +374,30 @@ export class AddDetailsComponent implements OnInit {
   }
 
   deleteUserReview(review: ReviewDtoRequest) {
-    const index = this.reviews.indexOf(review);
-    this.reviews.splice(index, 1);
+    const index = this.userService.reviews.indexOf(review);
+    this.userService.reviews.splice(index, 1);
     this.userService.deleteReview(review.idReview).subscribe(
       result => {
         console.log(result);
-        this.snackBar.open('Review-ul a fost sters!', 'Ok', {duration: 5000});
+        this.snackBar.open('Recenzia a fost ștersă!', 'Ok', {duration: 5000});
+        this.userService.userReviewedAd = false;
       }
     );
+    let sum = 0;
+    this.userService.reviews.forEach(
+      review2 => {
+        sum += review2.rating;
+      }
+    );
+    this.userService.adDetails.avgAdReview = sum / this.userService.reviews.length;
+    this.rating = null;
+    this.comment = null;
   }
 
   editUserReviewSave(review: ReviewDtoRequest) {
-    const index = this.reviews.indexOf(review);
-    this.reviews[index].comment = this.reviewChanges.comment;
-    this.reviews[index].rating = this.reviewChanges.rating;
+    const index = this.userService.reviews.indexOf(review);
+    this.userService.reviews[index].comment = this.reviewChanges.comment;
+    this.userService.reviews[index].rating = this.reviewChanges.rating;
     const reviewResponse = new ReviewDtoResponse();
     reviewResponse.idReview = this.reviewChanges.idReview;
     reviewResponse.rating = this.reviewChanges.rating;
@@ -374,7 +407,7 @@ export class AddDetailsComponent implements OnInit {
     this.userService.editReview(reviewResponse).subscribe(
       response => {
         console.log(response);
-        this.snackBar.open('Modificarile au fost salvate!', 'Ok', {duration: 5000});
+        this.snackBar.open('Modificările au fost salvate!', 'Ok', {duration: 5000});
       }
     );
     this.editReview = false;
@@ -386,6 +419,10 @@ export class AddDetailsComponent implements OnInit {
   }
 
   calendarRedirect() {
+    if (!this.userService.currentUser.token) {
+      this.snackBar.open('Intra în cont pentru a face o programare!', 'Ok', {duration: 5000});
+      return;
+    }
     this.userService.adDetailsCalendar = this.userService.adDetails;
     this.userService.userCalendar = false;
     this.router.navigateByUrl('/calendar');
