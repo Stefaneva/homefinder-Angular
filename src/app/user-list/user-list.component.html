@@ -7,14 +7,14 @@
           Informații utilizator
         </mat-panel-title>
         <mat-panel-description>
-          Date utilizator
+          Click pentru mai multe detalii...
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <p>{{user.username}}</p>
-      <p>{{user.email}}</p>
-      <p>{{user.phone}}</p>
-      <p>{{user.lastLoginDate}}</p>
-      <p>{{user.lastPasswordResetDate}}</p>
+      <p>Username: {{user.username}}</p>
+      <p>E-mail: {{user.email}}</p>
+      <p>Telefon: 0{{user.phone}}</p>
+      <p>Ultima logare: {{user.lastLoginDate}}</p>
+      <p>Ultima resetare de parolă: {{user.lastPasswordResetDate}}</p>
       <mat-action-row>
         <button  *ngIf="user.enabled" mat-raised-button mat-button color="warn" (click)="blockUser(user)">Blochează cont!</button>
         <button  *ngIf="!user.enabled"mat-raised-button mat-button color="primary" (click)="unblockUser(user)">Deblochează cont!</button>

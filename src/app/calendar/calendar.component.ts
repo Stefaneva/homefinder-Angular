@@ -63,6 +63,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
     eventTitle: string;
     eventStart: Date;
     eventEnd: Date;
+    status: string;
     index: number;
   };
   actions: CalendarEventAction[] = [
@@ -164,7 +165,13 @@ export class CalendarComponent implements OnInit, OnDestroy {
     const eventStart = event.start;
     const eventEnd = event.end;
     const adTitle = this.eventsDto[index].adTitle;
-    this.modalData = {action, adTitle, eventTitle, eventStart, eventEnd, index};
+    let status: string;
+    if (this.eventsDto[index].status === 'PENDING') {
+      status = 'În așteptare';
+    } else {
+      status = 'Programare acceptată';
+    }
+    this.modalData = {action, adTitle, eventTitle, eventStart, eventEnd, index, status};
     this.modalRef = this.modal.open(this.modalContent, { size: 'lg' });
   }
 

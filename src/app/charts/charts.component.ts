@@ -11,14 +11,14 @@ export class ChartsComponent implements OnInit {
 
   public barChartLegend = true;
   public barChartType = 'bar';
-  public barChartLabels: string[] = ['Apartamente', 'Case', 'Vanzare/Cumparare', 'Inchiriere'];
+  public barChartLabels: string[] = ['Apartamente', 'Case', 'Vânzare/Cumpărare', 'Închiriere'];
   public barChartData: any[] = [
       {data: [65], label: this.barChartLabels[0]},
       {data: [28], label: this.barChartLabels[1]},
       {data: [48], label: this.barChartLabels[2]},
       {data: [78], label: this.barChartLabels[3]}
   ];
-  public doughnutChartLabels: string[] = ['Programari', 'Programari acceptate', 'Programari in asteptare'];
+  public doughnutChartLabels: string[] = ['Programări', 'Progrămari acceptate', 'Programări în așteptare'];
   public doughnutChartData: number[] = [];
   public doughnutChartType = 'doughnut';
   public doughnutChartOptions: any = {
@@ -66,7 +66,7 @@ export class ChartsComponent implements OnInit {
       pointHoverBackgroundColor: '#fff'
     },
     {
-      backgroundColor: ['rgba(255,0,0,1)'],
+      backgroundColor: ['rgb(102,255,102)'],
       pointHoverBackgroundColor: '#fff'
     }
   ];

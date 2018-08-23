@@ -18,13 +18,13 @@
     <li class="nav-item">
       <a routerLink="/userList">
         <button class="btn btn-warning" type="button" *ngIf="userService.currentUser.token && userService.currentUser.type === 'ADMIN'"
-                >Manage Users</button>
+                >Utilizatori</button>
       </a>
     </li>
     <li class="nav-item">
       <a routerLink="/statistics">
         <button class="btn btn-warning" type="button" *ngIf="userService.currentUser.token && userService.currentUser.type === 'ADMIN'"
-                >Statistici</button>
+                >Date anunțuri</button>
       </a>
     </li>
   </ul>

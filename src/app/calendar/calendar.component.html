@@ -1,19 +1,19 @@
 <ng-template #modalContent let-close="close">
   <div class="modal-header">
-    <h5 class="modal-title">Event action occurred</h5>
+    <!--<h5 class="modal-title">Event action occurred</h5>-->
     <button type="button" class="close" (click)="closeModal()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
+    <!--<div>-->
+      <!--Action:-->
+      <!--<pre>{{ modalData?.action }}</pre>-->
+    <!--</div>-->
     <div>
-      Action:
-      <pre>{{ modalData?.action }}</pre>
-    </div>
-    <div>
-      Event:
+      <h3>Programare: </h3>
       <!--<pre>{{ modalData?.event }} + {{modalData.num}}</pre>-->
-      <pre>Programare: {{modalData.eventTitle}}</pre>
+      <pre>Programare: {{modalData.eventTitle}} - {{modalData.status}}</pre>
       <pre>Denumire anunț: {{modalData.adTitle}}</pre>
       <pre>De la: {{modalData.eventStart | date:'yyyy-MM-dd HH:mm'}}</pre>
       <pre>Pâna la: {{modalData.eventEnd | date:'yyyy-MM-dd HH:mm'}}</pre>

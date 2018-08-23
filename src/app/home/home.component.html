@@ -35,17 +35,17 @@
           <img mat-card-image height="300px"  [src]="ad.image">
           <p>Loca&#539;ie: {{ad.location}}</p>
           <mat-card-actions class="viewAddButton">
-            <button mat-raised-button mat-button color="primary" (click)="viewAdDetails(ad)">Vizualizeaza Anunt</button>
+            <button mat-raised-button mat-button color="primary" (click)="viewAdDetails(ad)">Vizualizează anunț</button>
             <button *ngIf="userService.currentUser.type === 'ADMIN'"
-                    mat-raised-button mat-button color="warn" (click)="deleteAd(ad)">Sterge Anunt!</button>
+                    mat-raised-button mat-button color="warn" (click)="deleteAd(ad)">Șterge anunt!</button>
           </mat-card-actions>
         </mat-card><br>
       </div>
     </div>
     <div class="myPaginationContainer">
       <pagination-controls class="myPagination" (pageChange)="userService.page = $event"
-                           previousLabel="Inapoi"
-                           nextLabel="Inainte" maxSize="5">
+                           previousLabel="Înapoi"
+                           nextLabel="Înainte" maxSize="5">
       </pagination-controls>
     </div>
 </div>
