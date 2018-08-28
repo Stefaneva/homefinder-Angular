@@ -34,7 +34,7 @@ export class SignupComponent implements OnInit {
       'password' : new FormControl(null, Validators.required),
       'confirm_password' : new FormControl(null, [Validators.required, this.confirmPassword.bind(this)]),
       'phone' : new FormControl(null, [Validators.required, Validators.pattern('[0-9]{10}')]),
-      'user_type' : new FormControl('User')
+      'user_type' : new FormControl('Cumparator/Chirias')
     });
   }
 
@@ -47,7 +47,7 @@ export class SignupComponent implements OnInit {
     data.email = this.signupForm.value.email;
     data.phoneNumber = this.signupForm.value.phone;
     // data.userType = this.signupForm.value.user_type;
-    data.userType = 'User';
+    data.userType = 'Cumparator/Chirias';
     this.authService.register(data).subscribe(
       (response) => {
         this.spinnerService.hide();

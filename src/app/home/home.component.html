@@ -32,8 +32,8 @@
             <p>Pret: {{ ad.price }} <span class="fa fa-euro"></span></p>
             <p>An Construc&#539;ie: {{ad.yearBuilt}}</p>
           </mat-card-content>
-          <img mat-card-image height="300px"  [src]="ad.image">
-          <p>Loca&#539;ie: {{ad.location}}</p>
+          <img mat-card-image height="270px"  [src]="ad.image">
+          <div class="location__paragraph">Loca&#539;ie: {{ad.location}}</div>
           <mat-card-actions class="viewAddButton">
             <button mat-raised-button mat-button color="primary" (click)="viewAdDetails(ad)">Vizualizează anunț</button>
             <button *ngIf="userService.currentUser.type === 'ADMIN'"

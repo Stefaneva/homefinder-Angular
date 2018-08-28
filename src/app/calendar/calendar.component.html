@@ -112,17 +112,17 @@
 <div *ngIf="userService.currentUser.token && ((userService.adDetailsCalendar && userService.adDetailsCalendar !== null) || owner || userEvents)">
 <h3>
   <div *ngIf="!owner && !userEvents">
-    Adauga Programare:
+    Adaugă programare:
   </div>
   <div *ngIf="owner || userEvents">
-    Programari:
+    Programări:
   </div>
   <button
     *ngIf="userService.userEvent && userService.adDetailsCalendar && userService.adDetailsCalendar !== null
           && userService.currentUser.email !== userService.adDetailsCalendar.userEmail && !eventAdded"
     class="btn btn-primary pull-right"
     (click)="addEvent()">
-    Add new
+    Adaugă programare
   </button>
   <div class="clearfix"></div>
 </h3>
@@ -131,7 +131,7 @@
 
   <thead>
   <tr>
-    <th>Continut: </th>
+    <th>Conținut: </th>
     <!--<th>Title</th>-->
     <!--<th>Primary color</th>-->
     <!--<th>Secondary color</th>-->

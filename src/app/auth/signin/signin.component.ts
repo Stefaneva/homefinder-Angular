@@ -50,6 +50,16 @@ export class SigninComponent implements OnInit {
               form.resetForm();
               console.log(this.userService.currentUser.email + ' ' + this.userService.currentUser.name);
               this.userService.closeDialog.emit(true);
+              console.log(this.userService.currentUser.notification);
+              if (!this.userService.currentUser.notification) {
+                this.userService.snotifyService.success('Bine ai venit, ' + this.userService.currentUser.name + '!', { position: 'rightTop'});
+              } else if (this.userService.currentUser.notification === 1) {
+                this.userService.snotifyService.info('O programare a fost acceptata', { position: 'rightTop'});
+              } else if (this.userService.currentUser.notification === 2) {
+                this.userService.snotifyService.error('O programare a fost anulata', { position: 'rightTop'});
+              } else {
+                this.userService.snotifyService.info('O programare este in asteptare', { position: 'rightTop'});
+              }
               this.userService.getFavoriteAds().subscribe(
                 response => {
                   this.userService.favoriteAds = response;
@@ -81,16 +91,6 @@ export class SigninComponent implements OnInit {
             } else {
               this.isLoginError2 = true;
               this.userService.currentUser = null;
-            }
-            console.log(this.userService.currentUser.notification);
-            if (!this.userService.currentUser.notification) {
-              this.userService.snotifyService.success('Bine ai venit, ' + this.userService.currentUser.name + '!', { position: 'rightTop'});
-            } else if (this.userService.currentUser.notification === 1) {
-              this.userService.snotifyService.info('O programare a fost acceptata', { position: 'rightTop'});
-            } else if (this.userService.currentUser.notification === 2) {
-              this.userService.snotifyService.error('O programare a fost anulata', { position: 'rightTop'});
-            } else {
-              this.userService.snotifyService.info('O programare este in asteptare', { position: 'rightTop'});
             }
           },
           (error: HttpErrorResponse) => {

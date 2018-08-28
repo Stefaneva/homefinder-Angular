@@ -166,10 +166,10 @@ export class CalendarComponent implements OnInit, OnDestroy {
     const eventEnd = event.end;
     const adTitle = this.eventsDto[index].adTitle;
     let status: string;
-    if (this.eventsDto[index].status === 'PENDING') {
-      status = 'În așteptare';
-    } else {
+    if (this.eventsDto[index].status === 'ACCEPTED') {
       status = 'Programare acceptată';
+    } else {
+      status = 'În așteptare';
     }
     this.modalData = {action, adTitle, eventTitle, eventStart, eventEnd, index, status};
     this.modalRef = this.modal.open(this.modalContent, { size: 'lg' });
