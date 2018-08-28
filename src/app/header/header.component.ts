@@ -60,4 +60,8 @@ export class HeaderComponent implements OnInit {
     this.userService.closeDialog.subscribe(result => this.dialog.closeAll());
     const dialogRef = this.dialog.open(EditUserComponent, {});
   }
+
+  redirectHome() {
+    this.router.navigateByUrl('/home');
+  }
 }

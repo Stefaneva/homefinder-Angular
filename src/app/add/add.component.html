@@ -63,8 +63,9 @@
     <agm-map [latitude]="lat" [longitude]="lng" [scrollwheel]="true" [fullscreenControl]="true" (mapClick)="onChoseLocation($event)" [zoom]="zoom">
       <agm-marker [latitude]="lat" [longitude]="lng" *ngIf="locationChosen"></agm-marker>
     </agm-map>
-    <div class="suggested__price" *ngIf="adSuggestedPrice !== 0">
-      <button class="btn btn-info">Pret sugerat: {{ adSuggestedPrice.toFixed(0) }}</button>
+    <div class="suggested__price" *ngIf="adSuggestedMaxPrice !== 0">
+      <button class="btn btn-info">Pret minim sugerat: {{ adSuggestedMinPrice.toFixed(0) }}</button>
+      <button class="btn btn-info">Preț maxim sugerat: {{ adSuggestedMaxPrice.toFixed(0) }}</button>
     </div>
     <mat-form-field>
       <input type="number" placeholder="Pret..." matInput formControlName="price" autocomplete="off">

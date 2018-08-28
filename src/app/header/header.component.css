@@ -19,3 +19,12 @@
 .dropdown:hover .dropdown-menu {
   display: block;
 }
+
+.home__button {
+  height: 5.2vh;
+  width: 6.5vw;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 0;
+  padding-top: 0;
+}

@@ -357,7 +357,9 @@ export class AddDetailsComponent implements OnInit {
         reviewNewArrayElement.rating = review.rating;
         reviewNewArrayElement.date = new Date().toDateString();
         reviewNewArrayElement.username = this.userService.currentUser.name;
-        reviewNewArrayElement.userType = this.userService.currentUser.type;
+        reviewNewArrayElement.userType = 'Utilizator';
+        console.log(reviewNewArrayElement.date);
+        this.reviewsDates.splice(0, 0, new Date(reviewNewArrayElement.date));
       }
     );
     this.userService.userReviewedAd = true;
@@ -369,7 +371,8 @@ export class AddDetailsComponent implements OnInit {
   }
 
   editUserReview(review: ReviewDtoRequest) {
-    this.editReview = true;
+    // this.editReview = true;
+    review.editReview = true;
     this.reviewChanges = review;
   }
 
@@ -410,11 +413,20 @@ export class AddDetailsComponent implements OnInit {
         this.snackBar.open('Modificările au fost salvate!', 'Ok', {duration: 5000});
       }
     );
-    this.editReview = false;
+    // this.editReview = false;
+    review.editReview = false;
+    let sum = 0;
+    this.userService.reviews.forEach(
+      review2 => {
+        sum += review2.rating;
+      }
+    );
+    this.userService.adDetails.avgAdReview = sum / this.userService.reviews.length;
   }
 
   editReviewCancel(review: ReviewDtoRequest) {
-    this.reviewChanges = review;
+    // this.reviewChanges = review;
+    review.editReview = false;
     this.editReview = false;
   }
 

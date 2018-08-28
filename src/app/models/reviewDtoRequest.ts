@@ -7,4 +7,5 @@ export class ReviewDtoRequest {
   mail: string;
   userType: string;
   date: string;
+  editReview = false;
 }

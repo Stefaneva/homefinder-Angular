@@ -232,44 +232,75 @@
   <div class="review__container">
     <div class="box">
       <h3>Review-uri: </h3>
-      <div *ngIf="!editReview">
+      <!--<div *ngIf="!editReview">-->
+        <!--<hr>-->
+        <!--<div *ngFor="let review of userService.reviews; let i = index" class="reviews">-->
+          <!--<div class="comment__first__row">-->
+            <!--<p>{{review.username}} - {{review.userType}}</p>-->
+            <!--<p>Data adaugarii: {{reviewsDates[i] | date:'dd/MM/yyyy'}}</p>-->
+          <!--</div>-->
+          <!--<p>{{review.comment}}</p>-->
+          <!--<div class="review__rating__container">-->
+            <!--<rating [(ngModel)]="review.rating" [max]=5 [readonly]="true"></rating>-->
+            <!--<div *ngIf="userService.currentUser.email === review.mail">-->
+              <!--<button mat-icon-button color="primary" (click)="editUserReview(review)"><mat-icon>create</mat-icon></button>-->
+              <!--<button mat-icon-button color="warn"><mat-icon (click)="deleteUserReview(review)">delete</mat-icon></button>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<hr>-->
+        <!--</div>-->
+      <!--</div>-->
+       <!--<div *ngIf="editReview">-->
+         <!--<div *ngFor="let review of userService.reviews; let i = index" class="reviews">-->
+           <!--<div class="comment__first__row">-->
+             <!--<p>{{review.username}} - {{review.userType}}</p>-->
+             <!--<p>Data adăugarii: {{reviewsDates[i] | date:'dd/MM/yyyy'}}</p>-->
+           <!--</div>-->
+           <!--<mat-form-field class="descriere">-->
+            <!--<textarea type="text" placeholder="Editeaza comentariu..." matInput matTextareaAutosize matAutosizeMinRows=5 matAutosizeMaxRows=10-->
+                      <!--[(ngModel)]="reviewChanges.comment" autocomplete="off"></textarea>-->
+           <!--</mat-form-field>-->
+           <!--<div class="review__rating__container">-->
+             <!--<rating [(ngModel)]="reviewChanges.rating" [max]=5></rating>-->
+             <!--<div>-->
+               <!--<button mat-raised-button mat-button="" color="primary" (click)="editUserReviewSave(review)">Salvează</button>-->
+               <!--<button mat-raised-button mat-button="" color="warn" (click)="editReviewCancel(review)">Anulează</button>-->
+             <!--</div>-->
+           <!--</div>-->
+           <!--<hr>-->
+        <!--</div>-->
+      <!--</div>-->
         <hr>
         <div *ngFor="let review of userService.reviews; let i = index" class="reviews">
           <div class="comment__first__row">
             <p>{{review.username}} - {{review.userType}}</p>
             <p>Data adaugarii: {{reviewsDates[i] | date:'dd/MM/yyyy'}}</p>
           </div>
-          <p>{{review.comment}}</p>
-          <div class="review__rating__container">
-            <rating [(ngModel)]="review.rating" [max]=5 [readonly]="true"></rating>
-            <div *ngIf="userService.currentUser.email === review.mail">
-              <button mat-icon-button color="primary" (click)="editUserReview(review)"><mat-icon>create</mat-icon></button>
-              <button mat-icon-button color="warn"><mat-icon (click)="deleteUserReview(review)">delete</mat-icon></button>
+          <div *ngIf="!review.editReview">
+            <p>{{review.comment}}</p>
+            <div class="review__rating__container">
+              <rating [(ngModel)]="review.rating" [max]=5 [readonly]="true"></rating>
+              <div *ngIf="userService.currentUser.email === review.mail">
+                <button mat-icon-button color="primary" (click)="editUserReview(review)"><mat-icon>create</mat-icon></button>
+                <button mat-icon-button color="warn"><mat-icon (click)="deleteUserReview(review)">delete</mat-icon></button>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="review.editReview">
+            <mat-form-field class="descriere">
+              <textarea type="text" placeholder="Editeaza comentariu..." matInput matTextareaAutosize matAutosizeMinRows=5 matAutosizeMaxRows=10
+                        [(ngModel)]="reviewChanges.comment" autocomplete="off"></textarea>
+            </mat-form-field>
+            <div class="review__rating__container">
+              <rating [(ngModel)]="reviewChanges.rating" [max]=5></rating>
+              <div>
+                <button mat-raised-button mat-button="" color="primary" (click)="editUserReviewSave(review)">Salvează</button>
+                <button mat-raised-button mat-button="" color="warn" (click)="editReviewCancel(review)">Anulează</button>
+              </div>
             </div>
           </div>
           <hr>
         </div>
-      </div>
-       <div *ngIf="editReview">
-         <div *ngFor="let review of userService.reviews; let i = index" class="reviews">
-           <div class="comment__first__row">
-             <p>{{review.username}} - {{review.userType}}</p>
-             <p>Data adăugarii: {{reviewsDates[i] | date:'dd/MM/yyyy'}}</p>
-           </div>
-           <mat-form-field class="descriere">
-            <textarea type="text" placeholder="Editeaza comentariu..." matInput matTextareaAutosize matAutosizeMinRows=5 matAutosizeMaxRows=10
-                      [(ngModel)]="reviewChanges.comment" autocomplete="off"></textarea>
-           </mat-form-field>
-           <div class="review__rating__container">
-             <rating [(ngModel)]="reviewChanges.rating" [max]=5></rating>
-             <div>
-               <button mat-raised-button mat-button="" color="primary" (click)="editUserReviewSave(review)">Salvează</button>
-               <button mat-raised-button mat-button="" color="warn" (click)="editReviewCancel(review)">Anulează</button>
-             </div>
-           </div>
-           <hr>
-        </div>
-      </div>
       <div *ngIf="userService.reviews.length === 0">
         <p>Anunțul nu are momentan review-uri.</p>
         <hr>

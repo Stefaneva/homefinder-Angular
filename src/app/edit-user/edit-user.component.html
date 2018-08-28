@@ -1,7 +1,7 @@
 <mat-dialog-content>
   <div class="container">
     <h1 class="title"><i class="fa fa-user"></i> Editeaza cont: </h1>
-    <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="editForm" (ngSubmit)="onSubmit()" class="edit__user__form">
       <mat-form-field>
         <input placeholder="Parola noua..." matInput type="password" formControlName="password" (keyup)="keyPress($event)">
         <mat-error *ngIf="!editForm.get('password').valid && editForm.get('password').touched">Introduceti o noua parola!</mat-error>

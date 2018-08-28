@@ -7,10 +7,12 @@ div.container {
 }
 
 .suggested__price {
-  margin-top: 20px;
+  /*margin-top: 20px;*/
+  margin-top: 5vh;
   display: flex;
-  justify-content: center;
-  size: 7px;
+  justify-content: space-around;
+  /*size: 7px;*/
+  size: 3vw;
 }
 
 .container > * {

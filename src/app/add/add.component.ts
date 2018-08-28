@@ -24,7 +24,9 @@ export class AddComponent implements OnInit {
   myFiles: File [] = [];
   sMsg = '';
   base64String: string;
-  adSuggestedPrice = 0;
+  adSuggestedMinPrice = Number.MAX_SAFE_INTEGER;
+  adSuggestedMaxPrice = 0;
+  suggestedPrice: number;
   addDto: AdDto = new AdDto();
   address: string;
 
@@ -82,7 +84,9 @@ export class AddComponent implements OnInit {
           this.locationChosen = true;
           // price Suggestion
           const locationLatLng = new google.maps.LatLng(this.lat, this.lng);
-          let adNumber = 0;
+          // let adNumber = 0;
+          this.adSuggestedMaxPrice = 0;
+          this.adSuggestedMinPrice = Number.MAX_SAFE_INTEGER;
           if (this.addNewAdForm.get('adItemType').value) {
             const adItemType = this.addNewAdForm.get('adItemType').value;
             const adType = this.addNewAdForm.get('adType').value;
@@ -90,9 +94,15 @@ export class AddComponent implements OnInit {
               const adLocation = new google.maps.LatLng(i.lat, i.lng);
               const distanceInKm = google.maps.geometry.spherical.computeDistanceBetween(locationLatLng, adLocation) / 1000;
               console.log(distanceInKm);
-              if (i.adItemType === adItemType && distanceInKm <= 3.0 && i.adType === adType) {
-                this.adSuggestedPrice = this.adSuggestedPrice + i.price;
-                adNumber++;
+              if (i.adItemType === adItemType && distanceInKm <= 1.0 && i.adType === adType) {
+                // this.adSuggestedMinPrice = this.adSuggestedMinPrice + i.price;
+                // adNumber++;
+                if (this.adSuggestedMinPrice > i.price) {
+                  this.adSuggestedMinPrice = i.price;
+                }
+                if (this.adSuggestedMaxPrice < i.price) {
+                  this.adSuggestedMaxPrice = i.price;
+                }
               }
             }
           }
@@ -183,7 +193,8 @@ export class AddComponent implements OnInit {
   }
 
   onChoseLocation(event) {
-    this.adSuggestedPrice = 0;
+    this.adSuggestedMaxPrice = 0;
+    this.adSuggestedMinPrice = Number.MAX_SAFE_INTEGER;
     this.lat = event.coords.lat;
     this.lng = event.coords.lng;
     this.locationChosen = true;
@@ -202,7 +213,7 @@ export class AddComponent implements OnInit {
       }
     });
     const locationLatLng = new google.maps.LatLng(this.lat, this.lng);
-    let adNumber = 0;
+    // let adNumber = 0;
     if (this.addNewAdForm.get('adItemType').value) {
       const adItemType = this.addNewAdForm.get('adItemType').value;
       const adType = this.addNewAdForm.get('adType').value;
@@ -210,16 +221,19 @@ export class AddComponent implements OnInit {
         const adLocation = new google.maps.LatLng(i.lat, i.lng);
         const distanceInKm = google.maps.geometry.spherical.computeDistanceBetween(locationLatLng, adLocation) / 1000;
         console.log(distanceInKm);
-        if (i.adItemType === adItemType && distanceInKm <= 3.0 && i.adType === adType) {
-          this.adSuggestedPrice = this.adSuggestedPrice + i.price;
-          adNumber++;
+        if (i.adItemType === adItemType && distanceInKm <= 1.0 && i.adType === adType) {
+          if (this.adSuggestedMinPrice > i.price) {
+            this.adSuggestedMinPrice = i.price;
+          }
+          if (this.adSuggestedMaxPrice < i.price) {
+            this.adSuggestedMaxPrice = i.price;
+          }
+          // adNumber++;
         }
       }
-    }
-    // Price Suggestion
-    if (this.adSuggestedPrice !== 0) {
-      this.adSuggestedPrice = this.adSuggestedPrice / adNumber;
-      console.log(this.adSuggestedPrice);
+      if (this.adSuggestedMaxPrice !== 0 && this.adSuggestedMinPrice === Number.MAX_SAFE_INTEGER) {
+        this.adSuggestedMinPrice = this.adSuggestedMaxPrice;
+      }
     }
   }
 
