@@ -76,12 +76,25 @@ export class AddComponent implements OnInit {
           if (place.geometry === undefined || place.geometry === null) {
             return;
           }
-
           // set latitude, longitude and zoom
           this.lat = place.geometry.location.lat();
           this.lng = place.geometry.location.lng();
           this.zoom = 16;
           this.locationChosen = true;
+          // Location
+          const geocoder = new google.maps.Geocoder();
+          const latlng = new google.maps.LatLng(this.lat, this.lng);
+          const request = {
+            location: latlng
+          };
+          geocoder.geocode(request, (results, status) => {
+            if (status === google.maps.GeocoderStatus.OK) {
+              if (results[0] != null) {
+                this.addDto.location = results[0].formatted_address;
+                console.log(this.addDto.location);
+              }
+            }
+          });
           // price Suggestion
           const locationLatLng = new google.maps.LatLng(this.lat, this.lng);
           // let adNumber = 0;

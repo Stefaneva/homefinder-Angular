@@ -1,3 +1,4 @@
+<ng4-loading-spinner></ng4-loading-spinner>
 <mat-dialog-content>
 <div class="container">
   <h1 class="title"><i class="fa fa-user"></i> Creare cont: </h1>
@@ -22,11 +23,11 @@
         <input placeholder="Telefon..." matInput type="tel" formControlName="phone">
         <mat-error *ngIf="!signupForm.get('phone').valid && signupForm.get('phone').touched">Introduceti un numar de telefon valid!</mat-error>
       </mat-form-field>
-      <mat-form-field>
-        <mat-select matInput formControlName="user_type">
-          <mat-option *ngFor="let t of user_types" [value]="t">{{ t }}</mat-option>
-        </mat-select>
-      </mat-form-field>
+      <!--<mat-form-field>-->
+        <!--<mat-select matInput formControlName="user_type">-->
+          <!--<mat-option *ngFor="let t of user_types" [value]="t">{{ t }}</mat-option>-->
+        <!--</mat-select>-->
+      <!--</mat-form-field>-->
       <div class="custom__button__position">
         <button [disabled]="!signupForm.valid" class="btn btn-success custom__button" type="submit">Sign Up</button>
       </div>

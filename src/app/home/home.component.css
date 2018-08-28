@@ -1,7 +1,10 @@
 .card__class {
   /*max-width: 600px;*/
-  width: 300px;
-  margin-right: 10px;
+  /*width: 300px;*/
+  width: 20vw;
+  margin-right: 4vw;
+  height: 90vh;
+  /*margin-right: 10px;*/
 }
 
 .custom__container {
@@ -64,6 +67,8 @@
 
 .options {
   margin-bottom: 4.5vh;
+  height: 0.2vh;
+  background-color: lightgray;
 }
 
 .filter__button {

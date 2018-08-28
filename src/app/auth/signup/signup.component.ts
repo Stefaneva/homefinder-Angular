@@ -4,6 +4,7 @@ import {SignupResponse} from './signup.response';
 import {AuthService} from '../auth.service';
 import {Router} from '@angular/router';
 import {UserService} from '../../user.service';
+import {Ng4LoadingSpinnerService} from 'ng4-loading-spinner';
 
 @Component({
   selector: 'app-signup',
@@ -20,7 +21,8 @@ export class SignupComponent implements OnInit {
 
   constructor(private authService: AuthService,
               public userService: UserService,
-              private router: Router) { }
+              private router: Router,
+              private spinnerService: Ng4LoadingSpinnerService) { }
 
   ngOnInit() {
     this.userService.getUserEmails().subscribe(
@@ -32,20 +34,23 @@ export class SignupComponent implements OnInit {
       'password' : new FormControl(null, Validators.required),
       'confirm_password' : new FormControl(null, [Validators.required, this.confirmPassword.bind(this)]),
       'phone' : new FormControl(null, [Validators.required, Validators.pattern('[0-9]{10}')]),
-      'user_type' : new FormControl('Cumparator/Chirias')
+      'user_type' : new FormControl('User')
     });
   }
 
   onSubmit() {
+    this.spinnerService.show();
     const data: SignupResponse = new SignupResponse;
     // console.log(this.signupForm);
     data.username = this.signupForm.value.username;
     data.password = this.signupForm.value.password;
     data.email = this.signupForm.value.email;
     data.phoneNumber = this.signupForm.value.phone;
-    data.userType = this.signupForm.value.user_type;
+    // data.userType = this.signupForm.value.user_type;
+    data.userType = 'User';
     this.authService.register(data).subscribe(
       (response) => {
+        this.spinnerService.hide();
         console.log(response);
         this.signupForm.reset();
         this.userService.closeDialog.emit(true);
