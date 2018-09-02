@@ -12,11 +12,11 @@
         <img src="../../assets/casa.jpg" *ngIf="ad.adItemType == 'Casa'" mat-card-avatar>
         <img src="../../assets/bloc.jpg" *ngIf="ad.adItemType == 'Apartament'" mat-card-avatar>
       </mat-card-header>
-      <mat-card-content>Pret: {{ ad.price }} <span class="fa fa-euro"></span></mat-card-content>
+      <mat-card-content>Preț: {{ ad.price }} <span class="fa fa-euro"></span></mat-card-content>
       <img mat-card-image height="300px"  [src]="ad.image">
       <mat-card-actions class="ad__buttons">
-        <button mat-raised-button mat-button color="primary" (click)="viewAdDetails(ad)">Editeaza Anunt</button>
-        <button mat-raised-button mat-button color="warn" (click)="deleteAd(ad)">Sterge Anuntul</button>
+        <button mat-raised-button mat-button color="primary" (click)="viewAdDetails(ad)">Vizualizează anunt</button>
+        <button mat-raised-button mat-button color="warn" (click)="deleteAd(ad)">Șterge anunțul</button>
       </mat-card-actions>
     </mat-card><br>
   </div>

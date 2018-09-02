@@ -41,7 +41,6 @@ export class SignupComponent implements OnInit {
   onSubmit() {
     this.spinnerService.show();
     const data: SignupResponse = new SignupResponse;
-    // console.log(this.signupForm);
     data.username = this.signupForm.value.username;
     data.password = this.signupForm.value.password;
     data.email = this.signupForm.value.email;

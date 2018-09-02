@@ -1,11 +1,11 @@
 <ng4-loading-spinner></ng4-loading-spinner>
 <ng-snotify></ng-snotify>
-<h1 class="ads__title">Anun&#539;uri </h1>
+<h1 class="ads__title">Anunțuri </h1>
 <div class="body__container">
   <div class="search__filter__container">
     <form>
       <mat-form-field class="search__field">
-        <input type="text" name="search" matInput placeholder="Caut&#259; anun&#539;..." [(ngModel)]="userService.term" autocomplete="off">
+        <input type="text" name="search" matInput placeholder="Caută anunț..." [(ngModel)]="userService.term" autocomplete="off">
         <mat-icon matSuffix class="search__icon">mode_search</mat-icon>
       </mat-form-field>
     </form>
@@ -29,15 +29,15 @@
             <img src="../../assets/bloc.jpg" *ngIf="ad.adItemType == 'Apartament'" mat-card-avatar>
           </mat-card-header>
           <mat-card-content>
-            <p>Pret: {{ ad.price }} <span class="fa fa-euro"></span></p>
-            <p>An Construc&#539;ie: {{ad.yearBuilt}}</p>
+            <p>Preț: {{ ad.price }} <span class="fa fa-euro"></span></p>
+            <p>An construcție: {{ad.yearBuilt}}</p>
           </mat-card-content>
           <img mat-card-image height="270px"  [src]="ad.image">
-          <div class="location__paragraph">Loca&#539;ie: {{ad.location}}</div>
+          <div class="location__paragraph">Locație: {{ad.location}}</div>
           <mat-card-actions class="viewAddButton">
             <button mat-raised-button mat-button color="primary" (click)="viewAdDetails(ad)">Vizualizează anunț</button>
             <button *ngIf="userService.currentUser.type === 'ADMIN'"
-                    mat-raised-button mat-button color="warn" (click)="deleteAd(ad)">Șterge anunt!</button>
+                    mat-raised-button mat-button color="warn" (click)="deleteAd(ad)">Șterge anunț!</button>
           </mat-card-actions>
         </mat-card><br>
       </div>
