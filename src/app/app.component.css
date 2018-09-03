@@ -57,3 +57,17 @@
 .location__search__field {
   width: 90%;
 }
+
+@media only screen and (max-width: 600px) {
+  .sidenav {
+    width: 90%;
+    height: 100%;
+  }
+
+  .form__options {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+}
