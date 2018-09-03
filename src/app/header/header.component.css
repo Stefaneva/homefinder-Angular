@@ -28,3 +28,32 @@
   padding-bottom: 0;
   padding-top: 0;
 }
+
+@media only screen and (max-width: 600px) {
+  .home__button {
+    height: 5.5vh;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .sign__up {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .sign__in {
+    width: 100%;
+  }
+
+  .sign__out {
+    width: 100%;
+  }
+
+  .login__logout {
+    padding: 0;
+  }
+
+  .signup__dialog {
+
+  }
+}

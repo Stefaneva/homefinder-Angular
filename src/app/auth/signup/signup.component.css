@@ -46,3 +46,12 @@ mat-form-field {
   padding: 30px 25px;
   margin: 0 auto;
 }
+
+@media only screen and (max-width: 600px) {
+  div.container {
+    width: 70vw;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+  }
+}

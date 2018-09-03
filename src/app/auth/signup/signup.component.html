@@ -3,7 +3,7 @@
 <div class="container">
   <h1 class="title"><i class="fa fa-user"></i> Creare cont: </h1>
     <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-      <mat-form-field>
+      <mat-form-field class="form__field">
         <input type="text" matInput placeholder="Nume utilizator..." formControlName="username">
         <mat-error *ngIf="!signupForm.get('username').valid && signupForm.get('username').touched">Introduceți un nume de utilizator!</mat-error>
       </mat-form-field>
