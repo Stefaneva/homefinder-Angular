@@ -90,4 +90,22 @@
     height: auto;
     margin-left: 20px;
   }
+
+  .search__filter__container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: -3vh;
+    margin-left: 3vw;
+    margin-right: 3vw;
+  }
+
+  .search__icon {
+    margin-right: 29vw;
+  }
+
+  .button__responsive {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
 }
