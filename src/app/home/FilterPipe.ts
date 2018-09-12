@@ -42,7 +42,7 @@ export class FilterPipe implements PipeTransform {
       const locationLatLng = new google.maps.LatLng(searchLat, searchLng);
       const adLocation = new google.maps.LatLng(item['lat'], item['lng']);
       const distanceInKm = google.maps.geometry.spherical.computeDistanceBetween(locationLatLng, adLocation) / 1000;
-      if (distanceInKm <= 2.0) {
+      if (distanceInKm <= 1.0) {
         return true;
       }
     } else {
