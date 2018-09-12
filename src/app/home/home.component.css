@@ -4,7 +4,7 @@
   width: 20vw;
   margin-right: 2vw;
   margin-left: 2vw;
-  height: 80vh;
+  height: 86vh;
   /*margin-right: 10px;*/
 }
 
@@ -15,7 +15,12 @@
   align-items: flex-start !important;
 }
 
+.location__paragraph {
+  padding-bottom: 0;
+}
+
 .viewAddButton {
+  margin-top: 2vh;
   display: flex;
   justify-content: center;
 }

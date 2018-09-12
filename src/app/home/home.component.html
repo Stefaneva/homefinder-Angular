@@ -37,9 +37,9 @@
           <img mat-card-image height="270px"  [src]="ad.image">
           <div class="location__paragraph">Locație: {{ad.location}}</div>
           <mat-card-actions class="viewAddButton">
-            <button mat-raised-button mat-button color="primary" (click)="viewAdDetails(ad)">Vizualizează anunț</button>
+            <button mat-raised-button mat-button color="primary" (click)="viewAdDetails(ad)">Detalii anunț</button>
             <button *ngIf="userService.currentUser.type === 'ADMIN'"
-                    mat-raised-button mat-button color="warn" (click)="deleteAd(ad)">Șterge anunț!</button>
+                    mat-raised-button mat-button color="warn" (click)="deleteAd(ad)">Șterge anunțul!</button>
           </mat-card-actions>
         </mat-card><br>
       </div>
