@@ -42,7 +42,7 @@ export class AddComponent implements OnInit {
   ngOnInit() {
     this.addNewAdForm = new FormGroup({
       'title' : new FormControl(null, Validators.required),
-      'adType' : new FormControl('Inchiriere', Validators.required),
+      'adType' : new FormControl('Închiriere', Validators.required),
       'description' : new FormControl(null, Validators.required),
       'price' : new FormControl(null, Validators.required),
       'surface' : new FormControl(null, Validators.required),
@@ -174,7 +174,8 @@ export class AddComponent implements OnInit {
       this.addNewAdForm.get('areaSurface').setValue(0);
     }
     frmData.append('adType', this.addNewAdForm.value.adType);
-    frmData.append('price', this.addNewAdForm.value.price);
+    // frmData.append('price', this.addNewAdForm.value.price);
+    frmData.append('price', this.addDto.price.toString());
     frmData.append('rooms', this.addNewAdForm.value.rooms);
     frmData.append('surface', this.addNewAdForm.value.surface);
     frmData.append('lat', this.lat.toString());

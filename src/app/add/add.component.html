@@ -1,26 +1,26 @@
 <ng4-loading-spinner></ng4-loading-spinner>
 <mat-dialog-content>
 <div class="container">
-  <h2>Adauga Anunt <i class="fa fa-arrow-circle-up"></i></h2>
+  <h2>Adaugă anunț <i class="fa fa-arrow-circle-up"></i></h2>
   <form [formGroup]="addNewAdForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
     <mat-form-field>
-      <input type="text" placeholder="Titlu anunt..." matInput formControlName="title" autocomplete="off">
+      <input type="text" placeholder="Titlu anunț..." matInput formControlName="title" autocomplete="off">
     </mat-form-field>
     <mat-form-field>
-      <mat-select placeholder="Tip anunt..." matInput formControlName="adType">
-        <mat-option value="Inchiriere">Inchiriere</mat-option>
-        <mat-option value="Vanzare">Vanzare</mat-option>
+      <mat-select placeholder="Tip anunț..." matInput formControlName="adType">
+        <mat-option value="Inchiriere">Închiriere</mat-option>
+        <mat-option value="Vanzare">Vânzare</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-radio-group matInput formControlName="adItemType">
-      <mat-radio-button value="Casa">Casa</mat-radio-button>
+      <mat-radio-button value="Casa">Casă</mat-radio-button>
       <mat-radio-button value="Apartament">Apartament</mat-radio-button>
     </mat-radio-group>
     <mat-form-field>
       <textarea type="text" placeholder="Descriere..." matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=10 formControlName="description" autocomplete="off"></textarea>
     </mat-form-field>
     <mat-form-field>
-      <input type="number" placeholder="Suprafata..." matInput formControlName="surface" autocomplete="off">
+      <input type="number" placeholder="Suprafața..." matInput formControlName="surface" autocomplete="off">
     </mat-form-field>
     <div *ngIf="addNewAdForm.get('adItemType').value === 'Apartament'">
       <mat-form-field>
@@ -32,8 +32,8 @@
       <mat-form-field>
         <mat-select placeholder="Compartimentare..." matInput formControlName="partitioning">
           <mat-option value="Decomandat">Decomandat</mat-option>
-          <mat-option value="Semidecomandat">Semidecomandata</mat-option>
-          <mat-option value="Necomandat">Necomandata</mat-option>
+          <mat-option value="Semidecomandat">Semidecomandat</mat-option>
+          <mat-option value="Necomandat">Necomandat</mat-option>
           <mat-option value="Vagon">Vagon</mat-option>
           <mat-option value="Circular">Circular</mat-option>
         </mat-select>
@@ -41,21 +41,21 @@
     </div>
     <div *ngIf="addNewAdForm.get('adItemType').value === 'Casa'">
       <mat-form-field>
-        <input type="number" placeholder="Suprafata Utila..." matInput formControlName="areaSurface" autocomplete="off">
+        <input type="number" placeholder="Suprafața Utilă..." matInput formControlName="areaSurface" autocomplete="off">
       </mat-form-field>
     </div>
     <mat-form-field>
-      <input type="number" placeholder="Numar Camere..." matInput formControlName="rooms" autocomplete="off">
+      <input type="number" placeholder="Număr camere..." matInput formControlName="rooms" autocomplete="off">
     </mat-form-field>
     <mat-form-field>
-      <mat-select placeholder="Tip locuinta..." matInput formControlName="furnished">
-        <mat-option value="Mobilata">Mobilata</mat-option>
-        <mat-option value="Mobilata Partial">Mobilata Partial</mat-option>
-        <mat-option value="Nemobilata">Nemobilata</mat-option>
+      <mat-select placeholder="Tip locuința..." matInput formControlName="furnished">
+        <mat-option value="Mobilata">Mobilată</mat-option>
+        <mat-option value="Mobilata Partial">Mobilată parțial</mat-option>
+        <mat-option value="Nemobilata">Nemobilată</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field>
-      <input type="number" placeholder="An Constructie..." matInput formControlName="yearBuilt" autocomplete="off">
+      <input type="number" placeholder="An construcție..." matInput formControlName="yearBuilt" autocomplete="off">
     </mat-form-field>
     <div class="form-group">
       <input placeholder="Localizare..." autocorrect="on" autocapitalize="on" spellcheck="on" type="text" class="form-control" #search formControlName="searchControl">
@@ -64,7 +64,7 @@
       <agm-marker [latitude]="lat" [longitude]="lng" *ngIf="locationChosen"></agm-marker>
     </agm-map>
     <div class="suggested__price" *ngIf="adSuggestedMaxPrice !== 0">
-      <button class="btn btn-info">Pret minim sugerat: {{ adSuggestedMinPrice.toFixed(0) }}</button>
+      <button class="btn btn-info">Preț minim sugerat: {{ adSuggestedMinPrice.toFixed(0) }}</button>
       <button class="btn btn-info">Preț maxim sugerat: {{ adSuggestedMaxPrice.toFixed(0) }}</button>
     </div>
     <mat-form-field>
@@ -75,7 +75,7 @@
     <input type="file" id="file" multiple (change)="getFileDetails($event)" accept="image/*" class="images__input">
     <br>
     <button [disabled]="!validForm() || !locationChosen || myFiles.length <= 0"
-            class="btn btn-success form-control custom__button" type="submit">Adauga Anunt</button>
+            class="btn btn-success form-control custom__button" type="submit">Adaugă anunțul</button>
   </form>
 </div>
 </mat-dialog-content>
