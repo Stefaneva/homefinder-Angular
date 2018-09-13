@@ -25,6 +25,7 @@ export class AddDetailsComponent implements OnInit {
   lat = 0;
   lng = 0;
   address: string;
+  oldAddress: string;
   zoom = 15;
   panelOpenState = false;
   adId: number;
@@ -129,6 +130,7 @@ export class AddDetailsComponent implements OnInit {
         geocoder.geocode(request, (results, status) => {
           if (status === google.maps.GeocoderStatus.OK) {
             if (results[0] != null) {
+              this.oldAddress = this.address;
               this.address = results[0].formatted_address;
               console.log(this.address);
             }
@@ -184,6 +186,8 @@ export class AddDetailsComponent implements OnInit {
           // set latitude, longitude and zoom
           this.lat = place.geometry.location.lat();
           this.lng = place.geometry.location.lng();
+          this.adDetailsChanges.lat = this.lat;
+          this.adDetailsChanges.lng = this.lng;
           this.zoom = 16;
           this.changeLocation = true;
         });
@@ -228,7 +232,23 @@ export class AddDetailsComponent implements OnInit {
     if (this.changeLocation === true) {
       this.lat = event.coords.lat;
       this.lng = event.coords.lng;
-      this.changeLocation = false;
+      // this.changeLocation = true;
+      this.adDetailsChanges.lat = this.lat;
+      this.adDetailsChanges.lng = this.lng;
+      // Location:
+      const geocoder = new google.maps.Geocoder();
+      const latlng = new google.maps.LatLng(this.lat, this.lng);
+      const request = {
+        location: latlng
+      };
+      geocoder.geocode(request, (results, status) => {
+        if (status === google.maps.GeocoderStatus.OK) {
+          if (results[0] != null) {
+            this.address = results[0].formatted_address;
+            console.log(this.address);
+          }
+        }
+      });
     }
   }
 
@@ -246,6 +266,10 @@ export class AddDetailsComponent implements OnInit {
   }
 
   saveLocationChanges() {
+    console.log(this.address);
+    this.changeLocation = false;
+    this.hidden = true;
+    this.newLocation.get('searchControl').setValue(null);
     this.userService.adDetails = this.adDetailsChanges;
     this.spinnerService.show();
     this.userService.replaceAdInfo(this.adDetailsChanges).subscribe(
