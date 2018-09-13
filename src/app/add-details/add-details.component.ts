@@ -348,7 +348,7 @@ export class AddDetailsComponent implements OnInit {
         }
       );
     } else {
-      this.snackBar.open('Intra în cont pentru a adăuga anunțul la favorite!', 'OK', {duration: 5000});
+      this.snackBar.open('Intră în cont pentru a adăuga anunțul la favorite!', 'OK', {duration: 5000});
     }
   }
 
@@ -410,7 +410,7 @@ export class AddDetailsComponent implements OnInit {
     this.userService.deleteReview(review.idReview).subscribe(
       result => {
         console.log(result);
-        this.snackBar.open('Recenzia a fost ștersă!', 'Ok', {duration: 5000});
+        this.snackBar.open('Recenzia a fost ștearsă!', 'Ok', {duration: 5000});
         this.userService.userReviewedAd = false;
       }
     );
@@ -460,7 +460,7 @@ export class AddDetailsComponent implements OnInit {
 
   calendarRedirect() {
     if (!this.userService.currentUser.token) {
-      this.snackBar.open('Intra în cont pentru a face o programare!', 'Ok', {duration: 5000});
+      this.snackBar.open('Intră în cont pentru a face o programare!', 'Ok', {duration: 5000});
       return;
     }
     this.userService.adDetailsCalendar = this.userService.adDetails;

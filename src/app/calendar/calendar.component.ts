@@ -319,7 +319,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
       }
     }
     if (this.events[index].start.getTime() >= this.events[index].end.getTime()) {
-      this.snackBar.open('Datele de inceput si sfarsit nu sunt corecte!', 'OK', {duration: 5000});
+      this.snackBar.open('Datele de început și sfarșit nu sunt corecte!', 'OK', {duration: 5000});
     } else {
       this.userService.userEvent = false;
       this.eventsDto[index].status = 'PENDING';
@@ -383,6 +383,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
   }
 
   adDetails(index: number) {
+    this.closeModal();
     this.router.navigate(['/AdDetails', this.eventsDto[index].adId]);
   }
 }

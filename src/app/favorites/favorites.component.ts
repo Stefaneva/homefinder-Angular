@@ -39,7 +39,7 @@ export class FavoritesComponent implements OnInit {
     const index = this.userService.favoriteAds.indexOf(ad);
     this.userService.favoriteAds.splice(index, 1);
     this.userService.deleteFavoriteAd(ad.id).subscribe(
-      result => this.snackBar.open('Anuntul a fost sters!', 'OK', {duration: 5000})
+      result => this.snackBar.open('Anunțul a fost șters!', 'OK', {duration: 5000})
     );
   }
 
