@@ -29,7 +29,7 @@
             (click)="saveImages()">Salvează imaginile <mat-icon>archive</mat-icon></button>
     <input (change)="getFileDetails($event)" id="fileInput" name="file" type="file" class="ng-hide" multiple>
     <button mat-button mat-raised-button color="accent"
-            (click)="replaceImages()" class="img__replace_button">Înlocuieste imaginile <mat-icon>cloud_upload</mat-icon></button>
+            (click)="replaceImages()" class="img__replace_button">Înlocuiește imaginile <mat-icon>cloud_upload</mat-icon></button>
   </div>
   <br>
   <div class="description__container">
@@ -38,7 +38,7 @@
                                                  (closed)="panelOpenState = false" hideToggle>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Descriere Anunț...
+          Descriere anunț...
         </mat-panel-title>
         <mat-panel-description class="mat__panel__description"><mat-icon>info</mat-icon></mat-panel-description>
       </mat-expansion-panel-header>
@@ -66,7 +66,7 @@
                            (closed)="panelOpenState = false" hideToggle>
         <mat-expansion-panel-header>
           <mat-panel-title>
-            Detalii Anunț...
+            Detalii anunț...
           </mat-panel-title>
           <mat-panel-description class="mat__panel__description"><mat-icon>assignment</mat-icon></mat-panel-description>
         </mat-expansion-panel-header>
@@ -75,22 +75,22 @@
               <div class="expansion__panel__content__logged">
                 <mat-form-field class="form__field__input apartemnt__detail__form">
                   <label>
-                    <input type="number" matInput placeholder="Pret..." [(ngModel)]="adDetailsChanges.price" autocomplete="off">
+                    <input type="number" matInput placeholder="Preț..." [(ngModel)]="adDetailsChanges.price" autocomplete="off">
                   </label>
                 </mat-form-field>
                 <mat-form-field class="form__field__input apartemnt__detail__form">
                   <label>
-                    <input type="number" matInput placeholder="Numar camere..." [(ngModel)]="adDetailsChanges.rooms" autocomplete="off">
+                    <input type="number" matInput placeholder="Număr camere..." [(ngModel)]="adDetailsChanges.rooms" autocomplete="off">
                   </label>
                 </mat-form-field>
                 <mat-form-field class="form__field__input apartemnt__detail__form">
                   <label>
-                    <input type="number" matInput placeholder="Suprafata..." [(ngModel)]="adDetailsChanges.surface" autocomplete="off">
+                    <input type="number" matInput placeholder="Suprafață..." [(ngModel)]="adDetailsChanges.surface" autocomplete="off">
                   </label>
                 </mat-form-field>
                 <mat-form-field class="form__field__input apartemnt__detail__form">
                   <label>
-                    <input type="number" matInput placeholder="Suprafata utila..." [(ngModel)]="adDetailsChanges.areaSurface" autocomplete="off">
+                    <input type="number" matInput placeholder="Suprafață utilă..." [(ngModel)]="adDetailsChanges.areaSurface" autocomplete="off">
                   </label>
                 </mat-form-field>
                 <mat-form-field class="form__field__input apartemnt__detail__form">
@@ -101,7 +101,7 @@
                 </mat-form-field>
                 <mat-form-field class="form__field__input apartemnt__detail__form">
                   <label>
-                    <input type="number" matInput placeholder="An constructie..." [(ngModel)]="adDetailsChanges.yearBuilt" autocomplete="off">
+                    <input type="number" matInput placeholder="An construcție..." [(ngModel)]="adDetailsChanges.yearBuilt" autocomplete="off">
                   </label>
                 </mat-form-field>
               </div>
@@ -134,17 +134,17 @@
             <div class="expansion__panel__content__logged">
               <mat-form-field class="form__field__input apartemnt__detail__form">
                 <label>
-                  <input type="number" matInput placeholder="Pret..." [(ngModel)]="adDetailsChanges.price" autocomplete="off">
+                  <input type="number" matInput placeholder="Preț..." [(ngModel)]="adDetailsChanges.price" autocomplete="off">
                 </label>
               </mat-form-field>
               <mat-form-field class="form__field__input apartemnt__detail__form">
                 <label>
-                  <input type="number" matInput placeholder="Numar camere..." [(ngModel)]="adDetailsChanges.rooms" autocomplete="off">
+                  <input type="number" matInput placeholder="Număr camere..." [(ngModel)]="adDetailsChanges.rooms" autocomplete="off">
                 </label>
               </mat-form-field>
               <mat-form-field class="form__field__input apartemnt__detail__form">
                 <label>
-                  <input type="number" matInput placeholder="Suprafata..." [(ngModel)]="adDetailsChanges.surface" autocomplete="off">
+                  <input type="number" matInput placeholder="Suprafață..." [(ngModel)]="adDetailsChanges.surface" autocomplete="off">
                 </label>
               </mat-form-field>
               <mat-form-field class="form__field__input apartemnt__detail__form">
@@ -174,7 +174,7 @@
               </mat-form-field>
               <mat-form-field class="form__field__input apartemnt__detail__form">
                 <label>
-                  <input type="number" matInput placeholder="An constructie..." [(ngModel)]="adDetailsChanges.yearBuilt" autocomplete="off">
+                  <input type="number" matInput placeholder="An construcție..." [(ngModel)]="adDetailsChanges.yearBuilt" autocomplete="off">
                 </label>
               </mat-form-field>
               <p class="form__field__input apartemnt__detail__form"></p>
@@ -288,7 +288,7 @@
           </div>
           <div *ngIf="review.editReview">
             <mat-form-field class="descriere">
-              <textarea type="text" placeholder="Editeaza comentariu..." matInput matTextareaAutosize matAutosizeMinRows=5 matAutosizeMaxRows=10
+              <textarea type="text" placeholder="Editează comentariu..." matInput matTextareaAutosize matAutosizeMinRows=5 matAutosizeMaxRows=10
                         [(ngModel)]="reviewChanges.comment" autocomplete="off"></textarea>
             </mat-form-field>
             <div class="review__rating__container">
