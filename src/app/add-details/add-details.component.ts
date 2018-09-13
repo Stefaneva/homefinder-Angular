@@ -335,11 +335,15 @@ export class AddDetailsComponent implements OnInit {
 
   addReview() {
     if (!this.userService.currentUser.token) {
-      this.snackBar.open('Intra în cont pentru a adăuga o recenzie!', 'Ok', {duration: 5000});
+      this.snackBar.open('Intră în cont pentru a adăuga o recenzie!', 'Ok', {duration: 5000});
       return;
     }
     if (this.userService.userReviewedAd) {
       this.snackBar.open('Ați adăugat deja o recenzie!', 'Ok', {duration: 5000});
+      return;
+    }
+    if (!this.comment || !this.rating) {
+      this.snackBar.open('Trebuie să adăugați text și rating recenziei!', 'Ok', {duration: 5000});
       return;
     }
     const reviewNewArrayElement = new ReviewDtoRequest();
